@@ -1,19 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import { View, Text, StyleSheet, ActivityIndicator, AsyncStorage, FlatList} from 'react-native'
+import { View, Text, StyleSheet, ActivityIndicator, FlatList, AsyncStorage} from 'react-native'
 import { h, w } from '../../modules/constants' 
 import MenuElement from '../../modules/MenuElement'
 import Header from '../../modules/Header'
-import moment from 'moment'
 import {useLocale} from '../../locale/LocaleManager'
 import {useTheme} from '../../themes/ThemeManager'
 
 const url = 'https://mysibsau.ru/v2/menu/all/'
 
-function food(count, theme, locale){
-    if (count == 0){
-        return(<Text style={{ color: theme.labelColor,fontSize: 20, fontFamily: 'roboto', marginTop: 20}}>{locale}</Text>)
-    }
-}
 
 export default function MenuScreen(props){
     const [dayList, setDayList] = useState([])
@@ -23,11 +17,9 @@ export default function MenuScreen(props){
     const {localeMode, locale, toggleLang} = useLocale()
 
     useEffect(() => {
-        
-        const unsubscribe = props.navigation.addListener(
+        props.navigation.addListener(
             'state',
             payload => {
-                console.log('Получаю меню')
                 AsyncStorage.getItem('Diner')
                 .then(res => {
                     if (res !== null){
@@ -36,7 +28,6 @@ export default function MenuScreen(props){
                             .then(json => {
                                 json.map(item => {
                                     if(item.name === res){
-                                        console.log(item)
                                         setDayList(item)
                                     }
                                 })
@@ -52,8 +43,9 @@ export default function MenuScreen(props){
     return( 
         <View style={{flex: 1, backgroundColor: theme.primaryBackground}}>
             <Header title={dayList.name} onPress={() => {
-                AsyncStorage.removeItem('Diner')
-                props.navigation.navigate('DinersScreen')}}/>
+                AsyncStorage.removeItem('Diner').then(() => {
+                    props.navigation.navigate('DinersScreen')
+                })}}/>
                 
             {!loaded ?
             <View style={{ height: h - 140, alignItems: 'center', justifyContent: 'center'}}>

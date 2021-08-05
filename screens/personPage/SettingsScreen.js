@@ -79,10 +79,11 @@ export default function SettingsScreen(props){
                 <Text style={{ width: w * 0.9, alignSelf: 'center', color: 'gray', fontSize: 12, fontFamily: 'roboto', marginTop: 15}}>{locale['color_settings']}</Text>
                 {Object.keys(props.route.params.user).length !== 0 ?
                 <TouchableOpacity style={{padding: 10, width: w * 0.4, alignSelf: 'center', marginTop: 20, borderRadius: 15, elevation: 5, backgroundColor: theme.blockColor}} onPress={() => {
-                    console.log('out')
-                    AsyncStorage.removeItem('User')
-                    AsyncStorage.removeItem('AuthData')
-                    props.navigation.navigate('Account')
+                    AsyncStorage.removeItem('User').then(() => {
+                        AsyncStorage.removeItem('AuthData').then(() => {
+                            props.navigation.navigate('Account')
+                        })
+                    })
                 }}>
                     <Text style={{alignSelf: 'center', color: '#EE7575', fontWeight: 'bold', fontFamily: 'roboto',}}>{locale['sign_out']}</Text>
                 </TouchableOpacity> : null}
