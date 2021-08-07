@@ -69,6 +69,7 @@ import { MaterialIcons } from '@expo/vector-icons'
 import { AntDesign } from '@expo/vector-icons'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { Ionicons } from '@expo/vector-icons'
+import ActiveNavScreen from './services/student_life/ActiveNavScreen'
 
 function LibraryTabBar({ state, descriptors, navigation, position }) {
   const {mode, theme, toggle} = useTheme()
@@ -489,6 +490,7 @@ function ServiceStackScreen(){
       <ServiceStack.Screen name='FAQ' component={FAQScreen} />
       <ServiceStack.Screen name='LibrarySearch' component={LibrarySearchScreen} />
       <ServiceStack.Screen name='LibraryResult' component={LibraryTabs} />
+      <ServiceStack.Screen name='TestScreen' component={ActiveNavScreen} />
     </ServiceStack.Navigator>
   )
 }
