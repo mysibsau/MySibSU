@@ -14,26 +14,26 @@ export default function TestScreen(props){
         <View style={{flex: 1, backgroundColor: theme.primaryBackground}}>
             <Header title={locale.student_life} onPress={() => props.navigation.goBack()} />
             <View style={{flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-evenly'}}>
-                <TouchableOpacity style={[styles.block, {backgroundColor: theme.blockColor}]}>
-                    <Text style={[styles.label, {color: theme.labelColor}]}>Актив</Text>
+                <TouchableOpacity style={[styles.block, {backgroundColor: theme.blockColor}]} onPress={() => props.navigation.navigate('Active')}>
+                    <Text style={[styles.label, {color: theme.labelColor}]}>{locale.active}</Text>
                     <View style={[styles.imageContainer, {backgroundColor: 'rgba(76, 174, 50, 0.6)'}]}>
                     <Image source={require('../../../assets/icons/active.png')} style={styles.image} tintColor={theme.blockColor}/>
                     </View>
                 </TouchableOpacity>
-                <TouchableOpacity style={[styles.block, {backgroundColor: theme.blockColor}]}>
-                    <Text style={[styles.label, {color: theme.labelColor}]}>Спорт</Text>
+                <TouchableOpacity style={[styles.block, {backgroundColor: theme.blockColor}]} onPress={() => props.navigation.navigate('Sport')}>
+                    <Text style={[styles.label, {color: theme.labelColor}]}>{locale.sport}</Text>
                     <View style={[styles.imageContainer, {backgroundColor: 'rgba(0, 108, 181, 0.6)'}]}>
                     <Image source={require('../../../assets/icons/sport.png')} style={styles.image} tintColor={theme.blockColor}/>
                     </View>
                 </TouchableOpacity>
                 <TouchableOpacity style={[styles.block, {backgroundColor: theme.blockColor}]}>
-                    <Text style={[styles.label, {color: theme.labelColor}]}>Наука</Text>
+                    <Text style={[styles.label, {color: theme.labelColor}]}>{locale.science}</Text>
                     <View style={[styles.imageContainer, {backgroundColor: '#FF7133'}]}>
                     <Image source={require('../../../assets/icons/science.png')} style={styles.image} tintColor={theme.blockColor}/>
                     </View>
                 </TouchableOpacity>
                 <TouchableOpacity style={[styles.block, {backgroundColor: theme.blockColor}]}>
-                    <Text style={[styles.label, {color: theme.labelColor}]}>Искусство</Text>
+                    <Text style={[styles.label, {color: theme.labelColor}]}>{locale.art}</Text>
                     <View style={[styles.imageContainer, {backgroundColor: mode === 'light' ? 'rgba(0,0,0, 0.4)' : 'lightgray'}]}>
                     <Image source={require('../../../assets/icons/art.png')} style={styles.image} tintColor={theme.blockColor}/>
                     </View>

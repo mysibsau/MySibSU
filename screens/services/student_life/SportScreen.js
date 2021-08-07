@@ -39,6 +39,7 @@ export default function SportScreen(props){
 
     return(
         <View style={{flex: 1, backgroundColor: theme.primaryBackground}}>
+            <Header title={locale['sport']} onPress={() => props.navigation.goBack()}/>
             <ScrollView contentContainerStyle={{paddingBottom: 120}}>
                 {loaded ? 
                     unions.map( item => {

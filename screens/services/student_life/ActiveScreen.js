@@ -39,7 +39,7 @@ export default function ActiveScreen(props){
 
     return(
         <View style={{flex: 1, backgroundColor: theme.primaryBackground}}>
-            {/* <Header title={locale['student_life']} onPress={() => props.navigation.goBack()}/> */}
+            <Header title={locale['active']} onPress={() => props.navigation.goBack()}/>
             <ScrollView contentContainerStyle={{paddingBottom: 120}}>
                 {loaded ? 
                 unions.map( item => {

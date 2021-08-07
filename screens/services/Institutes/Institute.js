@@ -38,7 +38,7 @@ const Information = ({ number, data }) => {
                     <Text style={{ width: w * 0.8, color: theme.blueColor, fontFamily: 'roboto', fontSize: 15, justifyContent:'center'}}>{data.address}</Text>
                 </View>
                 <View style={{flexDirection: 'column', paddingBottom: 180}}>
-                    <TouchableWithoutFeedback onPress={() => call({number: data.phone, prompt: false})}>
+                    <TouchableWithoutFeedback onPress={() => Linking.openURL(`tel:${data.phone}`)}>
                         <View style={[styles.box, styles.centerContent, styles.shadow2, {flexDirection: 'row', backgroundColor: theme.blockColor}]}>
                             <View style={{ width: w * 0.1, justifyContent: 'center', alignItems: 'center'}}>
                                 <MaterialCommunityIcons name="phone" size={24} color="rgb(115, 182, 28)" />
@@ -91,7 +91,7 @@ const Information = ({ number, data }) => {
                     <Text style={{ width: w * 0.8, color: theme.blueColor, fontFamily: 'roboto', fontSize: 15, justifyContent:'center'}}>{data.address}</Text>
                 </View>
                 <View style={{flexDirection: 'column', paddingBottom: 180}}>
-                    <TouchableWithoutFeedback onPress={() => call({number: data.phone, prompt: false})}>
+                    <TouchableWithoutFeedback onPress={() => Linking.openURL(`tel:${data.phone}`)}>
                         <View style={[styles.box, styles.centerContent, styles.shadow2, {flexDirection: 'row', backgroundColor: theme.blockColor}]}>
                             <View style={{ width: w * 0.1, justifyContent: 'center', alignItems: 'center'}}>
                                 <MaterialCommunityIcons name="phone" size={24} color="rgb(115, 182, 28)" />

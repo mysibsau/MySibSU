@@ -90,7 +90,7 @@ export default function Ermak(props){
 
                 <View style={{flexDirection: 'column', paddingBottom: 180}}>
                     {data.phone ?
-                    <TouchableWithoutFeedback onPress={() => call({number: data.phone, prompt: false})}>
+                    <TouchableWithoutFeedback onPress={() => Linking.openURL(`tel:${data.phone}`)}>
                         <View style={[styles.box, styles.shadow2, {flexDirection: 'row', backgroundColor: theme.blockColor}]}>
                             <View style={{ width: w * 0.1, justifyContent: 'center', alignItems: 'center'}}>
                                 <MaterialCommunityIcons name="phone" size={24} color="rgb(115, 182, 28)" />

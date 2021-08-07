@@ -278,22 +278,17 @@ function MyTabBar({ state, descriptors, navigation, position }) {
   );
 }
 
-const StudentLifeTab = createMaterialTopTabNavigator();
+const StudentLifeStack = createStackNavigator();
 
-function StudentLifeTabs(){
-  const {localeMode, locale, toggleLang} = useLocale()
-  const {mode, theme, toggle} = useTheme()
+function StudentLifeNavigator(){
   return(
-    <StudentLifeTab.Navigator tabBar={props => <MyTabBar {...props} />} tabBarOptions={{
-      indicatorStyle: {
-        marginLeft: Dimensions.get('window').width / 8
-      },
-      activeTintColor: theme.labelColor,
-    }}>
-      <StudentLifeTab.Screen listeners={{state: e => console.log(e)}} options={{ title: locale['unions']}} name="Unions" component={ActiveScreen} />
-      <StudentLifeTab.Screen listeners={{state: e => console.log(e)}} options={{ title: locale['sport']}} name="Sport" component={SportScreen} />
-      <StudentLifeTab.Screen listeners={{state: e => console.log(e)}} options={{ title: locale['sdo']}} name="Design" component={DesignScreen} />
-    </StudentLifeTab.Navigator>
+    <StudentLifeStack.Navigator>
+      <StudentLifeStack.Screen options={{headerShown: false}} name="Navigator" component={ActiveNavScreen} />
+      <StudentLifeStack.Screen options={{headerShown: false}} name="Active" component={ActiveScreen} />
+      <StudentLifeStack.Screen options={{headerShown: false}} name="Sport" component={SportScreen} />
+      <StudentLifeStack.Screen options={{headerShown: false}} name="Science" component={DesignScreen} />
+      {/* <StudentLifeStack.Screen options={{headerShown: false}} name="Active" component={ActiveScreen} /> */}
+    </StudentLifeStack.Navigator>
   )
 }
 
@@ -474,7 +469,7 @@ function ServiceStackScreen(){
   return(
     <ServiceStack.Navigator initialRouteName='Service' headerMode='none'>
       <ServiceStack.Screen name="Service" component={ServiceScreen} />
-      <ServiceStack.Screen name="Active" component={StudentLifeTabs} />
+      <ServiceStack.Screen name="StudentLife" component={StudentLifeNavigator} />
       <ServiceStack.Screen name='Ermak' component={Ermak} />
       <ServiceStack.Screen name="Institutes" component={InstitutesScreen} />
       <ServiceStack.Screen name="IITK" component={IITK} />
@@ -490,7 +485,7 @@ function ServiceStackScreen(){
       <ServiceStack.Screen name='FAQ' component={FAQScreen} />
       <ServiceStack.Screen name='LibrarySearch' component={LibrarySearchScreen} />
       <ServiceStack.Screen name='LibraryResult' component={LibraryTabs} />
-      <ServiceStack.Screen name='TestScreen' component={ActiveNavScreen} />
+      {/* <ServiceStack.Screen name='TestScreen' component={ActiveNavScreen} /> */}
     </ServiceStack.Navigator>
   )
 }
