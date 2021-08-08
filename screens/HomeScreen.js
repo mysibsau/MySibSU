@@ -32,7 +32,9 @@ import Animated, {Easing} from 'react-native-reanimated'
     import ActiveScreen from './services/student_life/ActiveScreen'
     import SportScreen from './services/student_life/SportScreen'
     import DesignScreen from './services/student_life/DesignScreen'
+    import ArtScreen from './services/student_life/ArtScreen'
     import Ermak from './services/student_life/Unit'
+    import EnsembleScreen from './services/student_life/EnsembleScreen'
     //Map
     import MapScreen from './services/MapScreen'
     // Online Catalog (tickets)
@@ -287,6 +289,7 @@ function StudentLifeNavigator(){
       <StudentLifeStack.Screen options={{headerShown: false}} name="Active" component={ActiveScreen} />
       <StudentLifeStack.Screen options={{headerShown: false}} name="Sport" component={SportScreen} />
       <StudentLifeStack.Screen options={{headerShown: false}} name="Science" component={DesignScreen} />
+      <StudentLifeStack.Screen options={{headerShown: false}} name="Art" component={ArtScreen} />
       {/* <StudentLifeStack.Screen options={{headerShown: false}} name="Active" component={ActiveScreen} /> */}
     </StudentLifeStack.Navigator>
   )
@@ -471,6 +474,7 @@ function ServiceStackScreen(){
       <ServiceStack.Screen name="Service" component={ServiceScreen} />
       <ServiceStack.Screen name="StudentLife" component={StudentLifeNavigator} />
       <ServiceStack.Screen name='Ermak' component={Ermak} />
+      <ServiceStack.Screen name="Ensemble" component={EnsembleScreen} />
       <ServiceStack.Screen name="Institutes" component={InstitutesScreen} />
       <ServiceStack.Screen name="IITK" component={IITK} />
       <ServiceStack.Screen name="Map" component={MapScreen} />

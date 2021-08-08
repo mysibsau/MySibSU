@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { View, Text, StyleSheet, ActivityIndicator, BackHandler } from 'react-native'
+import { View, Text, StyleSheet, ActivityIndicator, BackHandler, Alert } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 import ActiveElement from '../../../modules/ActiveElement'
 import Header from '../../../modules/Header'
@@ -8,16 +8,16 @@ import {useLocale} from '../../../locale/LocaleManager'
 import { useTheme } from '../../../themes/ThemeManager'
 
 
-export default function DesignScreen(props){
-    const [unions, setUnions] = useState([])
+export default function ArtScreen(props){
+    const [ensembles, setEnsembles] = useState([])
     const [loaded, setLoaded] = useState(false)
     const {mode, theme, toggle} = useTheme()
     const {localeMode, locale, toggleLang} = useLocale()
     useEffect(() => {
-        fetch('https://mysibsau.ru/v2/campus/design_offices/?language=' + String(localeMode), {method: 'GET'})
+        fetch('https://mysibsau.ru/v2/campus/ensembles/', {method: 'GET'})
             .then(response => response.json())
             .then(json => {
-                setUnions(json)
+                setEnsembles(json)
                 setLoaded(true)
             })
             .catch(err => console.log(err))
@@ -39,11 +39,11 @@ export default function DesignScreen(props){
 
     return(
         <View style={{flex: 1, backgroundColor: theme.primaryBackground}}>
-            <Header title={locale['science']} onPress={() => props.navigation.goBack()}/>
+            <Header title={locale['art']} onPress={() => props.navigation.goBack()}/>
             <ScrollView contentContainerStyle={{paddingBottom: 120}}>
                 {loaded ? 
-                unions.map( item => {
-                    return(<ActiveElement onPress={() => props.navigation.navigate('Ermak', {data: item})} title={item.name} source={item.logo} key={item[0]} />)
+                ensembles.map( item => {
+                    return(<ActiveElement onPress={() => props.navigation.navigate('Ensemble', {data: item})} title={item.name} source={item.logo} key={item[0]} />)
                 }) : <View style={{height: h, justifyContent: 'center', paddingBottom: 120}}><ActivityIndicator size='large' color='#0060B3' /></View>}   
             </ScrollView>
         </View>

@@ -13,7 +13,7 @@ const EventModule = ({data}) => {
     const {themeMode, theme, toggle} = useTheme()
     const {localeMode, locale, toggleLang} = useLocale()
 
-    const stringLinkRegex = 'https?://(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,4}\\b([-a-zA-Z0-9@:%_\\+.~#?&//=]*)'
+    const stringLinkRegex = 'https?://(www\\.)?[-a-zA-ZА-Яа-я0-9@:%._\\+~#=]{2,256}\\.[А-Яа-яa-z]{2,4}\\b([-a-zA-ZА-Яа-я0-9@:%_\\+.~#?&//=]*)'
     const regex = '\\[(.*?)\\]\\(\(stringLinkRegex)\\)'.replace('stringLinkRegex', stringLinkRegex)
     console.log(data)
     let text = data.text

@@ -12,7 +12,7 @@ import { Ionicons } from '@expo/vector-icons';
 
 const url = 'https://mysibsau.ru'
 
-export default function Ermak(props){
+export default function EnsembleScreen(props){
 
     const [onVisible, setVisible] = useState(false)
     const [fio, setFio] = useState('')
@@ -43,6 +43,7 @@ export default function Ermak(props){
     }
 
     const data = props.route.params.data
+    console.log(data)
     return(
         <View style={[styles.container, {backgroundColor: theme.primaryBackground}]}>
             <Header title={data.short_name ? data.short_name : data.name} onPress={() => props.navigation.goBack()}/>
@@ -51,10 +52,6 @@ export default function Ermak(props){
                 <View style={{ borderBottomWidth: 2, borderColor: 'gray'}}>
                     <Image source={data.logo ? {uri: url + data.logo} : require('../../../assets/back.png')}  style={{ width: w, height: w / 2, resizeMode: 'cover', backgroundColor: 'white'}} blurRadius={data.logo ? 0.5 : 0}/>
                 </View>
-                {data.photo ?
-                <View style={[styles.profile, styles.centerContent, styles.shadow1]}>
-                    <Image source={{uri: url + data.photo}} style={{width: w*0.4, height: w*0.4, borderRadius: w*0.4, borderWidth: 2, borderColor: 'gray'}} />
-                </View> : null}
 
                 {data.about ?
                 <View>
@@ -64,69 +61,8 @@ export default function Ermak(props){
                     </View>
                 </View> : null}
 
-                {data.dates ? 
-                <View>
-                    <Text style={{ fontFamily: 'roboto', fontSize: 20, marginTop: data.photo ? w * 0.2 + 20 : 20, marginLeft: 20, color: '#5575A7',}}>{locale['training_days']}</Text>
-                    <View style={[styles.box, styles.centerContent, styles.shadow2, {padding: 10, backgroundColor: theme.blockColor}]}>
-                        <Text style={{fontFamily: 'roboto', fontSize: 16, color: '#5575A7', paddingLeft: 5}}>{data.dates}</Text>
-                    </View>
-                </View> : null}
-                
-                {data.fio && 
-                <>
-                <Text style={{ fontFamily: 'roboto', fontSize: 20, marginTop: 15, marginLeft: 20, color: '#5575A7',}}>{data.leader_rank ? data.leader_rank : locale['active_head']}</Text>
-                {data.fio !== '-' ? 
-                    <View style={[styles.box, styles.centerContent, styles.shadow2, {backgroundColor: theme.blockColor, padding: 10}]}>
-                        <Text style={{fontFamily: 'roboto', fontSize: 20, textAlign: 'center', color: '#5575A7'}}>{data.fio}</Text>
-                    </View> : null}
-                </>}
-
-                <View style={[styles.box, styles.shadow2, {flexDirection: 'row', backgroundColor: theme.blockColor}]}>
-                    <View style={{ width: w * 0.1, justifyContent: 'center', alignItems: 'center'}}>
-                        <MaterialCommunityIcons name="map-marker" size={24} color="rgb(115, 182, 28)" />
-                    </View>
-                    <View style={{ justifyContent: 'center'}}>
-                        <Text style={styles.buttonText}>{data.address}</Text>
-                    </View>
-                </View>
-
                 <View style={{flexDirection: 'column', paddingBottom: 180}}>
-                    {data.phone ?
-                    <TouchableWithoutFeedback onPress={() => Linking.openURL(`tel:${data.phone}`)}>
-                        <View style={[styles.box, styles.shadow2, {flexDirection: 'row', backgroundColor: theme.blockColor}]}>
-                            <View style={{ width: w * 0.1, justifyContent: 'center', alignItems: 'center'}}>
-                                <MaterialCommunityIcons name="phone" size={24} color="rgb(115, 182, 28)" />
-                            </View>
-                            <View style={{ justifyContent: 'center'}}>
-                                <Text style={styles.buttonText}>{locale['call']}</Text>
-                            </View>
-                            
-                        </View>
-                    </TouchableWithoutFeedback> : null}
 
-                    {data.group_vk ? 
-                    <TouchableWithoutFeedback onPress={() => Linking.openURL(data.group_vk)}>
-                        <View style={[styles.box, styles.centerContent, styles.shadow2, {flexDirection: 'row', backgroundColor: theme.blockColor}]}>
-                            <View style={{ width: w * 0.1, justifyContent: 'center', alignItems: 'center'}}>
-                                <Entypo name="vk-with-circle" size={24} color="rgb(115, 182, 28)" />
-                            </View>
-                            <View style={{ justifyContent: 'center'}}>
-                                <Text style={styles.buttonText}>{locale['group_vk']}</Text>
-                            </View>
-                        </View>
-                    </TouchableWithoutFeedback> : null}
-
-                    {data.email ?
-                    <TouchableWithoutFeedback onPress={() => Linking.openURL(`mailto:${data.email}?subject==&`)}>
-                    <View style={[styles.box, styles.centerContent, styles.shadow2, {flexDirection: 'row', backgroundColor: theme.blockColor}]}>
-                        <View style={{ width: w * 0.1, justifyContent: 'center', alignItems: 'center'}}>
-                            <Ionicons name="mail" size={24} color="rgb(115, 182, 28)" />
-                        </View>
-                        <Text style={styles.buttonText}>{locale['write_email']}</Text>
-                    </View>
-                </TouchableWithoutFeedback> : null}
-
-                    {data.page_vk ?
                     <TouchableWithoutFeedback onPress={() => setVisible(!onVisible)}>
                     <View style={[styles.box, styles.centerContent, styles.shadow2, { flexDirection: 'row', backgroundColor: theme.blockColor}]}>
                         <View style={{ width: w * 0.1, justifyContent: 'center', alignItems: 'center'}}>
@@ -136,7 +72,7 @@ export default function Ermak(props){
                             <Text style={styles.buttonText}>{locale['join']}</Text>
                         </View> 
                     </View>
-                    </TouchableWithoutFeedback> : null}
+                    </TouchableWithoutFeedback>
             
 
                     <Modal animationType="slide" transparent={true} visible={onVisible}>
