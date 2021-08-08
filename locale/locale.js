@@ -122,6 +122,7 @@ export const translations = {
         hello_services_how: `"Institute" - contacts of the institute director’s office, academic department and Student Council.\n"Student life" – there is more to being a part of Reshetnev University than getting a higher education!\n"Buildings" - geolocation of university buildings with redirection to 2gis app\n"Vacancies" - work offers for young specialists from partner companies of the University.`,
         hello_profile_what: 'After authorization, you will have access to your current academic performance and much more!',
         hello_profile_how: 'In the settings, you can change the language or set the "dark theme".',
+        contacts: 'Contacts',
         },
   ru: { timetable: 'Расписание', 
         menu: 'Столовые',
@@ -244,7 +245,8 @@ export const translations = {
         hello_services_what: 'Вакансии для подработки, быстрые вопросы – ответы, кампус и многое другое доступно во вкладке «Сервисы».',
         hello_services_how: `«Институт» - контакты дирекции, кафедры и студенческого совета.\n«Студенческая жизнь» - в СибГУ им. М.Ф. Решетнева можно не только получить высшее образование!\n«Корпуса» - геолокация корпусов университета с переадресацией на 2гис \n«Вакансии» - приглашение на работу молодых специалистов от компаний-партнеров вуза.`,
         hello_profile_what: 'Пройдя авторизацию, тебе станет доступна своя успеваемость на текущий момент. И многое другое!',
-        hello_profile_how: 'В настройках можно изменить язык или поставить «темную тему»' 
+        hello_profile_how: 'В настройках можно изменить язык или поставить «темную тему»',
+        contacts: 'Контакты'
     },
 };
 // Set the locale once at the beginning of your app.

@@ -9,6 +9,10 @@ import {useTheme} from '../../../themes/ThemeManager'
 import {useLocale} from '../../../locale/LocaleManager'
 import { Ionicons } from '@expo/vector-icons'; 
 
+const REGEXES = [
+    {reg: /(\+7|8) ?[\( -]?\d{3}[\) -]? ?\d{3}[ -]?\d{2}[ -]?\d{2}/, type: 'phone'}, 
+{reg: /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/, type: 'email'},
+{reg: /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/, type: 'link'}]
 
 const url = 'https://mysibsau.ru'
 
@@ -43,7 +47,6 @@ export default function EnsembleScreen(props){
     }
 
     const data = props.route.params.data
-    console.log(data)
     return(
         <View style={[styles.container, {backgroundColor: theme.primaryBackground}]}>
             <Header title={data.short_name ? data.short_name : data.name} onPress={() => props.navigation.goBack()}/>
@@ -53,18 +56,53 @@ export default function EnsembleScreen(props){
                     <Image source={data.logo ? {uri: url + data.logo} : require('../../../assets/back.png')}  style={{ width: w, height: w / 2, resizeMode: 'cover', backgroundColor: 'white'}} blurRadius={data.logo ? 0.5 : 0}/>
                 </View>
 
-                {data.about ?
                 <View>
                     <Text style={{ fontFamily: 'roboto', fontSize: 20, marginTop: data.photo ? w * 0.2 + 20 : 20, marginLeft: 20, color: '#5575A7',}}>{locale['description']}</Text>
                     <View style={[styles.box, styles.centerContent, styles.shadow2, {padding: 10, backgroundColor: theme.blockColor}]}>
                         <Text style={{fontFamily: 'roboto', fontSize: 15, color: '#5575A7', paddingLeft: 5}}>{data.about}</Text>
                     </View>
-                </View> : null}
+                </View>
+
+                <View>
+                <Text style={{ fontFamily: 'roboto', fontSize: 20, marginTop: data.photo ? w * 0.2 + 20 : 20, marginLeft: 20, color: '#5575A7',}}>{locale['contacts']}</Text>
+                    <View style={[styles.box, styles.centerContent, styles.shadow2, {padding: 10, backgroundColor: theme.blockColor}]}>
+                        {/* <Text style={{fontFamily: 'roboto', fontSize: 15, color: '#5575A7', paddingLeft: 5}}>{data.contacts.split('\n')}</Text> */}
+                        {data.contacts.split('\n').map(item => {
+                            let contact = {}
+                            REGEXES.map(reg => {
+                                if (item.match(reg.reg)){
+                                    contact['type'] = reg.type
+                                    contact['data'] = item
+                                }
+                            })
+
+                            return(
+                            <Text style={{fontFamily: 'roboto', fontSize: 15, color: '#5575A7', paddingLeft: 5, textDecorationLine: contact.type ? 'underline' : 'none'}} onPress={() => {
+                                if (contact.data){
+                                    switch(contact.type){
+                                        case 'phone':
+                                            Linking.openURL(`tel:${contact.data}`)
+                                            break
+                                        case 'email':
+                                            Linking.openURL(`mailto:${contact.data}`)
+                                            break
+                                        
+                                        case 'link':
+                                            Linking.openURL(contact.data)
+                                            break
+                                    }
+                                }
+                            }}>
+                                {contact.data ? contact.data : item}
+                            </Text>)
+                        })}
+                    </View>
+                </View>
 
                 <View style={{flexDirection: 'column', paddingBottom: 180}}>
 
                     <TouchableWithoutFeedback onPress={() => setVisible(!onVisible)}>
-                    <View style={[styles.box, styles.centerContent, styles.shadow2, { flexDirection: 'row', backgroundColor: theme.blockColor}]}>
+                    <View style={[styles.box, styles.shadow2, { flexDirection: 'row', backgroundColor: theme.blockColor}]}>
                         <View style={{ width: w * 0.1, justifyContent: 'center', alignItems: 'center'}}>
                             <Entypo name="circle-with-plus" size={24} color="rgb(115, 182, 28)" />
                         </View>
@@ -207,6 +245,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     centerContent: {
-        alignItems: 'center'
+        // alignItems: 'center'
     },
 })
