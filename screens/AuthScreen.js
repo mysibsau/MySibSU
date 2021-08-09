@@ -48,7 +48,7 @@ export default function AuthScreen(props){
                                     AsyncStorage.setItem('User', JSON.stringify(json))
                                     AsyncStorage.setItem('AuthData', JSON.stringify({
                                         username: login,
-                                        password: password
+                                        password: password,
                                     }))
                                     props.navigation.navigate('Bottom')
                                 }

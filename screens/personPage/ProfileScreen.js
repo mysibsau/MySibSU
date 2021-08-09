@@ -94,6 +94,10 @@ export default function PersonScreen(props){
                         </View>
                     </TouchableOpacity>
                 </View>
+
+                <TouchableOpacity onPress={() => props.navigation.navigate('Questions')} style={{width: w * 0.9, borderRadius: 15, backgroundColor: theme.blockColor, elevation: 5, padding: 10, marginTop: 25}}>
+                    <Text style={{fontFamily: 'roboto', color: theme.labelColor, fontSize: 19}}>{locale.myQuestions}</Text>
+                </TouchableOpacity>
             </View> 
         </View>
     )

@@ -61,6 +61,7 @@ import ProfileScreen from './personPage/ProfileScreen'
 import SettingsScreen from './personPage/SettingsScreen'
 import AttestationScreen from './personPage/AttestationScreen'
 import MarksScreen from './personPage/MarksScreen'
+import QuestionsScreen from './personPage/QuestionsScreen'
 
 // MODULES
 import { useTheme } from '../themes/ThemeManager'
@@ -447,6 +448,7 @@ function PersonStackScreen(){
           <PersonStack.Screen name='Settings' component={SettingsScreen} />
           <PersonStack.Screen name='Attestation' component={AttestationScreen} />
           <PersonStack.Screen name='Marks' component={MarksScreen} />
+          <PersonStack.Screen name="Questions" component={QuestionsScreen} />
         </PersonStack.Navigator>
       )
   }

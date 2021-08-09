@@ -15,25 +15,25 @@ export default function TestScreen(props){
             <Header title={locale.student_life} onPress={() => props.navigation.goBack()} />
             <View style={{flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-evenly'}}>
                 <TouchableOpacity style={[styles.block, {backgroundColor: theme.blockColor}]} onPress={() => props.navigation.navigate('Active')}>
-                    <Text style={[styles.label, {color: theme.labelColor}]}>{locale.active}</Text>
+                    <Text style={[styles.label, {color: theme.headerTitle}]}>{locale.active}</Text>
                     <View style={[styles.imageContainer, {backgroundColor: 'rgba(76, 174, 50, 0.6)'}]}>
                     <Image source={require('../../../assets/icons/active.png')} style={styles.image} tintColor={theme.blockColor}/>
                     </View>
                 </TouchableOpacity>
                 <TouchableOpacity style={[styles.block, {backgroundColor: theme.blockColor}]} onPress={() => props.navigation.navigate('Sport')}>
-                    <Text style={[styles.label, {color: theme.labelColor}]}>{locale.sport}</Text>
+                    <Text style={[styles.label, {color: theme.headerTitle}]}>{locale.sport}</Text>
                     <View style={[styles.imageContainer, {backgroundColor: 'rgba(0, 108, 181, 0.6)'}]}>
                     <Image source={require('../../../assets/icons/sport.png')} style={styles.image} tintColor={theme.blockColor}/>
                     </View>
                 </TouchableOpacity>
                 <TouchableOpacity style={[styles.block, {backgroundColor: theme.blockColor}]} onPress={() => props.navigation.navigate('Science')}>
-                    <Text style={[styles.label, {color: theme.labelColor}]}>{locale.science}</Text>
+                    <Text style={[styles.label, {color: theme.headerTitle}]}>{locale.science}</Text>
                     <View style={[styles.imageContainer, {backgroundColor: '#FF7133'}]}>
                     <Image source={require('../../../assets/icons/science.png')} style={styles.image} tintColor={theme.blockColor}/>
                     </View>
                 </TouchableOpacity>
                 <TouchableOpacity style={[styles.block, {backgroundColor: theme.blockColor}]} onPress={() => props.navigation.navigate('Art')}>
-                    <Text style={[styles.label, {color: theme.labelColor}]}>{locale.art}</Text>
+                    <Text style={[styles.label, {color: theme.headerTitle}]}>{locale.art}</Text>
                     <View style={[styles.imageContainer, {backgroundColor: mode === 'light' ? 'rgba(0,0,0, 0.4)' : 'lightgray'}]}>
                     <Image source={require('../../../assets/icons/art.png')} style={styles.image} tintColor={theme.blockColor}/>
                     </View>
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
         fontFamily: 'roboto',
         textAlign: 'center',
         // fontWeight: 'bold',
-        fontSize: 30,
+        fontSize: w / 15,
         height: w * 0.45 / 2,
         textAlignVertical: 'center'
     },

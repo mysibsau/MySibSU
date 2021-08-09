@@ -8,6 +8,7 @@ import { Entypo } from '@expo/vector-icons';
 import {useTheme} from '../../../themes/ThemeManager'
 import {useLocale} from '../../../locale/LocaleManager'
 import { Ionicons } from '@expo/vector-icons'; 
+import AsyncStorage from '@react-native-community/async-storage'
 
 const REGEXES = [
     {reg: /(\+7|8) ?[\( -]?\d{3}[\) -]? ?\d{3}[ -]?\d{2}[ -]?\d{2}/, type: 'phone'}, 
@@ -20,33 +21,38 @@ export default function EnsembleScreen(props){
 
     const [onVisible, setVisible] = useState(false)
     const [fio, setFio] = useState('')
-    const [institute, setInstitute] = useState('')
-    const [group, setGroup] = useState('')
+    const [phone, setPhone] = useState('')
     const [vk, setVk] = useState('')
-    const [hobby, setHobby] = useState('')
-    const [reason, setReason] = useState('')
+    const [experience, setExperience] = useState('')
+    const [comment, setComment] = useState('')
 
     const {mode, theme, toggle} = useTheme()
     const {localeMode, locale, toggleLang} = useLocale()
+    const data = props.route.params.data
 
-    async function sendMessage(link){
-        const uri = 'https://mysibsau.ru/v2/campus/unions/join/' + props.route.params.data.id + '/'
-        let vk_page = vk.split('/')
-        vk_page = vk_page[vk_page.length - 1]
+    async function sendMessage(){
+        const token = await AsyncStorage.getItem('User');
+        const uri = 'https://mysibsau.ru/v2/campus/ensembles/join/?token=' + JSON.parse(token).token
 
-        let data = new FormData()
-        data.append('fio', fio)
-        data.append('institute', institute)
-        data.append('group', group)
-        data.append('vk', vk_page)
-        data.append('hobby', hobby)
-        data.append('reason', reason)
+        let req = {
+            ensemble: data.id,
+            fio: fio,
+            phone: phone,
+            link_on_vk: vk,
+            experience: experience,
+            comment: comment,
+        }
+        console.log(req)
 
-        fetch(uri, {method: 'POST', body: data})
+        fetch(uri, {method: 'POST', body: req})
+            .then(response => response.json())
+            .then(json => {
+                console.log(json)
+            })
             .catch(err => console.log(err))
     }
 
-    const data = props.route.params.data
+    
     return(
         <View style={[styles.container, {backgroundColor: theme.primaryBackground}]}>
             <Header title={data.short_name ? data.short_name : data.name} onPress={() => props.navigation.goBack()}/>
@@ -124,19 +130,18 @@ export default function EnsembleScreen(props){
 
                             <Text style={{fontFamily: 'roboto', color: '#006AB3', fontSize: 24, marginBottom: 10}}>Заявка на вступление</Text>
 
-                            <TextInput style={[styles.input, {color: theme.headerTitle}]} placeholderTextColor={'gray'} onChangeText={text => setFio(text)} placeholder={'ФИО'}/>
-                            <TextInput style={[styles.input, {color: theme.headerTitle}]} placeholderTextColor={'gray'} onChangeText={text => setInstitute(text)} placeholder={'Институт'} />
-                            <TextInput style={[styles.input, {color: theme.headerTitle}]} placeholderTextColor={'gray'} onChangeText={text => setGroup(text)} placeholder={'Группа'} />
-                            <TextInput style={[styles.input, {color: theme.headerTitle}]} placeholderTextColor={'gray'} onChangeText={text => setVk(text)} placeholder={'ID в VK'} />
-                            <TextInput style={[styles.input, {color: theme.headerTitle}]} placeholderTextColor={'gray'} onChangeText={text => setHobby(text)} placeholder={'Какие у вас есть увлечения?'} multiline scrollEnabled={true}/>
-                            <TextInput style={[styles.input, {color: theme.headerTitle}]} placeholderTextColor={'gray'} onChangeText={text => setReason(text)} placeholder={'Почему хотите вступить?'} multiline scrollEnabled={true} selectTextOnFocus={true}/>
+                            <TextInput style={[styles.input, {color: theme.labelColor}]} placeholderTextColor={'gray'} onChangeText={text => setFio(text)} placeholder={'ФИО'}/>
+                            <TextInput style={[styles.input, {color: theme.labelColor}]} placeholderTextColor={'gray'} onChangeText={text => setPhone(text)} placeholder={'Телефон'} />
+                            <TextInput style={[styles.input, {color: theme.labelColor}]} placeholderTextColor={'gray'} onChangeText={text => setVk(text)} placeholder={'ID в VK'} />
+                            <TextInput style={[styles.input, {color: theme.labelColor}]} placeholderTextColor={'gray'} onChangeText={text => setExperience(text)} placeholder={'Ваш опыт'} multiline scrollEnabled={true}/>
+                            <TextInput style={[styles.input, {color: theme.labelColor}]} placeholderTextColor={'gray'} onChangeText={text => setComment(text)} placeholder={'Комментарий к заявке'} multiline scrollEnabled={true} selectTextOnFocus={true}/>
 
                             <TouchableWithoutFeedback onPress={() => 
-                                {sendMessage(data.page_vk.split('id')[1])
+                                {sendMessage()
                                 setVisible(false)
                             }}>
                             <View style={{borderWidth: 1, borderColor: '#006AB3', borderRadius: 4, paddingBottom: 3, paddingTop: 3, paddingLeft: 5, paddingRight: 5, marginBottom: 10}}>
-                                <Text style={{fontFamily: 'roboto', color: '#006AB3', fontSize: 15}}>ОТПРАВИТЬ</Text>
+                                <Text style={{fontFamily: 'roboto', color: '#006AB3', fontSize: 15, textAlign: 'center'}}>ОТПРАВИТЬ</Text>
                             </View>
                             </TouchableWithoutFeedback>
                         </View>
