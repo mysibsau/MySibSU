@@ -24,17 +24,11 @@ export default function DesignScreen(props){
     }, [loaded])
 
     useEffect(() => {
-        const backAction = () => {
-          props.navigation.navigate('Service')
-          return true;
-        };
-    
-        const backHandler = BackHandler.addEventListener(
-          "hardwareBackPress",
-          backAction
+        BackHandler.addEventListener(
+          "hardwareBackPress", function(){
+              props.navigation.goBack();
+          }
         );
-    
-        return () => backHandler.remove();
       }, []);
 
     return(

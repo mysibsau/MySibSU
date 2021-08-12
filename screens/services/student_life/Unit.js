@@ -1,5 +1,5 @@
-import React, { PureComponent, useState } from 'react'
-import { View, Text, Image, Linking, StyleSheet, TouchableWithoutFeedback, Modal, TextInput, Alert, ScrollView, Platform } from 'react-native'
+import React, {useEffect, useState } from 'react'
+import { View, Text, Image, Linking, StyleSheet, TouchableWithoutFeedback, Modal, TextInput, Alert, ScrollView, Platform, BackHandler } from 'react-native'
 import call from 'react-native-phone-call'
 import Header from '../../../modules/Header'
 import { h, w } from '../../../modules/constants'
