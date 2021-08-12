@@ -1,15 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { View, Text, StyleSheet, Image, Linking , TouchableWithoutFeedback, StatusBar} from 'react-native'
-import call from 'react-native-phone-call'
 import { h, w } from '../../../modules/constants'
 import Header from '../../../modules/Header'
 import { ScrollView } from 'react-native-gesture-handler'
-import Cafedra from '../../../modules/Cafedra'
+import Cafedra from '../../../modules/Services/Institutes/CafedraListElement'
 import Swiper from 'react-native-swiper'
 import { MaterialCommunityIcons } from '@expo/vector-icons'; 
 import { Ionicons } from '@expo/vector-icons'; 
-import { useTheme } from '../../../themes/ThemeManager'
-import { useLocale } from '../../../locale/LocaleManager'
+import { useTheme } from '../../../services/themes/ThemeManager'
+import { useLocale } from '../../../services/locale/LocaleManager'
 
 
 const url = 'https://mysibsau.ru'

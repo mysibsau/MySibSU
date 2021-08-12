@@ -1,7 +1,7 @@
 import React from 'react'
 import {View, Text, Image, TouchableOpacity, StyleSheet} from 'react-native'
 import { h, w } from './constants'
-import {useTheme} from '../themes/ThemeManager'
+import {useTheme} from '../services/themes/ThemeManager'
 
 const ProductBlock = ({name, image, theater, onPress}) => {
     const {mode, theme, toggle} = useTheme()

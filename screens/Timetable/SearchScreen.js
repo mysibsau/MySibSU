@@ -1,9 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { View, Text, StyleSheet, Animated, StatusBar, TextInput, AsyncStorage, TouchableOpacity, TouchableHighlight, FlatList, ToastAndroid } from 'react-native'
 import MainHeader from '../../modules/MainHeader'
-import Help from '../../modules/timetableFolder/Help'
-import { useTheme } from '../../themes/ThemeManager'
-import { useLocale } from '../../locale/LocaleManager'
+import Help from '../../modules/Timetable/Help'
+import { useTheme } from '../../services/themes/ThemeManager'
+import { useLocale } from '../../services/locale/LocaleManager'
 import { h, w } from '../../modules/constants'
 import SwitchSelector from "react-native-switch-selector";
 import { Ionicons } from '@expo/vector-icons'; 

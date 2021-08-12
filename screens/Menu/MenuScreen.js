@@ -3,8 +3,8 @@ import { View, Text, StyleSheet, ActivityIndicator, FlatList, AsyncStorage} from
 import { h, w } from '../../modules/constants' 
 import MenuElement from '../../modules/MenuElement'
 import Header from '../../modules/Header'
-import {useLocale} from '../../locale/LocaleManager'
-import {useTheme} from '../../themes/ThemeManager'
+import {useLocale} from '../../services/locale/LocaleManager'
+import {useTheme} from '../../services/themes/ThemeManager'
 
 const url = 'https://mysibsau.ru/v2/menu/all/'
 

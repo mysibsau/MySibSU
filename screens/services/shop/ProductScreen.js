@@ -2,8 +2,8 @@ import React, { PureComponent } from 'react'
 import { View, Text, Image, TouchableOpacity, ScrollView, StyleSheet } from 'react-native'
 import Header from '../../../modules/Header'
 import { h, w } from '../../../modules/constants'
-import {useTheme} from '../../../themes/ThemeManager'
-import {useLocale} from '../../../locale/LocaleManager'
+import {useTheme} from '../../../services/themes/ThemeManager'
+import {useLocale} from '../../../services/locale/LocaleManager'
 
 export default function ProductScreen(props){
     const {mode, theme, toggle} = useTheme()

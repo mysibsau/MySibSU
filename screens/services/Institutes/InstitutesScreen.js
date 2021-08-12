@@ -1,10 +1,10 @@
-import React, { PureComponent, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { ScrollView, View, Text, StyleSheet, ActivityIndicator, Image } from 'react-native'
 import ListElement from '../../../modules/ListElement'
 import Header from '../../../modules/Header'
 import { h, w } from '../../../modules/constants'
-import {useTheme} from '../../../themes/ThemeManager'
-import {useLocale} from '../../../locale/LocaleManager'
+import {useTheme} from '../../../services/themes/ThemeManager'
+import {useLocale} from '../../../services/locale/LocaleManager'
 
 
 export default function InstitutesScreen(props){
@@ -12,8 +12,8 @@ export default function InstitutesScreen(props){
     const [institutes, setInstitutes] = useState([])
     const [loaded, setLoaded] = useState(false)
 
-    const {mode, theme, toggle} = useTheme()
-    const {localeMode, locale, toggleLang} = useLocale()
+    const {theme} = useTheme()
+    const {localeMode, locale} = useLocale()
 
     useEffect(() => {
         fetch('https://mysibsau.ru/v2/campus/institutes/?language=' + String(localeMode), {method: 'GET'})

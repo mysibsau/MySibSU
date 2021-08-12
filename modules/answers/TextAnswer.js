@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import {View, Text, StyleSheet, TouchableOpacity, TextInput} from 'react-native'
 
-import {useTheme} from '../../themes/ThemeManager'
-import {useLocale} from '../../locale/LocaleManager'
+import {useTheme} from '../../services/themes/ThemeManager'
+import {useLocale} from '../../services/locale/LocaleManager'
 
 const TextAnswer = ({onChange}) => {
     const {mode, theme, toggle} = useTheme()

@@ -1,8 +1,8 @@
 import React from 'react'
 import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native'
 import { h, w } from './constants'
-import { useTheme } from '../themes/ThemeManager'
-import { useLocale } from '../locale/LocaleManager'
+import { useTheme } from '../services/themes/ThemeManager'
+import { useLocale } from '../services/locale/LocaleManager'
 
 const MainHeader = ({title, onPress}) => {
     const {mode, theme, toggle} = useTheme() 

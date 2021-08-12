@@ -3,21 +3,21 @@ import { View, Text, StyleSheet, ActivityIndicator, Animated, ScrollView, Status
 import AsyncStorage from '@react-native-community/async-storage'
 import { h, w } from '../../modules/constants'
 import { AntDesign } from '@expo/vector-icons'
-import Day from '../../modules/timetableFolder/Day'
+import Day from '../../modules/Timetable/Day'
 import Swiper from 'react-native-swiper'
 
 
-import {useTheme} from '../../themes/ThemeManager'
-import {useLocale} from '../../locale/LocaleManager'
+import {useTheme} from '../../services/themes/ThemeManager'
+import {useLocale} from '../../services/locale/LocaleManager'
 import {useWeek} from '../../week/WeekManager'
 
 const URLs = ['group', 'teacher', 'place']
 
 
 export default function TimetableScreen(props){
-    const {mode, theme, toggle} = useTheme()
-    const {localeMode, locale, toggleLang} = useLocale()
-    const {week} = useWeek()
+    const {mode, theme} = useTheme()
+    const {locale} = useLocale()
+    // const {week} = useWeek()
 
     const [group, setGroup] = useState(null)
     const [weekDay, setWeekDay] = useState('')

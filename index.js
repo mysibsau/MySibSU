@@ -1,16 +1,18 @@
 import { registerRootComponent } from 'expo';
-
 import App from './App';
-
-// index.js
 import { AppRegistry } from 'react-native';
 import messaging from '@react-native-firebase/messaging';
+import axios from 'axios'
+import { BASE_URL } from './modules/constants';
 
-// Register background handler
+axios.defaults.baseURL=BASE_URL
+
+// Register background push notifications
 messaging().setBackgroundMessageHandler(async remoteMessage => {
   console.log('Message handled in the background!', remoteMessage);
 });
 
+// Subscribe to topic for notifications
 messaging()
   .subscribeToTopic('allUsers_android')
   .then(() => console.log('Subscribed to topic!'));
@@ -19,7 +21,3 @@ AppRegistry.registerComponent('main', () => App);
 
 registerRootComponent(App)
 
-// registerRootComponent calls AppRegistry.registerComponent('main', () => App);
-// It also ensures that whether you load the app in the Expo client or in a native build,
-// the environment is set up appropriately
-// registerRootComponent(App);

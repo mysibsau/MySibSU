@@ -1,7 +1,7 @@
 import React from 'react';
 import { TouchableOpacity, Image, View, StyleSheet, Text } from 'react-native';
 import { h, w } from './constants';
-import {useTheme} from '../themes/ThemeManager'
+import {useTheme} from '../services/themes/ThemeManager'
 
 
 const ListElement = ({onPress, title, prop}) => {

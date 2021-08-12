@@ -1,8 +1,8 @@
 import React from 'react'
 import {StyleSheet, View, Text, TouchableOpacity, TextInput, ScrollView, AsyncStorage, ToastAndroid} from 'react-native'
 import { Ionicons } from '@expo/vector-icons'; 
-import {useTheme} from '../../../themes/ThemeManager'
-import {useLocale} from '../../../locale/LocaleManager'
+import {useTheme} from '../../../services/themes/ThemeManager'
+import {useLocale} from '../../../services/locale/LocaleManager'
 import { h, w } from '../../../modules/constants'
 import Header from '../../../modules/Header'
 

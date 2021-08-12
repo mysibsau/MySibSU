@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import {View, Text, TouchableOpacity } from 'react-native'
 
-import {useTheme} from '../../themes/ThemeManager'
+import {useTheme} from '../../services/themes/ThemeManager'
 
 const MultipleAnswer = ({responses, onChange}) => {
     const {mode, theme, toggle} = useTheme()

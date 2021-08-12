@@ -1,7 +1,7 @@
 import React from 'react'
 import {StyleSheet, View, Text, TouchableOpacity, FlatList, AsyncStorage, ActivityIndicator, Linking} from 'react-native'
-import {useTheme} from '../../../themes/ThemeManager'
-import {useLocale} from '../../../locale/LocaleManager'
+import {useTheme} from '../../../services/themes/ThemeManager'
+import {useLocale} from '../../../services/locale/LocaleManager'
 import { h, w } from '../../../modules/constants'
 import Header from '../../../modules/Header'
 

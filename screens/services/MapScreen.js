@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { View, Text, StyleSheet, ActivityIndicator, TouchableOpacity, Linking, ScrollView, Image } from 'react-native'
 import Header from '../../modules/Header'
 import { h, w } from '../../modules/constants'
-import {useLocale} from '../../locale/LocaleManager'
-import {useTheme} from '../../themes/ThemeManager'
+import {useLocale} from '../../services/locale/LocaleManager'
+import {useTheme} from '../../services/themes/ThemeManager'
 
 export default function MapScreen(props){
     const {mode, theme, toggle} = useTheme()

@@ -8,12 +8,12 @@
  */
 import React, { useState, useEffect } from 'react'
 import {AsyncStorage, Text} from 'react-native'
-import Navigation from './screens/HomeScreen'
+import Navigation from './services/navigation/HomeScreen'
 import AppLoading from 'expo-app-loading'
 import { useFonts } from '@use-expo/font'
 import { AppearanceProvider } from 'react-native-appearance'
-import { ThemeManager } from './themes/ThemeManager'
-import { LocaleManager } from './locale/LocaleManager'
+import { ThemeManager } from './services/themes/ThemeManager'
+import { LocaleManager } from './services/locale/LocaleManager'
 import WeekManager from './week/WeekManager'
 
 
@@ -23,8 +23,6 @@ function App(){
   Text.defaultProps.allowFontScaling = false; 
 
   const [firstLaunch, setFirstLaunch] = useState(null)
-  // const [loaded, setLoaded] = useState(false)
-
   useEffect(() => {
     AsyncStorage.getItem("alreadyLaunched").then(value => {
       if(value == null){
@@ -53,9 +51,6 @@ function App(){
       AsyncStorage.setItem('UUID', Math.random().toString(36).substr(2, 8) + '-' + Math.random().toString(36).substr(2, 4) + '-' + 
       Math.random().toString(36).substr(2, 4) + '-' + Math.random().toString(36).substr(2, 4) + '-' + 
       Math.random().toString(36).substr(2, 12))
-    }
-    else{
-      console.log(res)
     }
   })
 

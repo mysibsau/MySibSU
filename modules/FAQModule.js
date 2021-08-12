@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import {View, Text, StyleSheet} from 'react-native'
 import {h, w} from './constants'
-import {useTheme} from '../themes/ThemeManager'
+import {useTheme} from '../services/themes/ThemeManager'
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler'
 import Hyperlink from 'react-native-hyperlink'
 

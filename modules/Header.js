@@ -2,7 +2,7 @@ import React from 'react'
 import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native'
 import { h, w } from './constants'
 import { Ionicons } from '@expo/vector-icons'; 
-import { useTheme } from '../themes/ThemeManager'
+import { useTheme } from '../services/themes/ThemeManager'
 
 const Header = ({title, onPress}) => {
     const {mode, theme, toggle} = useTheme()
