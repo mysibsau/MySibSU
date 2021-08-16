@@ -9,7 +9,7 @@ import Swiper from 'react-native-swiper'
 
 import {useTheme} from '../../services/themes/ThemeManager'
 import {useLocale} from '../../services/locale/LocaleManager'
-import {useWeek} from '../../week/WeekManager'
+import {useWeek} from '../../services/week/WeekManager'
 
 const URLs = ['group', 'teacher', 'place']
 

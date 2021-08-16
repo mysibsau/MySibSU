@@ -11,7 +11,7 @@ import { useTheme } from '../../services/themes/ThemeManager'
 import { useLocale } from '../../services/locale/LocaleManager'
 
 
-export default function EventsScreen(props){
+export default function ServiceListScreen(props){
 
     const [UUID, setUUID] = React.useState('')
     const [token, setToken] = React.useState('')

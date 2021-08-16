@@ -14,7 +14,7 @@ import { useFonts } from '@use-expo/font'
 import { AppearanceProvider } from 'react-native-appearance'
 import { ThemeManager } from './services/themes/ThemeManager'
 import { LocaleManager } from './services/locale/LocaleManager'
-import WeekManager from './week/WeekManager'
+import WeekManager from './services/week/WeekManager'
 
 
 function App(){

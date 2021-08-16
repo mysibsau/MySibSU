@@ -24,7 +24,7 @@ import Animated, {Easing} from 'react-native-reanimated'
   import TimetableScreen from '../../screens/Timetable/TimetableScreen'
 
   // Services 
-  import ServiceScreen from '../../screens/Services/ServiceListScreen'
+  import ServiceListScreen from '../../screens/Services/ServiceListScreen'
     // Institutes
     import InstitutesScreen from '../../screens/Services/Institutes/InstitutesScreen'
     import IITK from '../../screens/Services/Institutes/Institute'
@@ -473,7 +473,7 @@ const ServiceStack = createStackNavigator();
 function ServiceStackScreen(){
   return(
     <ServiceStack.Navigator initialRouteName='Service' headerMode='none'>
-      <ServiceStack.Screen name="Service" component={ServiceScreen} />
+      <ServiceStack.Screen name="Service" component={ServiceListScreen} />
       <ServiceStack.Screen name="StudentLife" component={StudentLifeNavigator} />
       <ServiceStack.Screen name='Ermak' component={Ermak} />
       <ServiceStack.Screen name="Ensemble" component={EnsembleScreen} />
