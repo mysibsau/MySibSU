@@ -5,35 +5,33 @@ import { h, w } from '../../modules/constants'
 import {useLocale} from '../../services/locale/LocaleManager'
 import {useTheme} from '../../services/themes/ThemeManager'
 import { MaterialIcons } from '@expo/vector-icons'; 
+import { useUser } from '../../services/auth/AuthManager';
 
 
 export default function PersonScreen(props){
-    const {localeMode, locale, toggleLang} = useLocale()
-    const {mode, theme, toggle} = useTheme()
+    const {locale} = useLocale()
+    const {theme} = useTheme()
+    const {user, authData} = useUser();
 
-    const [user, setUser] = React.useState({})
+    // const [authData, setAuthData] = React.useState({})
 
-    const [authData, setAuthData] = React.useState({})
 
-    const [loaded, setLoaded] = React.useState(false)
-    const [fetching, setFetching] = React.useState(0)
+    // React.useEffect(() => {
+    //     AsyncStorage.getItem('User')
+    //     .then(res => {
+    //         if(res !== null){
+    //             setUser(JSON.parse(res))
+    //             setLoaded(true)
+    //         }
+    //     })
 
-    React.useEffect(() => {
-        AsyncStorage.getItem('User')
-        .then(res => {
-            if(res !== null){
-                setUser(JSON.parse(res))
-                setLoaded(true)
-            }
-        })
-
-        AsyncStorage.getItem('AuthData')
-            .then(res => {
-                if(res !== null){
-                    setAuthData(JSON.parse(res))
-                }
-            })
-      }, []);
+    //     AsyncStorage.getItem('AuthData')
+    //         .then(res => {
+    //             if(res !== null){
+    //                 setAuthData(JSON.parse(res))
+    //             }
+    //         })
+    //   }, []);
 
     React.useEffect(() =>
           props.navigation.addListener('beforeRemove', (e) => {

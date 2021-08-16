@@ -1,12 +1,8 @@
 import React from 'react'
-
-var week = 0
-fetch("https://mysibsau.ru/CurrentWeek/")
-    .then(response => response.json())
-    .then(json => week = json.week)
+import { CurrentWeekApiCall } from '../api/timetable';
 
 export const ManageWeekContext = React.createContext({
-    week: week,
+    week: 0,
   });
 
 export const useWeek = () => React.useContext(ManageWeekContext);
@@ -14,8 +10,12 @@ export const useWeek = () => React.useContext(ManageWeekContext);
 export class WeekManager extends React.Component {
 
     state = {
-      week: week
+      week: 0
     };
+
+    async componentDidMount() {
+        this.setState({week: await CurrentWeekApiCall()})
+    }
 
     render () {
       return (

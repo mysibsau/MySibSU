@@ -56,7 +56,7 @@ import Animated, {Easing} from 'react-native-reanimated'
     import PhysicalScreen from '../../screens/Services/Library/PhysicalScreen'
   
 // Person
-import PersonScreen from '../../screens/Profile/PersonScreen'
+import PersonScreen from '../../screens/Profile/AuthScreen'
 import ProfileScreen from '../../screens/Profile/ProfileScreen'
 import SettingsScreen from '../../screens/Profile/SettingsScreen'
 import AttestationScreen from '../../screens/Profile/AttestationScreen'

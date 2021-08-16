@@ -7,8 +7,10 @@ import { useTheme } from '../../services/themes/ThemeManager'
 import SwitchSelector from "react-native-switch-selector";
 import {useLocale} from '../../services/locale/LocaleManager'
 import { TouchableOpacity } from 'react-native'
+import { useUser } from '../../services/auth/AuthManager'
 
 export default function SettingsScreen(props){ 
+    const {logout, isAuthorizated} = useUser();
     const { mode, theme, toggle } = useTheme();
     const { localeMode, locale, toggleLang } = useLocale()
     const langs = [{name: 'Русский', short_name: 'ru'}, {name: 'English', short_name: 'en'}]
@@ -77,16 +79,10 @@ export default function SettingsScreen(props){
                     />
                 </View>
                 <Text style={{ width: w * 0.9, alignSelf: 'center', color: 'gray', fontSize: 12, fontFamily: 'roboto', marginTop: 15}}>{locale['color_settings']}</Text>
-                {Object.keys(props.route.params.user).length !== 0 ?
-                <TouchableOpacity style={{padding: 10, width: w * 0.4, alignSelf: 'center', marginTop: 20, borderRadius: 15, elevation: 5, backgroundColor: theme.blockColor}} onPress={() => {
-                    AsyncStorage.removeItem('User').then(() => {
-                        AsyncStorage.removeItem('AuthData').then(() => {
-                            props.navigation.navigate('Account')
-                        })
-                    })
-                }}>
+                {isAuthorizated &&
+                <TouchableOpacity style={{padding: 10, width: w * 0.4, alignSelf: 'center', marginTop: 20, borderRadius: 15, elevation: 5, backgroundColor: theme.blockColor}} onPress={() => logout()}>
                     <Text style={{alignSelf: 'center', color: '#EE7575', fontWeight: 'bold', fontFamily: 'roboto',}}>{locale['sign_out']}</Text>
-                </TouchableOpacity> : null}
+                </TouchableOpacity>}
                 <Text style={{fontFamily: 'roboto', alignSelf: 'center', color: 'gray', position: 'absolute', bottom: 60}}>{locale['version']}: 2.0.0</Text>
                 
             </View>

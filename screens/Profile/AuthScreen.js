@@ -6,15 +6,27 @@ import {useLocale} from '../../services/locale/LocaleManager'
 import {useTheme} from '../../services/themes/ThemeManager'
 import { Ionicons } from '@expo/vector-icons'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
+import { useUser } from '../../services/auth/AuthManager';
 
 export default function PersonScreen(props){
-    const {localeMode, locale, toggleLang} = useLocale()
-    const {mode, theme, toggle} = useTheme()
-
-    const [login, setLogin] = React.useState('')
+    const {locale} = useLocale()
+    const {theme} = useTheme()
+    const {login} = useUser()
+    const [username, setUsername] = React.useState('')
     const [password, setPassword] = React.useState('')
 
-    const [fetching, setFetching] = React.useState(0)
+    const [fetching, setFetching] = React.useState(false)
+
+    const tryToLogin = async () => {
+        setFetching(true)
+        const response = await login(username, password)
+        if (response) {
+            props.navigation.navigate('Profile')
+        } else {
+            ToastAndroid.show(locale.wrong_login, ToastAndroid.LONG)
+        }
+        setFetching(false);
+    }
 
     return(
         <View style={[styles.container, {backgroundColor: theme.primaryBackground}]}>
@@ -33,7 +45,7 @@ export default function PersonScreen(props){
                     <View style={{ width: w * 0.8, borderRadius: 15, elevation: 6, backgroundColor: theme.blockColor, alignSelf: 'center', marginTop: 40}}>
                         <View style={{flexDirection: 'row', }}>
                             <Ionicons name='md-person' size={26} color={'gray'} style={{ marginTop: 'auto', marginBottom: 'auto', alignSelf: 'center', marginLeft: 10, marginRight: 10}}/>
-                            <TextInput value={login} onChangeText={value => setLogin(value)} placeholderTextColor={'gray'} placeholder={locale['login']} numberOfLines={1} style={{width: w * 0.7, fontFamily: 'roboto', color: theme.labelColor}}/>
+                            <TextInput value={username} onChangeText={value => setUsername(value)} placeholderTextColor={'gray'} placeholder={locale['login']} numberOfLines={1} style={{width: w * 0.7, fontFamily: 'roboto', color: theme.labelColor}}/>
                         </View>
                         <View  style={{alignSelf: 'center', width: w * 0.7, height: 1, backgroundColor: 'gray', opacity: 0.5}}/>
                         <View style={{flexDirection: 'row'}}>
@@ -43,34 +55,7 @@ export default function PersonScreen(props){
                         
                     </View>
                     <TouchableOpacity onPress={() => {
-                        setFetching(1)
-                        fetch('https://mysibsau.ru/v2/user/auth/', {method: 'POST',
-                            body: JSON.stringify({
-                                username: login,
-                                password: password
-                            })})
-                            .then(response => response.json())
-                            .then(json => {
-                                setFetching(0)
-                                if(!json.error){
-                                    setLogin('')
-                                    setPassword('')
-                                    AsyncStorage.setItem('User', JSON.stringify(json))
-                                    AsyncStorage.setItem('AuthData', JSON.stringify({
-                                        username: login,
-                                        password: password
-                                    }))
-                                    console.log(json)
-                                    props.navigation.navigate('Profile')
-                                }
-                                else{
-                                    ToastAndroid.show(
-                                        locale['wrong_login'],
-                                        ToastAndroid.LONG
-                                      );
-                                }
-                                
-                            })
+                        tryToLogin();
                     }}>
                         <View style={styles.okay_button}>
                             <Text style={styles.okay_button_text}>{locale['sign_in']}</Text>
@@ -78,7 +63,7 @@ export default function PersonScreen(props){
                     </TouchableOpacity>
                     <Text style={{width: w * 0.8, fontFamily: 'roboto', marginTop: 20, alignSelf: 'center', textAlign: 'center', color: 'gray'}}>{locale['sign_in_tip']}</Text>
                 </View>
-                <ActivityIndicator style={{ opacity: fetching }} color={'#006AB3'} size={'large'}/>
+                {fetching && <ActivityIndicator color={'#006AB3'} size={'large'}/>}
             </ScrollView>
             
         </View>

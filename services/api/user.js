@@ -12,4 +12,25 @@ export const getUserQuestionsApiCall = async () => {
         console.log(err);
         return [];
     }
+};
+
+export const signInApiCall = async (login, password) => {
+    try {
+        const response = await axios.post('/v2/user/auth/', {username: login, password: password});
+        return response.data;
+    } catch (err) {
+        return false;
+    }
+};
+
+export const getAttestationApiCall = async (authData) => {
+    console.log(authData)
+    try {
+        const response = await axios.post('/v2/user/attestation/', authData)
+        
+        return response.data;
+    } catch(err) {
+        console.log(err)
+        return []
+    }
 }

@@ -3,6 +3,7 @@ import { StyleSheet, View, Text, TouchableOpacity, Image } from 'react-native'
 import { w } from './constants'
 import { Ionicons } from '@expo/vector-icons'; 
 import { useTheme } from '../services/themes/ThemeManager'
+import AsyncStorage from '@react-native-community/async-storage';
 
 const AskHeader = ({title, onPress, onQuestion}) => {
     const {theme} = useTheme()
