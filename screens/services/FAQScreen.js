@@ -9,7 +9,7 @@ import AskHeader from '../../modules/AskHeader'
 import {h, w} from '../../modules/constants'
 import { FlatList } from 'react-native-gesture-handler'
 import AskModal from '../../modules/AskModal'
-import { AskQuestionApiCall } from '../../services/api/faq'
+import { AskQuestionApiCall, FAQListApiCall } from '../../services/api/faq'
 
 
 export default function FAQScreen(props){
@@ -22,24 +22,23 @@ export default function FAQScreen(props){
     const {localeMode, locale, toggleLang} = useLocale()
 
     useEffect(() => {
-        console.log('Получаем список вопросов')
-        fetch("https://mysibsau.ru/v2/support/faq/?language=" + String(localeMode), {method: 'GET'})
-            .then(response => response.json())
-            .then(json => {
-                setQuestions(json)
-                setLoaded(true)
-            })
+        getQuestions();
     }, [])
+    
+    const getQuestions = async () => {
+        const data = await FAQListApiCall();
+        setQuestions(data);
+        setLoaded(true);
+    }
 
-    const sendQuestion = async (text, isPublic, topic) => {
-        const response = AskQuestionApiCall(text, topic, isPublic);
-        response ? console.log('success') : console.log('fail');
+    const sendQuestion = async (text, isPublic) => {
+        await AskQuestionApiCall(text, 'general', isPublic);
     }
 
     return(
         <View style={[styles.container, {backgroundColor: theme.primaryBackground}]}>
             <AskHeader title={'FAQ'} onPress={() => props.navigation.goBack()} onQuestion={() => setVisible(true)}/>
-            <AskModal visible={visible} onClose={() => setVisible(false)} onSend={(text, isPublic, topic) => sendQuestion(text,isPublic, topic)}/>
+            <AskModal visible={visible} onClose={() => setVisible(false)} onSend={(text, isPublic) => sendQuestion(text,isPublic)}/>
             {loaded ? 
                 <FlatList 
                     data={questions}

@@ -22,7 +22,7 @@ const AskModal = ({visible, onClose, onSend}) => {
             <TextInput 
                 placeholderTextColor={'gray'} 
                 onChangeText={text => setText(text)}
-                onSubmitEditing={() => onSend(text, isPublic, 'default')}
+                onSubmitEditing={() => onSend(text, isPublic)}
                 placeholder={locale['input_question']} 
                 multiline 
                 numberOfLines={5} 
@@ -36,7 +36,7 @@ const AskModal = ({visible, onClose, onSend}) => {
             </View>
             <TouchableOpacity style={[styles.send_button, {backgroundColor: theme.blockColor}]} onPress={() => {
                 if (text.length) {
-                    onSend(text,isPublic, 'default');
+                    onSend(text,isPublic);
                     onClose();
                 } else {
 

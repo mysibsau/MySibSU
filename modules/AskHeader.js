@@ -3,9 +3,11 @@ import { StyleSheet, View, Text, TouchableOpacity, Image } from 'react-native'
 import { w } from './constants'
 import { Ionicons } from '@expo/vector-icons'; 
 import { useTheme } from '../services/themes/ThemeManager'
+import { useUser } from '../services/auth/AuthManager';
 import AsyncStorage from '@react-native-community/async-storage';
 
 const AskHeader = ({title, onPress, onQuestion}) => {
+    const {isAuthorizated} = useUser();
     const {theme} = useTheme()
     return(
         <View style={[styles.box,{backgroundColor: theme.blockColor}]}>
@@ -17,10 +19,11 @@ const AskHeader = ({title, onPress, onQuestion}) => {
             </TouchableOpacity>
             <Text numberOfLines={1} style={[styles.maintext, {color: theme.headerTitle}]}>{title}</Text>
             </View>
+            {isAuthorizated &&
             <TouchableOpacity onPress={onQuestion} style={{height: w/8, alignItems: 'center', flexDirection: 'column', justifyContent: 'center', marginRight: 10}}>
             <Ionicons name="ios-create-outline" size={30} color={theme.blueColor} />
                 {/* <Image source={{uri: "https://e7.pngegg.com/pngimages/458/214/png-clipart-scalable-graphics-icon-question-mark-text-speech-balloon.png"}} style={{height: 30, width: 30, resizeMode: 'contain'}} /> */}
-            </TouchableOpacity>
+            </TouchableOpacity>}
         </View>
     )
 }
