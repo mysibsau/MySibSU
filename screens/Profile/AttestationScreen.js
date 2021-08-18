@@ -38,6 +38,7 @@ export default function AttestationScreen(props){
                 data={attestation}
                 keyExtractor={item => item.name}
                 renderItem={data => <AttestationListElement item={data.item} />}
+                contentContainerStyle={{paddingBottom: 120}}
             />}
         </View>
     )

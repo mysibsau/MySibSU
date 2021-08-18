@@ -21,7 +21,7 @@ export default function QuestionsScreen(props){
     }, [])
 
     const getQuestions = async () => {
-        const data = GroupBy(await getUserQuestionsApiCall(), 'theme');
+        const data = GroupBy(await getUserQuestionsApiCall(localeMode), 'theme');
         // console.log(data)
         setQuestions(data);
         setLoaded(true);

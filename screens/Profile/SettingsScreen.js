@@ -51,9 +51,15 @@ export default function SettingsScreen(props){
         }
     }
 
+    const signOut = async () => {
+        await logout();
+    }
+
     return(
         <View style={{ flex: 1, backgroundColor: theme.primaryBackground}}>
-            <Header title={locale['settings']} onPress={() => props.navigation.goBack()}/>
+            <Header title={locale['settings']} onPress={() => {
+                isAuthorizated ? props.navigation.navigate('Profile') : props.navigation.navigate('Person')
+            }}/>
             <View style={{ flex: 1, backgroundColor: theme.primaryBackground}}>
                 <Text style={styles.large_text}>{locale['choose_lang']}</Text>
                 <View style={[styles.container, styles.shadow, {alignItems: 'center', minHeight: 50, backgroundColor: theme.blockColor}]}>
@@ -80,7 +86,7 @@ export default function SettingsScreen(props){
                 </View>
                 <Text style={{ width: w * 0.9, alignSelf: 'center', color: 'gray', fontSize: 12, fontFamily: 'roboto', marginTop: 15}}>{locale['color_settings']}</Text>
                 {isAuthorizated &&
-                <TouchableOpacity style={{padding: 10, width: w * 0.4, alignSelf: 'center', marginTop: 20, borderRadius: 15, elevation: 5, backgroundColor: theme.blockColor}} onPress={() => logout()}>
+                <TouchableOpacity style={{padding: 10, width: w * 0.4, alignSelf: 'center', marginTop: 20, borderRadius: 15, elevation: 5, backgroundColor: theme.blockColor}} onPress={() => signOut()}>
                     <Text style={{alignSelf: 'center', color: '#EE7575', fontWeight: 'bold', fontFamily: 'roboto',}}>{locale['sign_out']}</Text>
                 </TouchableOpacity>}
                 <Text style={{fontFamily: 'roboto', alignSelf: 'center', color: 'gray', position: 'absolute', bottom: 60}}>{locale['version']}: 2.0.0</Text>

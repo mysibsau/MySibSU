@@ -73,6 +73,7 @@ import { AntDesign } from '@expo/vector-icons'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { Ionicons } from '@expo/vector-icons'
 import ActiveNavScreen from '../../screens/Services/StudentLife/ActiveNavScreen'
+import { useUser } from '../auth/AuthManager'
 
 function LibraryTabBar({ state, descriptors, navigation, position }) {
   const {mode, theme, toggle} = useTheme()
@@ -204,83 +205,6 @@ function FeedTabs() {
   );
 }
 
-function MyTabBar({ state, descriptors, navigation, position }) {
-  const {mode, theme, toggle} = useTheme()
-  const inputRange = state.routes.map((_, i) => i);
-  const translateX = Animated.interpolate(position, {
-    inputRange,
-    outputRange: inputRange.map(i => i * Dimensions.get('window').width / 4)
-  })
-  
-  return (
-    <View style={{ flexDirection: 'row', backgroundColor: theme.blockColor, elevation: 6}}>
-      <TouchableOpacity onPress={() => navigation.navigate('Service')}>
-        <View style={{ height: Dimensions.get('window').width / 8, width: Dimensions.get('window').width / 8 , justifyContent: 'center'}}>
-          <Ionicons name="ios-arrow-back" size={30} color="black" style={{ color: '#006AB3', paddingRight: 10, paddingLeft: 15}}/>
-        </View>
-      </TouchableOpacity>
-      <Animated.View
-        style={[
-            style.slider,
-            {
-                transform: [{translateX}],
-                width: Dimensions.get('window').width / 4,
-                height: 2,
-                backgroundColor: theme.blueColor
-            },
-        ]}
-          />
-      {state.routes.map((route, index) => {
-        const { options } = descriptors[route.key];
-        const label = options.title
-
-        const isFocused = state.index === index;
-
-        const onPress = () => {
-          const event = navigation.emit({
-            type: 'tabPress',
-            target: route.key,
-            canPreventDefault: true,
-          });
-
-          if (!isFocused && !event.defaultPrevented) {
-            navigation.navigate(route.name);
-          }
-        };
-
-        const onLongPress = () => {
-          navigation.emit({
-            type: 'tabLongPress',
-            target: route.key,
-          });
-        };
-
-        const inputRange = state.routes.map((_, i) => i);
-        const opacity = Animated.interpolate(position, {
-          inputRange,
-          outputRange: inputRange.map(i => (i === index ? 1 : 0.5)),
-        });
-
-        return (
-          <TouchableOpacity
-            accessibilityRole="button"
-            accessibilityState={isFocused ? { selected: true } : {}}
-            accessibilityLabel={options.tabBarAccessibilityLabel}
-            testID={options.tabBarTestID}
-            onPress={onPress}
-            onLongPress={onLongPress}
-            style={{ width: Dimensions.get('window').width / 4, alignItems: 'center', justifyContent: 'center' }}
-          >
-            <Animated.Text style={{ textTransform: 'uppercase', fontFamily: 'roboto', color: theme.labelColor, fontSize: 13, opacity }}>
-              {label}
-            </Animated.Text>
-          </TouchableOpacity>
-        );
-      })}
-    </View>
-  );
-}
-
 const StudentLifeStack = createStackNavigator();
 
 function StudentLifeNavigator(){
@@ -291,7 +215,6 @@ function StudentLifeNavigator(){
       <StudentLifeStack.Screen options={{headerShown: false}} name="Sport" component={SportScreen} />
       <StudentLifeStack.Screen options={{headerShown: false}} name="Science" component={DesignScreen} />
       <StudentLifeStack.Screen options={{headerShown: false}} name="Art" component={ArtScreen} />
-      {/* <StudentLifeStack.Screen options={{headerShown: false}} name="Active" component={ActiveScreen} /> */}
     </StudentLifeStack.Navigator>
   )
 }
@@ -300,6 +223,7 @@ const Tabs = createBottomTabNavigator();
 
 function BottomTab(){
   const {localeMode, locale, toggleLang} = useLocale()
+  const {isAuthorizated} = useUser();
   
     return (
       <Tabs.Navigator initialRouteName={'Timetable'} tabBar={(props) => <MainTabBar {...props} />}>
@@ -324,7 +248,23 @@ function BottomTab(){
           headerShown: false,
           title: locale['services']
         }}/>
-        <Tabs.Screen name={'Profile'} component={PersonStackScreen}
+        <Tabs.Screen name={'Profile'} listeners={({ navigation, route }) => ({
+    tabPress: (e) => {
+      try {
+      if (route.state.routes.length > 1){
+        if (route.state.routes[1].name ==='Settings') {
+          e.preventDefault();
+          if (isAuthorizated) {
+            console.log('Here')
+            navigation.navigate('Profile')
+          } else {
+            navigation.navigate('Person')
+          }
+        }
+      }
+    } catch(err) {} 
+    },
+  })} component={PersonStackScreen} 
         options={{
           headerShown: false,
           title: locale['profile']
@@ -427,45 +367,29 @@ function TimetableStackScreen(){
 }
 
 const PersonStack = createStackNavigator();
-  
 
 function PersonStackScreen(){
-  const [screen, setScreen] = useState('')
+  const {isAuthorizated} = useUser();
 
-  const Layout = (initialName) => {
-    if(initialName === '')
-      return(<View></View>)
-    else
+    if (isAuthorizated){
+        return(
+          <PersonStack.Navigator initialRouteName={'Profile'} headerMode='none'>
+            <PersonStack.Screen name='Profile' component={ProfileScreen} />
+            <PersonStack.Screen name='Settings' component={SettingsScreen} />
+            <PersonStack.Screen name='Attestation' component={AttestationScreen} />
+            <PersonStack.Screen name='Marks' component={MarksScreen} />
+            <PersonStack.Screen name="Questions" component={QuestionsScreen} />
+          </PersonStack.Navigator>
+      )
+    } else {
       return(
-        <PersonStack.Navigator initialRouteName={initialName} headerMode='none'>
-          <PersonStack.Screen name='Account' component={PersonScreen} />
-          <PersonStack.Screen name='Profile' component={ProfileScreen} 
-          listeners={{
-            tabPress: e => {
-              e.preventDefault();
-            },
-          }}/>
+        <PersonStack.Navigator initialRouteName={'Person'} headerMode='none'>
+          <PersonStack.Screen name='Person' component={PersonScreen} />
+          <PersonStack.Screen name='Profile' component={ProfileScreen} />
           <PersonStack.Screen name='Settings' component={SettingsScreen} />
-          <PersonStack.Screen name='Attestation' component={AttestationScreen} />
-          <PersonStack.Screen name='Marks' component={MarksScreen} />
-          <PersonStack.Screen name="Questions" component={QuestionsScreen} />
         </PersonStack.Navigator>
       )
-  }
-
-  useEffect(() => {
-    AsyncStorage.getItem('User')
-    .then(res => {
-      if (res !== null)
-        setScreen('Profile')
-      else
-        setScreen('Account')
-    })
-  }, [])
-
-  return(
-    Layout(screen)
-  )
+    }
 }
 
 const ServiceStack = createStackNavigator();
@@ -491,13 +415,12 @@ function ServiceStackScreen(){
       <ServiceStack.Screen name='FAQ' component={FAQScreen} />
       <ServiceStack.Screen name='LibrarySearch' component={LibrarySearchScreen} />
       <ServiceStack.Screen name='LibraryResult' component={LibraryTabs} />
-      {/* <ServiceStack.Screen name='TestScreen' component={ActiveNavScreen} /> */}
     </ServiceStack.Navigator>
   )
 }
 
 const BottomMenuItem = ({ iconName, label, isCurrent }) => {
-  const {mode, theme, toggle} = useTheme()
+  const {theme} = useTheme()
 
   const color = isCurrent ? theme.blueColor : 'gray'
   const icons = {
@@ -516,7 +439,7 @@ const BottomMenuItem = ({ iconName, label, isCurrent }) => {
       }}
     >
       {icons[iconName]}
-      {/* <Text style={{ fontFamily: 'roboto', fontSize: 10, color: color }}>{label}</Text> */}
+      <Text style={{ fontFamily: 'roboto', fontSize: 10, color: color }}>{label}</Text>
     </View>
   );
 };

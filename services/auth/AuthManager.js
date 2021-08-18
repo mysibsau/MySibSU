@@ -6,6 +6,7 @@ import { signInApiCall } from '../api/user';
 
 export const ManageAuthContext = React.createContext({
     user: {},
+    authData: {},
     isAuthorizated: false,
     setUserInfo: () => {},
     login: () => {},
@@ -15,12 +16,19 @@ export const ManageAuthContext = React.createContext({
 export const useUser = () => React.useContext(ManageAuthContext);
 
 export class AuthManager extends React.Component {
+    constructor(props){
+        super(props)
+        this.state = {
+            user: {},
+            authData: {},
+            isAuthorizated: false,
+        }
 
-    state = {
-      user: {},
-      authData: {},
-      isAuthorizated: false,
-    };
+        this.login.bind(this);
+        this.logout.bind(this);
+    }
+
+    
 
     async componentDidMount() {
         this.setUserInfo();
@@ -36,19 +44,19 @@ export class AuthManager extends React.Component {
         }
     }
 
-    async login(login, password){
+    login = async (login, password) => {
         const user = await signInApiCall(login, password);
         if (user) {
-            AsyncStorage.setItem('User', JSON.stringify(user))
-            AsyncStorage.setItem('AuthData', JSON.stringify({username: login, password: password}))
             this.setState({user: user, authData: {username: login, password: password}, isAuthorizated: true})
+            await AsyncStorage.setItem('User', JSON.stringify(user))
+            await AsyncStorage.setItem('AuthData', JSON.stringify({username: login, password: password}))
             return true;
         } else {
             return false;
         }
     }
 
-    async logout(){
+    logout = async () => {
         await AsyncStorage.removeItem('User');
         await AsyncStorage.removeItem('AuthData');
         this.setState({user: {}, authData: {}, isAuthorizated: false})

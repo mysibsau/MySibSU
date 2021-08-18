@@ -13,26 +13,6 @@ export default function PersonScreen(props){
     const {theme} = useTheme()
     const {user, authData} = useUser();
 
-    // const [authData, setAuthData] = React.useState({})
-
-
-    // React.useEffect(() => {
-    //     AsyncStorage.getItem('User')
-    //     .then(res => {
-    //         if(res !== null){
-    //             setUser(JSON.parse(res))
-    //             setLoaded(true)
-    //         }
-    //     })
-
-    //     AsyncStorage.getItem('AuthData')
-    //         .then(res => {
-    //             if(res !== null){
-    //                 setAuthData(JSON.parse(res))
-    //             }
-    //         })
-    //   }, []);
-
     React.useEffect(() =>
           props.navigation.addListener('beforeRemove', (e) => {
             if(e.data.action.type === 'GO_BACK')
@@ -42,7 +22,7 @@ export default function PersonScreen(props){
 
     return(
         <View style={[styles.container, {backgroundColor: theme.primaryBackground}]}>
-            <View style={[styles.box, styles.shadow, {backgroundColor: theme.blockColor}]}>
+            <View style={[styles.box, {backgroundColor: theme.blockColor}]}>
                 <Image source={require('../../assets/header_logo.png')} style={{ width: 25, height: 25, marginBottom: 3, marginRight: 10, marginLeft: 10}} />
                 <Text style={[styles.maintext, {color: theme.headerTitle}]}>{locale['personal_account']}</Text>
                 <TouchableOpacity onPress={() => {
@@ -78,7 +58,7 @@ export default function PersonScreen(props){
 
                 <Text style={{ fontFamily: 'roboto', fontSize: 19, fontWeight: 'bold', color: theme.blueColor, marginBottom: 5, marginTop: 15}}>{locale['perfomance']}</Text>
                 <View style={{width: w * 0.9, borderRadius: 15, backgroundColor: theme.blockColor, elevation: 5}}>
-                    <TouchableOpacity onPress={() => props.navigation.navigate('Attestation', {data: authData})}>
+                    <TouchableOpacity onPress={() => props.navigation.navigate('Attestation')}>
                         <View style={{flexDirection: 'row', justifyContent: 'space-between', padding: 10}}>
                             <Text style={{fontFamily: 'roboto', color: theme.labelColor, fontSize: 19}}>{locale['attestation']}</Text>
                             <MaterialIcons name="keyboard-arrow-right" size={24} color="#006AB3" />
@@ -101,15 +81,6 @@ export default function PersonScreen(props){
     )
 }
 
-function elevationShadowStyle(elevation) {
-    return {
-      elevation,
-      shadowColor: 'black',
-      shadowOffset: { width: 0, height: 0.5 * elevation },
-      shadowOpacity: 0.3,
-      shadowRadius: 0.8 * elevation
-    };
-  }
 
 const styles = StyleSheet.create({
     container: {
@@ -129,7 +100,6 @@ const styles = StyleSheet.create({
         color: '#006AB3'
     },
 
-    shadow: elevationShadowStyle(5),
     box: {
         backgroundColor: 'white',
         height: w/8,
@@ -139,6 +109,7 @@ const styles = StyleSheet.create({
         position: 'relative',
         flexDirection: 'row',
         alignItems: 'center',
+        elevation: 5,
         zIndex: 4,
     },
 

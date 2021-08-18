@@ -69,7 +69,7 @@ export const translations = {
         active: 'Active',
         sport: 'Sport',
         science: 'Science',
-        art: 'Creation',
+        art: 'Creativity',
         active_head: 'Head',
         training_days: 'Training days',
         vacancies: 'Vacancies',

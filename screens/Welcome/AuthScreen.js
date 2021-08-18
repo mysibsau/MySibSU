@@ -5,16 +5,33 @@ import {useLocale} from '../../services/locale/LocaleManager'
 import { h, w } from '../../modules/constants'
 import { Ionicons } from '@expo/vector-icons'
 import { MaterialCommunityIcons } from '@expo/vector-icons'; 
+import { useUser } from '../../services/auth/AuthManager'
 
 
 export default function AuthScreen(props){
-    const {mode, theme, toggle} = useTheme()
-    const {localeMode, locale, toggleLang} = useLocale()
+    const {theme} = useTheme()
+    const {locale} = useLocale()
+    const {login} = useUser()
 
-    const [login, setLogin] = React.useState('')
+    const [username, setUsername] = React.useState('')
     const [password, setPassword] = React.useState('')
+    const [fetching, setFetching] = React.useState(false)
 
-    const [fetching, setFetching] = React.useState(0)
+    const toAuth = async () => {
+        setFetching(true)
+        const response = await login(username, password);
+        if (response){
+            setUsername('');
+            setPassword('');
+            props.navigation.navigate('Bottom')
+        } else {
+            ToastAndroid.show(
+                locale['wrong_login'],
+                ToastAndroid.LONG,
+              );
+        }
+        setFetching(false)
+    };
 
     return(
         <View style={{flex: 1, backgroundColor: theme.primaryBackground,}}>
@@ -24,40 +41,17 @@ export default function AuthScreen(props){
                     <View style={{ width: w * 0.8, borderRadius: 15, elevation: 6, backgroundColor: theme.blockColor, alignSelf: 'center', marginTop: 40}}>
                         <View style={{flexDirection: 'row', }}>
                             <Ionicons name='md-person' size={26} color={'gray'} style={{ marginTop: 'auto', marginBottom: 'auto', alignSelf: 'center', marginLeft: 10, marginRight: 10}}/>
-                            <TextInput value={login} onChangeText={value => setLogin(value)} placeholderTextColor={'gray'} placeholder={locale['login']} numberOfLines={1} style={{ width: w * 0.7, fontFamily: 'roboto', color: theme.labelColor}}/>
+                            <TextInput value={login} onChangeText={value => setUsername(value)} placeholderTextColor={'gray'} placeholder={locale['login']} numberOfLines={1} style={{ width: w * 0.7, fontFamily: 'roboto', color: theme.labelColor}}/>
                         </View>
                         <View  style={{alignSelf: 'center', width: w * 0.7, height: 1, backgroundColor: 'gray', opacity: 0.5}}/>
                         <View style={{flexDirection: 'row'}}>
                             <MaterialCommunityIcons name="key" size={26} color={'gray'} style={{ marginTop: 'auto', marginBottom: 'auto', alignSelf: 'center', marginLeft: 10, marginRight: 10}} />
-                            <TextInput value={password} onChangeText={value => setPassword(value)} placeholderTextColor={'gray'} placeholder={locale['password']} numberOfLines={1} secureTextEntry={true} style={{ width: w * 0.7, fontFamily: 'roboto', color: theme.labelColor}}/>
+                            <TextInput onSubmitEditing={() => toAuth()} value={password} onChangeText={value => setPassword(value)} placeholderTextColor={'gray'} placeholder={locale['password']} numberOfLines={1} secureTextEntry={true} style={{ width: w * 0.7, fontFamily: 'roboto', color: theme.labelColor}}/>
                         </View>
-                        
                     </View>
                     <TouchableOpacity onPress={() => {
-                        setFetching(1)
-                        fetch('https://mysibsau.ru/v2/user/auth/', {method: 'POST',
-                            body: JSON.stringify({
-                                username: login,
-                                password: password
-                            })})
-                            .then(response => response.json())
-                            .then(json => {
-                                setFetching(0)
-                                if (!json.error){
-                                    AsyncStorage.setItem('User', JSON.stringify(json))
-                                    AsyncStorage.setItem('AuthData', JSON.stringify({
-                                        username: login,
-                                        password: password,
-                                    }))
-                                    props.navigation.navigate('Bottom')
-                                }
-                                else{
-                                    ToastAndroid.show(
-                                        locale['wrong_login'],
-                                        ToastAndroid.LONG,
-                                      );
-                                }
-                            })
+                        setFetching(true)
+                        toAuth()
                     }}>
                         <View style={styles.okay_button}>
                             <Text style={styles.okay_button_text}>{locale['sign_in']}</Text>
@@ -67,7 +61,7 @@ export default function AuthScreen(props){
                         <Text style={{ alignSelf: 'center', fontFamily: 'roboto', marginTop: 20, color: 'gray'}}>{locale['sign_in_as_guest']}</Text>
                     </TouchableOpacity>
                 </View>
-                <ActivityIndicator style={{ opacity: fetching }} color={'#006AB3'} size={'large'}/>
+                {fetching && <ActivityIndicator color={'#006AB3'} size={'large'}/>}
             </ScrollView>
         </View>
     )

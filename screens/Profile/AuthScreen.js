@@ -19,8 +19,10 @@ export default function PersonScreen(props){
 
     const tryToLogin = async () => {
         setFetching(true)
-        const response = await login(username, password)
+        const response = login(username, password)
         if (response) {
+            setUsername('');
+            setPassword('');
             props.navigation.navigate('Profile')
         } else {
             ToastAndroid.show(locale.wrong_login, ToastAndroid.LONG)
