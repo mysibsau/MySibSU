@@ -5,10 +5,12 @@ import {useTheme} from '../services/themes/ThemeManager'
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler'
 import Hyperlink from 'react-native-hyperlink'
 import { watchFAQApiCall } from '../services/api/faq'
+import { useLocale } from '../services/locale/LocaleManager'
 
 const FAQModule = (data) => {
     const {theme} = useTheme()
     const [show, setShow] = useState(false)
+    const {locale} = useLocale();
 
     const watchQuestion = async () => {
         await watchFAQApiCall(data.data.id)
@@ -21,7 +23,7 @@ const FAQModule = (data) => {
                 setShow(!show)
                 if(!show) watchQuestion()
                 }}>
-                    <Text style={styles.question}>{data.data.question}</Text>
+                    <Text style={styles.question}>{data.data.question}<Text style={{color: 'gray'}}>{!data.data.answer && ` [${locale['in_processing']}]`}</Text></Text>
                 </TouchableWithoutFeedback>
                 {show ? 
                 <Hyperlink linkStyle={ { color: theme.blueColor, fontSize: 16, } }
