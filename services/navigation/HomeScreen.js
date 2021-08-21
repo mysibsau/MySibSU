@@ -74,6 +74,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { Ionicons } from '@expo/vector-icons'
 import ActiveNavScreen from '../../screens/Services/StudentLife/ActiveNavScreen'
 import { useUser } from '../auth/AuthManager'
+import AnotherSettingsScreen from '../../screens/Profile/AnotherSettingsScreen'
 
 function LibraryTabBar({ state, descriptors, navigation, position }) {
   const {mode, theme, toggle} = useTheme()
@@ -248,23 +249,7 @@ function BottomTab(){
           headerShown: false,
           title: locale['services']
         }}/>
-        <Tabs.Screen name={'Profile'} listeners={({ navigation, route }) => ({
-    tabPress: (e) => {
-      try {
-      if (route.state.routes.length > 1){
-        if (route.state.routes[1].name ==='Settings') {
-          e.preventDefault();
-          if (isAuthorizated) {
-            console.log('Here')
-            navigation.navigate('Profile')
-          } else {
-            navigation.navigate('Person')
-          }
-        }
-      }
-    } catch(err) {} 
-    },
-  })} component={PersonStackScreen} 
+        <Tabs.Screen name={'Profile'} component={PersonStackScreen} 
         options={{
           headerShown: false,
           title: locale['profile']
@@ -371,25 +356,22 @@ const PersonStack = createStackNavigator();
 function PersonStackScreen(){
   const {isAuthorizated} = useUser();
 
-    if (isAuthorizated){
-        return(
-          <PersonStack.Navigator initialRouteName={'Profile'} headerMode='none'>
-            <PersonStack.Screen name='Profile' component={ProfileScreen} />
-            <PersonStack.Screen name='Settings' component={SettingsScreen} />
-            <PersonStack.Screen name='Attestation' component={AttestationScreen} />
-            <PersonStack.Screen name='Marks' component={MarksScreen} />
-            <PersonStack.Screen name="Questions" component={QuestionsScreen} />
-          </PersonStack.Navigator>
-      )
-    } else {
-      return(
-        <PersonStack.Navigator initialRouteName={'Person'} headerMode='none'>
-          <PersonStack.Screen name='Person' component={PersonScreen} />
+    return(
+      <PersonStack.Navigator headerMode={'none'}>
+        {isAuthorizated ? 
+        <>
           <PersonStack.Screen name='Profile' component={ProfileScreen} />
           <PersonStack.Screen name='Settings' component={SettingsScreen} />
-        </PersonStack.Navigator>
-      )
-    }
+          <PersonStack.Screen name='Attestation' component={AttestationScreen} />
+          <PersonStack.Screen name='Marks' component={MarksScreen} />
+          <PersonStack.Screen name="Questions" component={QuestionsScreen} />
+        </> : 
+        <>
+          <PersonStack.Screen name='Person' component={PersonScreen} />
+          <PersonStack.Screen name='AnotherSettings' component={AnotherSettingsScreen} />  
+        </>}
+      </PersonStack.Navigator>
+    )
 }
 
 const ServiceStack = createStackNavigator();

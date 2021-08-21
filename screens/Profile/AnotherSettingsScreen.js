@@ -9,7 +9,7 @@ import {useLocale} from '../../services/locale/LocaleManager'
 import { TouchableOpacity } from 'react-native'
 import { useUser } from '../../services/auth/AuthManager'
 
-export default function SettingsScreen(props){ 
+export default function AnotherSettingsScreen(props){ 
     const {logout, isAuthorizated} = useUser();
     const { mode, theme, toggle } = useTheme();
     const { localeMode, locale, toggleLang } = useLocale()
