@@ -4,17 +4,23 @@ import {h, w} from './constants'
 import {useTheme} from '../services/themes/ThemeManager'
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler'
 import Hyperlink from 'react-native-hyperlink'
+import { watchFAQApiCall } from '../services/api/faq'
 
 const FAQModule = (data) => {
-    const {mode, theme, toggle} = useTheme()
+    const {theme} = useTheme()
     const [show, setShow] = useState(false)
+
+    const watchQuestion = async () => {
+        await watchFAQApiCall(data.data.id)
+    }
+
     return(
         <>
             <View style={[styles.container, {backgroundColor: theme.blockColor}]}>
                 <TouchableWithoutFeedback onPress={() => {
                 setShow(!show)
-                if(!show)
-                    fetch('https://mysibsau.ru/v2/support/faq/' + data.data.id + '/', {method: 'POST'})}}>
+                if(!show) watchQuestion()
+                }}>
                     <Text style={styles.question}>{data.data.question}</Text>
                 </TouchableWithoutFeedback>
                 {show ? 

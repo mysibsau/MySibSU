@@ -124,6 +124,11 @@ export const translations = {
         hello_profile_how: 'In the settings, you can change the language or set the "dark theme".',
         contacts: 'Contacts',
         myQuestions: 'My questions',
+        teams: 'Teams',
+        make_the_question_public: 'Make the question public',
+        accept: 'I accept the terms of ',
+        user_agreement: 'the user agreement',
+        should_accept: 'You must accept the terms of the user agreement',
         },
   ru: { timetable: 'Расписание', 
         menu: 'Столовые',
@@ -249,6 +254,11 @@ export const translations = {
         hello_profile_how: 'В настройках можно изменить язык или поставить «темную тему»',
         contacts: 'Контакты',
         myQuestions: 'Мои вопросы',
+        teams: 'Коллективы',
+        make_the_question_public: 'Сделать вопрос публичным',
+        accept: 'Я принимаю условия ',
+        user_agreement: 'пользовательского соглашения',
+        should_accept: 'Вы должны принять условия пользовательского соглашения'
     },
 };
 // Set the locale once at the beginning of your app.

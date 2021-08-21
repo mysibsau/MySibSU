@@ -28,3 +28,14 @@ export const AskQuestionApiCall = async (text, theme, isPublic) => {
         return false;
     }
 }
+
+export const watchFAQApiCall = async (id) => {
+    try {
+        // const token = JSON.parse(await AsyncStorage.getItem('User')).token
+        await axios.post(`/v3/support/faq/${id}/view/`)
+        return true;
+    } catch(err) {
+        console.log(err);
+        return false;
+    }
+}

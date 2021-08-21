@@ -23,16 +23,12 @@ function App(){
   Text.defaultProps = Text.defaultProps || {};
   Text.defaultProps.allowFontScaling = false; 
 
-  const [firstLaunch, setFirstLaunch] = useState(null)
+  const [firstLaunch, setFirstLaunch] = useState(true)
   useEffect(() => {
-    AsyncStorage.getItem("alreadyLaunched").then(value => {
-      if(value == null){
-           AsyncStorage.setItem('alreadyLaunched', "true");
-           setFirstLaunch(true)
-      }
-      else
-           setFirstLaunch(false)
-    })
+    AsyncStorage.getItem("agreement").then(value => {
+      if(value){
+        setFirstLaunch(false)
+      }})
   }, [])
 
   // Устанавливаем кастомный шрифт, который лежит в ./assets/fonts/

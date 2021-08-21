@@ -13,9 +13,6 @@ const URLs = ['https://mysibsau.ru/v2/timetable/all_groups/',
                 'https://mysibsau.ru/v2/timetable/all_teachers/',
                 'https://mysibsau.ru/v2/timetable/all_places/']
 
-const last = ['LastGroups', 'LastTeachers', 'LastPlaces']
-
-
 const fil = (fn, a) => {
     const f = []; //final
     for (let i = 0; i < a.length; i++) {
@@ -231,6 +228,7 @@ export default function SearchScreen(props){
             <View style={[{ position: 'absolute', top: 120, height: 8 * 40, width: w * 0.9, marginTop: -5, flexDirection: 'column', borderRadius: 15, backgroundColor: theme.blockColor, zIndex: 3, elevation: 6}]}>
                 <FlatList 
                     data={shown}
+                    showsVerticalScrollIndicator={false}
                     renderItem={renderHelp}
                     initialNumToRender={15}
                     keyExtractor={item => item.name}

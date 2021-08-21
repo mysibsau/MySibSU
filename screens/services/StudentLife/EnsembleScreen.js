@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from 'react'
-import { View, Text, Image, Linking, StyleSheet, TouchableWithoutFeedback, Modal, TextInput, Alert, ScrollView, Platform } from 'react-native'
+import { View, Text, Image, Linking, StyleSheet, Pressable, TouchableWithoutFeedback, Modal, TextInput, BackHandler, ScrollView, Platform } from 'react-native'
 import Header from '../../../modules/Header'
-import { h, w } from '../../../modules/constants'
+import { BASE_URL, h, w } from '../../../modules/constants'
 import { Entypo } from '@expo/vector-icons'; 
 import {useTheme} from '../../../services/themes/ThemeManager'
 import {useLocale} from '../../../services/locale/LocaleManager'
 import AsyncStorage from '@react-native-community/async-storage'
 
+
 const REGEXES = [
     {reg: /(\+7|8) ?[\( -]?\d{3}[\) -]? ?\d{3}[ -]?\d{2}[ -]?\d{2}/, type: 'phone'}, 
 {reg: /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/, type: 'email'},
 {reg: /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/, type: 'link'}]
-
-const url = 'https://mysibsau.ru'
 
 export default function EnsembleScreen(props){
 
@@ -39,7 +38,6 @@ export default function EnsembleScreen(props){
             experience: experience,
             comment: comment,
         }
-        console.log(req)
 
         fetch(uri, {method: 'POST', body: req})
             .then(response => response.json())
@@ -65,7 +63,7 @@ export default function EnsembleScreen(props){
             <ScrollView>
 
                 <View style={{ borderBottomWidth: 2, borderColor: 'gray'}}>
-                    <Image source={data.logo ? {uri: url + data.logo} : require('../../../assets/back.png')}  style={{ width: w, height: w / 2, resizeMode: 'cover', backgroundColor: 'white'}} blurRadius={data.logo ? 0.5 : 0}/>
+                    <Image source={data.logo ? {uri: BASE_URL + data.logo} : require('../../../assets/back.png')}  style={{ width: w, height: w / 2, resizeMode: 'cover', backgroundColor: 'white'}}/>
                 </View>
 
                 <View>
@@ -78,7 +76,6 @@ export default function EnsembleScreen(props){
                 <View>
                 <Text style={{ fontFamily: 'roboto', fontSize: 20, marginTop: data.photo ? w * 0.2 + 20 : 20, marginLeft: 20, color: '#5575A7',}}>{locale['contacts']}</Text>
                     <View style={[styles.box, styles.centerContent, styles.shadow2, {padding: 10, backgroundColor: theme.blockColor}]}>
-                        {/* <Text style={{fontFamily: 'roboto', fontSize: 15, color: '#5575A7', paddingLeft: 5}}>{data.contacts.split('\n')}</Text> */}
                         {data.contacts.split('\n').map(item => {
                             let contact = {}
                             REGEXES.map(reg => {
@@ -110,6 +107,16 @@ export default function EnsembleScreen(props){
                         })}
                     </View>
                 </View>
+                {data.instagram_link !== '' &&
+                <Pressable style={[styles.descriptionBox, {flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', paddingLeft: 10}]} onPress={() => Linking.openURL(info.instagram_link)}>
+                    <Entypo name="vk" size={30} color="rgb(115, 182, 28)" />
+                    <Text style={{fontFamily: 'roboto', fontSize: 20, color: '#5575A7', paddingLeft: 10, textAlign: 'center'}}>{locale.group_vk}</Text>
+                </Pressable>}
+                {data.vk_link !== '' &&
+                <Pressable style={[styles.descriptionBox, {flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', paddingLeft: 10}]} onPress={() => Linking.openURL(info.instagram_link)}>
+                    <AntDesign name="instagram" size={30} color={'rgb(115, 182, 28)'} />
+                    <Text style={{fontFamily: 'roboto', fontSize: 20, color: '#5575A7', paddingLeft: 10, textAlign: 'center'}}>Instagram</Text>
+                </Pressable>}
 
                 <View style={{flexDirection: 'column', paddingBottom: 180}}>
 

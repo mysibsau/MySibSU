@@ -6,6 +6,9 @@ import { h, w } from '../../modules/constants'
 import { Ionicons } from '@expo/vector-icons'
 import { MaterialCommunityIcons } from '@expo/vector-icons'; 
 import { useUser } from '../../services/auth/AuthManager'
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler'
+import { MaterialIcons } from '@expo/vector-icons'; 
+
 
 
 export default function AuthScreen(props){
@@ -16,22 +19,46 @@ export default function AuthScreen(props){
     const [username, setUsername] = React.useState('')
     const [password, setPassword] = React.useState('')
     const [fetching, setFetching] = React.useState(false)
+    const [isChecked, setIsChecked] = React.useState(false)
 
-    const toAuth = async () => {
-        setFetching(true)
-        const response = await login(username, password);
-        if (response){
-            setUsername('');
-            setPassword('');
-            props.navigation.navigate('Bottom')
-        } else {
+    const prohibitUsing = () => {
+        
+    }
+
+    const checkAgreement = () => {
+        if (!isChecked) {
             ToastAndroid.show(
-                locale['wrong_login'],
+                locale['should_accept'],
                 ToastAndroid.LONG,
               );
+            return false
         }
-        setFetching(false)
+
+        return true
+    }
+
+    const toAuth = async () => {
+        if(checkAgreement()){
+            setFetching(true)
+            const response = await login(username, password);
+            if (response){
+                setUsername('');
+                setPassword('');
+                signIn();
+            } else {
+                ToastAndroid.show(
+                    locale['wrong_login'],
+                    ToastAndroid.LONG,
+                );
+                setFetching(false)
+            }
+        }  
     };
+
+    const signIn = async () => {
+        await AsyncStorage.setItem('agreement', 'true');
+        props.navigation.navigate('Bottom')
+    }
 
     return(
         <View style={{flex: 1, backgroundColor: theme.primaryBackground,}}>
@@ -49,15 +76,18 @@ export default function AuthScreen(props){
                             <TextInput onSubmitEditing={() => toAuth()} value={password} onChangeText={value => setPassword(value)} placeholderTextColor={'gray'} placeholder={locale['password']} numberOfLines={1} secureTextEntry={true} style={{ width: w * 0.7, fontFamily: 'roboto', color: theme.labelColor}}/>
                         </View>
                     </View>
-                    <TouchableOpacity onPress={() => {
-                        setFetching(true)
-                        toAuth()
-                    }}>
+                    <TouchableWithoutFeedback onPress={() => setIsChecked(!isChecked)}  style={{flexDirection: 'row', width: w * 0.7, marginLeft: w * 0.1, marginTop: 10}}>
+                        <View style={{backgroundColor: 'white', width: 20, height: 20, borderRadius: 3, borderColor: theme.blueColor, borderWidth: 1, marginRight: 10}}>
+                            {isChecked && <MaterialIcons name="done" size={18} color={theme.blueColor} />}
+                        </View>
+                        <Text>{locale['accept']}<Text>{locale['user_agreement']}</Text></Text>
+                    </TouchableWithoutFeedback>
+                    <TouchableOpacity onPress={() => toAuth()}>
                         <View style={styles.okay_button}>
                             <Text style={styles.okay_button_text}>{locale['sign_in']}</Text>
                         </View>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => props.navigation.navigate('Bottom')}>
+                    <TouchableOpacity onPress={() => checkAgreement() && signIn()}>
                         <Text style={{ alignSelf: 'center', fontFamily: 'roboto', marginTop: 20, color: 'gray'}}>{locale['sign_in_as_guest']}</Text>
                     </TouchableOpacity>
                 </View>

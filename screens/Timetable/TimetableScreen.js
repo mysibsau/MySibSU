@@ -177,7 +177,7 @@ export default function TimetableScreen(props){
                 <StatusBar backgroundColor={theme.blockColor} barStyle={mode === 'light' ? 'dark-content' : 'light-content'}/>
                 <TimetableHeader />
                 <Swiper ref={swiper} style={styles.wrapper} loop={false} index={currentWeek - 1} onIndexChanged={() => changeIndex()} showsPagination={false} >
-                <ScrollView ref={f_scrollViewRef}>
+                <ScrollView showsVerticalScrollIndicator={false} ref={f_scrollViewRef}>
                 {!loaded ? 
                         <View style={{ height: h - 140, alignItems: 'center', justifyContent: 'center'}}>
                             <ActivityIndicator size='large' color={theme.blueColor}/>
@@ -197,7 +197,7 @@ export default function TimetableScreen(props){
                     </View>
                 )})}
                 </ScrollView>
-                <ScrollView ref={s_scrollViewRef}>
+                <ScrollView showsVerticalScrollIndicator={false} ref={s_scrollViewRef}>
                     {!loaded ?  
                         <View style={{ height: h - 140, alignItems: 'center', justifyContent: 'center'}}>
                             <ActivityIndicator size='large' color={theme.blueColor}/>
