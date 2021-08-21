@@ -22,49 +22,23 @@ export default function ServiceListScreen(props){
                     {name: locale['buildings'], path: 'Map', image: <View style={{ height: 55, width: 55, alignItems: 'center', justifyContent: 'center', alignSelf: 'flex-end', borderRadius: 5, backgroundColor: 'rgba(0, 108, 181, 0.6)'}}><Entypo name="map" size={40} color={theme.blockColor} /></View>},
                     // {name: locale['online_catalog'], path: 'Shop', image: <AntDesign name="shoppingcart" style={{alignSelf: 'flex-end', marginBottom: -5, marginRight: -5, opacity: 0.6}} size={60} color="#ef8531" />},
                     {name: locale['vacancies'], path: 'Vacancies', image: <View style={{ height: 55, width: 55, alignItems: 'center', justifyContent: 'center', alignSelf: 'flex-end', borderRadius: 5, backgroundColor: 'rgba(0, 108, 181, 0.6)'}}><MaterialIcons name="engineering" size={40} color={theme.blockColor} /></View>},
-                    {name: locale['feedback'], path: 'Poll', image: <View style={{ height: 55, width: 55, alignItems: 'center', justifyContent: 'center', alignSelf: 'flex-end', borderRadius: 5, backgroundColor: mode === 'light' ? 'rgba(0,0,0, 0.4)' : 'lightgray'}}>
-                        <View style={{flexDirection: 'row', rotation: 180}}>
-                        <View style={{height: 30, width: 6, borderRadius: 2, marginRight: 6, backgroundColor: theme.blockColor}}/>
-                        <View style={{height: 20, width: 6, borderRadius: 2, marginRight: 6, backgroundColor: theme.blockColor}}/>
-                        <View style={{height: 25, width: 6, borderRadius: 2, backgroundColor: theme.blockColor}}/>
-                        </View>
-                        </View>},
-                    {name: "FAQ", path: 'FAQ', image: <View style={{ height: 55, width: 55, alignItems: 'center', justifyContent: 'center', alignSelf: 'flex-end', borderRadius: 5, backgroundColor: 'rgba(76, 174, 50, 0.6)'}}><Text style={{fontFamily: 'roboto', color: theme.blockColor, fontWeight: 'bold', fontSize: 40}}>?</Text></View>},
                     {name: locale['library'], path: 'LibrarySearch', image: <View style={{ height: 55, width: 55, alignItems: 'center', justifyContent: 'center', alignSelf: 'flex-end', borderRadius: 5, backgroundColor: 'rgba(76, 174, 50, 0.6)'}}><Ionicons name="library-outline" size={40} color={theme.blockColor} /></View>}] }
 
-    const didFocusSubscription = props.navigation.addListener(
-        'focus',
-          payload => {
-            AsyncStorage.getItem('User')
-            .then(res => {
-                if (res !== null){
-                    setToken(res)
-                } else {
-                    setToken('')
-                }
-            })
-          }
-        );
+
 
     React.useEffect(() => {
         AsyncStorage.getItem('UUID')
             .then(res => {
                 setUUID(res)})
     }, [])
+
     return(
         <View style={styles.container}>
             <MainHeader title={locale['services']} onPress={() => props.navigation.goBack()}/>
                 <View style={{ backgroundColor: theme.headerColor, height: '100%',  width: w, flexDirection: 'row', flexWrap: 'wrap'}}>
                     {services(locale).map(item => {
-                        if (item.name === locale['tickets']){
-                            if(token === ''){
-                                return null
-                            }
-                        }
-                        return(<ServiceElement key={item.name} name={item.name} image={item.image} onPress={() => props.navigation.navigate(item.path, {uuid: UUID, id: 3, token: token})}/>)
+                        return(<ServiceElement key={item.name} name={item.name} image={item.image} onPress={() => props.navigation.navigate(item.path, {uuid: UUID, id: 3})}/>)
                     })}
-                    {/* {token !== '' ? 
-                        <ServiceElement onPress={() => props.navigation.navigate('Shop', {uuid: UUID})} key={locale['tickets']} name={locale['tickets']} image={<View style={{ height: 55, width: 55, alignItems: 'center', justifyContent: 'center', alignSelf: 'flex-end', borderRadius: 5, backgroundColor: 'rgba(0, 108, 181, 0.6)'}}><MaterialIcons name="theater-comedy" size={40} color={theme.blockColor} /></View>} /> : null} */}
                 </View>   
         </View>
     )

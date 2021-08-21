@@ -127,9 +127,10 @@ export const translations = {
         teams: 'Teams',
         make_the_question_public: 'Make the question public',
         accept: 'I accept the terms of ',
-        user_agreement: 'the user agreement',
+        user_agreement: 'the User Agreement',
         should_accept: 'You must accept the terms of the user agreement',
-        in_processing: 'В обработке'
+        in_processing: 'В обработке',
+        user_agreement_profile: 'User Agreement',
         },
   ru: { timetable: 'Расписание', 
         menu: 'Столовые',
@@ -260,7 +261,8 @@ export const translations = {
         accept: 'Я принимаю условия ',
         user_agreement: 'пользовательского соглашения',
         should_accept: 'Вы должны принять условия пользовательского соглашения',
-        in_processing: 'В обработке'
+        in_processing: 'В обработке',
+        user_agreement_profile: 'Пользовательское соглашение'
     },
 };
 // Set the locale once at the beginning of your app.

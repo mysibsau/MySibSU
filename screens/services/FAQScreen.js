@@ -17,9 +17,7 @@ export default function FAQScreen(props){
     const [questions, setQuestions] = useState([])
     const [loaded, setLoaded] = useState(false)
     const [visible, setVisible] = useState(false)
-    const [ownQuestion, setOwnQuestion] = useState('')
     const {mode, theme, toggle} = useTheme()
-    const {localeMode, locale, toggleLang} = useLocale()
 
     useEffect(() => {
         getQuestions();

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { View, Text, ScrollView, StyleSheet, Image, TouchableOpacity, TextInput, AsyncStorage, ActivityIndicator } from 'react-native'
+import { View, Text, ScrollView, StyleSheet, Image, TouchableOpacity, TextInput, AsyncStorage, ActivityIndicator, Linking } from 'react-native'
 import { Octicons } from '@expo/vector-icons'; 
 import { h, w } from '../../modules/constants'
 import {useLocale} from '../../services/locale/LocaleManager'
@@ -32,7 +32,7 @@ export default function PersonScreen(props){
                     <Octicons name="gear" size={24} color={theme.headerTitle}/>
                 </TouchableOpacity>
             </View>
-            <View style={{width: w, flex: 1, paddingLeft: w * 0.05, paddingRight: w * 0.05, paddingTop: w * 0.05,  paddingBottom: 120}}>
+            <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{width: w, padding: w * 0.05, paddingBottom: 120}}>
                 <Text style={{ fontFamily: 'roboto', fontSize: 19, fontWeight: 'bold', color: theme.blueColor, marginBottom: 5}}>{locale['full_name']}</Text>
                 <View style={{ padding: 10, width: w * 0.9, backgroundColor: theme.blockColor, borderRadius: 15, elevation: 5}}>
                     <Text style={{ textAlign: 'center', fontFamily: 'roboto', fontSize: 19, color: theme.labelColor}}>{user.FIO}</Text>
@@ -76,7 +76,25 @@ export default function PersonScreen(props){
                 <TouchableOpacity onPress={() => props.navigation.navigate('Questions')} style={{width: w * 0.9, borderRadius: 15, backgroundColor: theme.blockColor, elevation: 5, padding: 10, marginTop: 25}}>
                     <Text style={{fontFamily: 'roboto', color: theme.labelColor, fontSize: 19}}>{locale.myQuestions}</Text>
                 </TouchableOpacity>
-            </View> 
+
+                <View style={{marginTop: 25, elevation: 5, backgroundColor: theme.blockColor, borderRadius: 15}}>
+                    <TouchableOpacity onPress={() => props.navigation.navigate('FAQ')} style={{width: w * 0.9, borderRadius: 15, backgroundColor: theme.blockColor,  padding: 10}}>
+                        <Text style={{fontFamily: 'roboto', color: theme.labelColor, fontSize: 19}}>FAQ</Text>
+                    </TouchableOpacity>
+                    <View style={{width: w * 0.8, height: 1, backgroundColor: 'gray', alignSelf: 'center', opacity: 0.5}}/>
+                    <TouchableOpacity onPress={() => {
+                        AsyncStorage.getItem('UUID').then(uuid => {
+                            props.navigation.navigate('Poll', {uuid: uuid, id: 3})
+                        })
+                        }} style={{width: w * 0.9, borderRadius: 15, backgroundColor: theme.blockColor,  padding: 10}}>
+                        <Text style={{fontFamily: 'roboto', color: theme.labelColor, fontSize: 19}}>{locale.feedback}</Text>
+                    </TouchableOpacity>
+                    <View style={{width: w * 0.8, height: 1, backgroundColor: 'gray', alignSelf: 'center', opacity: 0.5}}/>
+                    <TouchableOpacity onPress={() => Linking.openURL('https://mysibsau.ru/user-agreement/')} style={{width: w * 0.9, borderRadius: 15, backgroundColor: theme.blockColor,  padding: 10}}>
+                        <Text style={{fontFamily: 'roboto', color: theme.labelColor, fontSize: 19}}>{locale.user_agreement_profile}</Text>
+                    </TouchableOpacity>
+                </View>
+            </ScrollView> 
         </View>
     )
 }

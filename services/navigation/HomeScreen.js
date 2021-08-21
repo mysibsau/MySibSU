@@ -365,6 +365,8 @@ function PersonStackScreen(){
           <PersonStack.Screen name='Attestation' component={AttestationScreen} />
           <PersonStack.Screen name='Marks' component={MarksScreen} />
           <PersonStack.Screen name="Questions" component={QuestionsScreen} />
+          <PersonStack.Screen name='FAQ' component={FAQScreen} />
+          <PersonStack.Screen name='Poll' component={PollScreen} />
         </> : 
         <>
           <PersonStack.Screen name='Person' component={PersonScreen} />
@@ -393,8 +395,6 @@ function ServiceStackScreen(){
       <ServiceStack.Screen name='Vacancies' component={VacanciesScreen} />
       <ServiceStack.Screen name='Vacancy' component={Vacancy} />
       <ServiceStack.Screen name='Topics' component={TopicsScreen} />
-      <ServiceStack.Screen name='Poll' component={PollScreen} />
-      <ServiceStack.Screen name='FAQ' component={FAQScreen} />
       <ServiceStack.Screen name='LibrarySearch' component={LibrarySearchScreen} />
       <ServiceStack.Screen name='LibraryResult' component={LibraryTabs} />
     </ServiceStack.Navigator>
