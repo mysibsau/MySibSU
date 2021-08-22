@@ -117,10 +117,8 @@ export default function PollScreen(props){
                         </View>
                         )
                     })}
-                    <TouchableOpacity onPress={() => sendAnswers()}>
-                        <View style={[styles.shadow, {alignSelf: 'center', width: w / 4, height: w / 8, borderRadius: 15, alignItems: 'center', justifyContent: 'center', backgroundColor: theme.blockColor, marginTop: 20}]}>
-                            <Text style={{color: theme.labelColor}}>Отправить</Text>
-                        </View>
+                    <TouchableOpacity onPress={() => sendAnswers()} style={[styles.shadow, {alignSelf: 'center', width: w / 4, height: w / 8, borderRadius: 15, alignItems: 'center', justifyContent: 'center', backgroundColor: theme.blockColor, marginTop: 20}]}>
+                        <Text style={{color: theme.labelColor}}>Отправить</Text>
                     </TouchableOpacity>
                 </View>}
             </ScrollView>

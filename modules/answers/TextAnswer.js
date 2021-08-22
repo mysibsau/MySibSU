@@ -19,7 +19,7 @@ const TextAnswer = ({onChange}) => {
         <View>
             <TextInput 
             value={text} 
-            style={{ borderWidth: 1, borderColor: theme.labelColor, borderRadius: 10, textAlignVertical: 'top', marginTop: 5, color: theme.labelColor, padding: 5}} 
+            style={{ backgroundColor: '#ddd', borderColor: theme.labelColor, borderRadius: 10, textAlignVertical: 'top', marginTop: 5, color: theme.labelColor, padding: 5}} 
             multiline 
             onChangeText={value => changeText(value)}
             numberOfLines={10}

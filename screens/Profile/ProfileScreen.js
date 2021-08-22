@@ -73,11 +73,12 @@ export default function PersonScreen(props){
                     </TouchableOpacity>
                 </View>
 
-                <TouchableOpacity onPress={() => props.navigation.navigate('Questions')} style={{width: w * 0.9, borderRadius: 15, backgroundColor: theme.blockColor, elevation: 5, padding: 10, marginTop: 25}}>
-                    <Text style={{fontFamily: 'roboto', color: theme.labelColor, fontSize: 19}}>{locale.myQuestions}</Text>
-                </TouchableOpacity>
-
-                <View style={{marginTop: 25, elevation: 5, backgroundColor: theme.blockColor, borderRadius: 15}}>
+                <Text style={{ fontFamily: 'roboto', fontSize: 19, fontWeight: 'bold', color: theme.blueColor, marginBottom: 5, marginTop: 15}}>{locale['help']}</Text>
+                <View style={{ elevation: 5, backgroundColor: theme.blockColor, borderRadius: 15}}>
+                    <TouchableOpacity onPress={() => props.navigation.navigate('Questions')} style={{width: w * 0.9, backgroundColor: theme.blockColor,padding: 10}}>
+                        <Text style={{fontFamily: 'roboto', color: theme.labelColor, fontSize: 19}}>{locale.myQuestions}</Text>
+                    </TouchableOpacity>
+                    <View style={{width: w * 0.8, height: 1, backgroundColor: 'gray', alignSelf: 'center', opacity: 0.5}}/>
                     <TouchableOpacity onPress={() => props.navigation.navigate('FAQ')} style={{width: w * 0.9, borderRadius: 15, backgroundColor: theme.blockColor,  padding: 10}}>
                         <Text style={{fontFamily: 'roboto', color: theme.labelColor, fontSize: 19}}>FAQ</Text>
                     </TouchableOpacity>

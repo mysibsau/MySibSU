@@ -131,6 +131,7 @@ export const translations = {
         should_accept: 'You must accept the terms of the user agreement',
         in_processing: 'В обработке',
         user_agreement_profile: 'User Agreement',
+        help: "Help",
         },
   ru: { timetable: 'Расписание', 
         menu: 'Столовые',
@@ -262,7 +263,8 @@ export const translations = {
         user_agreement: 'пользовательского соглашения',
         should_accept: 'Вы должны принять условия пользовательского соглашения',
         in_processing: 'В обработке',
-        user_agreement_profile: 'Пользовательское соглашение'
+        user_agreement_profile: 'Пользовательское соглашение',
+        help: 'Помощь',
     },
 };
 // Set the locale once at the beginning of your app.

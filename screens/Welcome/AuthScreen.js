@@ -76,7 +76,7 @@ export default function AuthScreen(props){
                             <TextInput onSubmitEditing={() => toAuth()} value={password} onChangeText={value => setPassword(value)} placeholderTextColor={'gray'} placeholder={locale['password']} numberOfLines={1} secureTextEntry={true} style={{ width: w * 0.7, fontFamily: 'roboto', color: theme.labelColor}}/>
                         </View>
                     </View>
-                    <TouchableWithoutFeedback onPress={() => setIsChecked(!isChecked)}  style={{flexDirection: 'row', width: w * 0.7, marginLeft: w * 0.1, marginTop: 10}}>
+                    <TouchableWithoutFeedback onPress={() => setIsChecked(!isChecked)}  style={{flexDirection: 'row', marginLeft: w * 0.1, marginTop: 10, overflow: 'visible'}}>
                         <View style={{backgroundColor: 'white', width: 20, height: 20, borderRadius: 3, borderColor: theme.blueColor, borderWidth: 1, marginRight: 10}}>
                             {isChecked && <MaterialIcons name="done" size={18} color={theme.blueColor} />}
                         </View>

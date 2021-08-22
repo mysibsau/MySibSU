@@ -23,12 +23,20 @@ function App(){
   Text.defaultProps = Text.defaultProps || {};
   Text.defaultProps.allowFontScaling = false; 
 
-  const [firstLaunch, setFirstLaunch] = useState(true)
+  const [firstLaunch, setFirstLaunch] = useState(null)
   useEffect(() => {
-    AsyncStorage.getItem("agreement").then(value => {
-      if(value){
+    const checkFirstLaunch = async () => {
+      const agreement = await AsyncStorage.getItem('agreement');
+      if (agreement) {
         setFirstLaunch(false)
-      }})
+      } else {
+        setFirstLaunch(true)
+        await AsyncStorage.removeItem('User');
+        await AsyncStorage.removeItem('AuthData');
+      }
+    }
+
+    checkFirstLaunch()
   }, [])
 
   // Устанавливаем кастомный шрифт, который лежит в ./assets/fonts/

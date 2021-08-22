@@ -262,7 +262,7 @@ const HelloStack = createStackNavigator();
 
 export default function Navigation({firstLaunch}){
   var initialName = firstLaunch === true ? 'Hello' : 'Bottom' 
-  console.log(initialName, firstLaunch)
+  console.log('Initial screen', initialName, firstLaunch)
   return(
     <NavigationContainer>
       <HelloStack.Navigator initialRouteName={initialName} headerMode='none'>

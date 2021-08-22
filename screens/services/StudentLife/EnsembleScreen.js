@@ -6,6 +6,8 @@ import { Entypo } from '@expo/vector-icons';
 import {useTheme} from '../../../services/themes/ThemeManager'
 import {useLocale} from '../../../services/locale/LocaleManager'
 import AsyncStorage from '@react-native-community/async-storage'
+import { useUser } from '../../../services/auth/AuthManager';
+import { sendRequestApiCall } from '../../../services/api/creativity';
 
 
 const REGEXES = [
@@ -14,22 +16,20 @@ const REGEXES = [
 {reg: /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/, type: 'link'}]
 
 export default function EnsembleScreen(props){
-
+    const {user} = useUser();
     const [onVisible, setVisible] = useState(false)
-    const [fio, setFio] = useState('')
+    const [fio, setFio] = useState(user.FIO)
     const [phone, setPhone] = useState('')
     const [vk, setVk] = useState('')
     const [experience, setExperience] = useState('')
     const [comment, setComment] = useState('')
 
-    const {mode, theme, toggle} = useTheme()
-    const {localeMode, locale, toggleLang} = useLocale()
+    const {theme} = useTheme()
+    
+    const {locale} = useLocale()
     const data = props.route.params.data
 
     async function sendMessage(){
-        const token = await AsyncStorage.getItem('User');
-        const uri = 'https://mysibsau.ru/v2/campus/ensembles/join/?token=' + JSON.parse(token).token
-
         let req = {
             ensemble: data.id,
             fio: fio,
@@ -39,12 +39,10 @@ export default function EnsembleScreen(props){
             comment: comment,
         }
 
-        fetch(uri, {method: 'POST', body: req})
-            .then(response => response.json())
-            .then(json => {
-                console.log(json)
-            })
-            .catch(err => console.log(err))
+       const response = await sendRequestApiCall(req)
+       if (response) {
+           setVisible(false)
+       }
     }
 
     useEffect(() => {
@@ -132,33 +130,24 @@ export default function EnsembleScreen(props){
                     </TouchableWithoutFeedback>
             
 
-                    <Modal animationType="slide" transparent={true} visible={onVisible}>
-                        <ScrollView>
-                        <View style={[styles.modal, styles.centerContent, styles.shadow2, {backgroundColor: theme.primaryBackground}]}>
-                            <View style={{width: w * 0.8, height: 45}}>
+                    <Modal animationType="slide" visible={onVisible}>
+                        <View style={[styles.modal, {backgroundColor: theme.primaryBackground, width: w * 0.75, alignSelf: 'center'}]}>
                             <TouchableWithoutFeedback onPress={() => setVisible(!onVisible)}>
                                 <Text style={{color: '#006AB3', fontSize: 50, marginLeft: 6}}>˟</Text>
                             </TouchableWithoutFeedback>
-                            </View>
 
                             <Text style={{fontFamily: 'roboto', color: '#006AB3', fontSize: 24, marginBottom: 10}}>Заявка на вступление</Text>
 
-                            <TextInput style={[styles.input, {color: theme.labelColor}]} placeholderTextColor={'gray'} onChangeText={text => setFio(text)} placeholder={'ФИО'}/>
+                            <TextInput style={[styles.input, {color: theme.labelColor}]} placeholderTextColor={'gray'} onChangeText={text => setFio(text)} placeholder={'ФИО'} defaultValue={user.FIO}/>
                             <TextInput style={[styles.input, {color: theme.labelColor}]} placeholderTextColor={'gray'} onChangeText={text => setPhone(text)} placeholder={'Телефон'} />
                             <TextInput style={[styles.input, {color: theme.labelColor}]} placeholderTextColor={'gray'} onChangeText={text => setVk(text)} placeholder={'ID в VK'} />
                             <TextInput style={[styles.input, {color: theme.labelColor}]} placeholderTextColor={'gray'} onChangeText={text => setExperience(text)} placeholder={'Ваш опыт'} multiline scrollEnabled={true}/>
                             <TextInput style={[styles.input, {color: theme.labelColor}]} placeholderTextColor={'gray'} onChangeText={text => setComment(text)} placeholder={'Комментарий к заявке'} multiline scrollEnabled={true} selectTextOnFocus={true}/>
 
-                            <TouchableWithoutFeedback onPress={() => 
-                                {sendMessage()
-                                setVisible(false)
-                            }}>
-                            <View style={{borderWidth: 1, borderColor: '#006AB3', borderRadius: 4, paddingBottom: 3, paddingTop: 3, paddingLeft: 5, paddingRight: 5, marginBottom: 10}}>
-                                <Text style={{fontFamily: 'roboto', color: '#006AB3', fontSize: 15, textAlign: 'center'}}>ОТПРАВИТЬ</Text>
-                            </View>
+                            <TouchableWithoutFeedback onPress={() => sendMessage()} style={{ padding: 10, backgroundColor: 'white'}}>
+                                <Text style={{fontFamily: 'roboto', color: theme.blueColor, fontSize: 15, textAlign: 'center', elevation: 5}}>ОТПРАВИТЬ</Text>
                             </TouchableWithoutFeedback>
                         </View>
-                        </ScrollView>
                     </Modal>
                 </View>
             </ScrollView>
@@ -185,41 +174,13 @@ const styles = StyleSheet.create({
         flex: 1,
     },
 
-    icons: {
-        width: w*0.08, 
-        height:w*0.08, 
-        resizeMode:"stretch", 
-        marginLeft: 10, 
-        marginRight: 10
-    },
-
-    modalView: {
-        borderColor: '#006AB3', 
-        borderWidth: 1, 
-        borderRadius: 15, 
-        backgroundColor: 'white', 
-        width: w * 0.8, 
-        alignSelf: 'center', 
-        flexDirection: 'column',
-        alignItems: 'center',
-        marginTop: 50
-    },
-
     input: {
-        // height: 40,
         width: w * 0.75,
         borderBottomWidth: 1,
         borderColor: '#5575A7',
         marginBottom: 15,
         fontFamily: 'roboto',
         fontSize: 18
-    },
-
-    button: {
-        height: w * 0.1, 
-        flexDirection: 'row',
-        marginBottom: 10,
-        alignItems: 'flex-end',
     },
 
     buttonText: {
@@ -230,7 +191,7 @@ const styles = StyleSheet.create({
         paddingTop: 10,
         paddingBottom: 10, 
     },
-    shadow1: elevationShadowStyle(30),
+
     shadow2: elevationShadowStyle(10),
 
     profile: {
@@ -244,13 +205,8 @@ const styles = StyleSheet.create({
     },
 
     modal: {
-        borderRadius: 30,
         padding: 10,
-        width: w * 0.9,
-        marginTop: Platform.OS === 'android' ? 50 : 100,
         alignSelf: 'center',
-        justifyContent: 'center',
-        marginBottom: 20,
     },
 
     box: {
@@ -261,8 +217,5 @@ const styles = StyleSheet.create({
         marginTop: 10,
         alignSelf: 'center',
         justifyContent: 'center'
-    },
-    centerContent: {
-        // alignItems: 'center'
     },
 })
