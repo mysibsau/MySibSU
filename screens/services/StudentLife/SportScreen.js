@@ -14,28 +14,15 @@ export default function SportScreen(props){
     const {mode, theme, toggle} = useTheme()
     const {localeMode, locale, toggleLang} = useLocale()
     useEffect(() => {
-        fetch('https://mysibsau.ru/v2/campus/sport_clubs/?language=' + String(localeMode), {method: 'GET'})
+        fetch('https://mysibsau.ru/v3/campus/sport_clubs/?language=' + String(localeMode), {method: 'GET'})
             .then(response => response.json())
             .then(json => {
+                console.log(json)
                 setUnions(json)
                 setLoaded(true)
             })
             .catch(err => console.log(err))
-    }, [loaded])
-
-    useEffect(() => {
-        const backAction = () => {
-          props.navigation.navigate('Service')
-          return true;
-        };
-    
-        const backHandler = BackHandler.addEventListener(
-          "hardwareBackPress",
-          backAction
-        );
-    
-        return () => backHandler.remove();
-      }, []);
+    }, [])
 
     return(
         <View style={{flex: 1, backgroundColor: theme.primaryBackground}}>

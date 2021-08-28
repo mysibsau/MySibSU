@@ -63,7 +63,7 @@ export default function PollScreen(props){
     }
 
     function sendAnswers(){
-        fetch('https://mysibsau.ru/v2/surveys/' + String(props.route.params.id) + '/set_answer', {
+        fetch('https://dev.mysibsau.ru/v2/surveys/' + String(props.route.params.id) + '/set_answer', {
             method: 'POST',
             body: JSON.stringify({
                 "uuid": String(props.route.params.uuid),

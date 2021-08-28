@@ -12,10 +12,17 @@ messaging().setBackgroundMessageHandler(async remoteMessage => {
   console.log('Message handled in the background!', remoteMessage);
 });
 
+
 // Subscribe to topic for notifications
 messaging()
   .subscribeToTopic('allUsers_android')
   .then(() => console.log('Subscribed to topic!'));
+
+messaging()
+  .subscribeToTopic('debug_android')
+  .then(() => console.log('Subscribed to topic!'));
+
+
 
 AppRegistry.registerComponent('main', () => App);
 

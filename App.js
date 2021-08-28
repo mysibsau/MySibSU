@@ -15,10 +15,13 @@ import { AppearanceProvider } from 'react-native-appearance'
 import { ThemeManager } from './services/themes/ThemeManager'
 import { LocaleManager } from './services/locale/LocaleManager'
 import { WeekManager } from './services/week/WeekManager'
-import { AuthManager } from './services/auth/AuthManager'
+import { AuthManager, useUser } from './services/auth/AuthManager'
+import messaging from '@react-native-firebase/messaging';
 
 
 function App(){
+
+  const  {isAuthorizated} = useUser();
 
   Text.defaultProps = Text.defaultProps || {};
   Text.defaultProps.allowFontScaling = false; 

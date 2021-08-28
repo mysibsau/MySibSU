@@ -68,6 +68,8 @@ export default function SearchScreen(props){
                     setLast(JSON.parse(list))
                 else
                     setLast([])
+
+                console.log(lastGroups)
             })
     }, [])
 
@@ -76,7 +78,6 @@ export default function SearchScreen(props){
         getList('Groups', 'GroupsHash', 0, 'https://mysibsau.ru/v2/timetable/hash/groups/', setGroupList)
         getList('Teachers', 'TeachersHash', 1, 'https://mysibsau.ru/v2/timetable/hash/teachers/', setTeacherList)
         getList('Places', 'PlacesHash', 2, 'https://mysibsau.ru/v2/timetable/hash/places', setPlaceList)
-
         setLoaded(true)
     }, [])
 
@@ -130,6 +131,7 @@ export default function SearchScreen(props){
                             
                             if (!there_is){
                                 group['mode'] = timetableMode;
+                                console.log(group)
                                 groups.push(group);
                             }
                         }
@@ -178,18 +180,18 @@ export default function SearchScreen(props){
         console.log(mode)
         setGroup(name)
         var choosed = ''
-        var type = mode === undefined ? timetableMode : Number(mode)
-        timetableMode === 0 ? 
+        var type = [0, 1, 2].includes(mode) ? mode : timetableMode
+        type === 0 ? 
             choosed = name
             .toUpperCase()
             .split(' ')[0] : choosed = name    
-
-        lists[timetableMode].map(group => {
+        console.log(type)
+        lists[type].map(group => {
             if (group.name === choosed){
-                storeData(group.id, group.name, timetableMode)
+                storeData(group.id, group.name, type)
                 setGroup('') 
                 setShown([])
-                    
+                
                 props.navigation.navigate('TimetableScreen', {group: group.id})
                     
             }

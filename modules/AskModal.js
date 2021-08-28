@@ -6,7 +6,7 @@ import { useLocale } from '../services/locale/LocaleManager';
 import { useTheme } from '../services/themes/ThemeManager';
 
 const AskModal = ({visible, onClose, onSend}) => {
-    const {theme} = useTheme();
+    const {theme, mode} = useTheme();
     const {locale} = useLocale();
     const [text, setText] = React.useState('');
     const [isPublic, setIsPublic] = React.useState(false)
@@ -20,19 +20,19 @@ const AskModal = ({visible, onClose, onSend}) => {
                 </TouchableOpacity>
             </View>
             <TextInput 
-                placeholderTextColor={'gray'} 
+                placeholderTextColor={'black'} 
                 onChangeText={text => setText(text)}
                 onSubmitEditing={() => onSend(text, isPublic)}
                 placeholder={locale['input_question']} 
                 multiline 
                 numberOfLines={5} 
-                style={[styles.input, {color: theme.labelColor}]} 
+                style={[styles.input, {color: 'black', backgroundColor: "#ddd"}]} 
                 scrollEnabled={true}/>
             <View style={{flexDirection: 'row', marginTop: 10}}>
                 <TouchableOpacity onPress={() => setIsPublic(!isPublic)} style={{width: 20, height: 20, borderRadius: 5, borderColor: theme.blueColor, borderWidth: 1, marginRight: 10, marginLeft: 10}}>
                     {isPublic && <MaterialIcons name="done" size={18} color={theme.blueColor} />}
                 </TouchableOpacity>
-                <Text>{locale['make_the_question_public']}</Text>
+                <Text style={{fontFamily: 'roboto', color: theme.headerTitle}}>{locale['make_the_question_public']}</Text>
             </View>
             <TouchableOpacity style={[styles.send_button, {backgroundColor: theme.blockColor}]} onPress={() => {
                 if (text.length) {

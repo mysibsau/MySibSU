@@ -6,6 +6,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
 import Animated, {Easing} from 'react-native-reanimated'
+import messaging from '@react-native-firebase/messaging';
 
 // SCREENS
   // Hello
@@ -216,45 +217,82 @@ function StudentLifeNavigator(){
       <StudentLifeStack.Screen options={{headerShown: false}} name="Sport" component={SportScreen} />
       <StudentLifeStack.Screen options={{headerShown: false}} name="Science" component={DesignScreen} />
       <StudentLifeStack.Screen options={{headerShown: false}} name="Art" component={ArtScreen} />
+      <StudentLifeStack.Screen options={{headerShown: false}} name='Ermak' component={Ermak} />
+      <StudentLifeStack.Screen options={{headerShown: false}} name="Ensemble" component={EnsembleScreen} />
     </StudentLifeStack.Navigator>
   )
 }
 
 const Tabs = createBottomTabNavigator();
 
-function BottomTab(){
-  const {localeMode, locale, toggleLang} = useLocale()
-  const {isAuthorizated} = useUser();
-  
-    return (
-      <Tabs.Navigator initialRouteName={'Timetable'} tabBar={(props) => <MainTabBar {...props} />}>
-        <Tabs.Screen name={'Feed'} component={FeedTabs}
-        options={{
-          headerShown: false,
-          title: locale['feed']
-        }}/>
-        <Tabs.Screen name={'Menu'} component={MenuStackScreen} 
-        options={{
-          headerShown: false,
-          title: locale['menu']
-        }}/>
-        <Tabs.Screen name={'Timetable'} component={TimetableStackScreen}
-        options={{
-          headerShown: false,
-          title: locale['timetable']
-        }}
-        />
-        <Tabs.Screen name={'Services'} component={ServiceStackScreen} 
-        options={{
-          headerShown: false,
-          title: locale['services']
-        }}/>
-        <Tabs.Screen name={'Profile'} component={PersonStackScreen} 
-        options={{
-          headerShown: false,
-          title: locale['profile']
-        }}/>
-      </Tabs.Navigator>
+function BottomTab(props){
+  const {locale} = useLocale()
+
+  const navigateToScreen = async (screen) => {
+    console.log('Screen', screen)
+    const isAuthorizated = JSON.parse(await AsyncStorage.getItem('User'))
+    switch(screen){
+      case 'FEED':
+        props.navigation.navigate('Feed');
+        break;
+      case 'ATTESTATION':
+        isAuthorizated && props.navigation.navigate('NotificationAttestation')
+        break;
+      case 'RECORD_BOOK':
+        isAuthorizated && props.navigation.navigate('NotificationMarks')
+        break;
+      case 'MY_QUESTIONS':
+        isAuthorizated && props.navigation.navigate('NotificationQuestions')
+        break;
+    }
+  };
+
+  React.useEffect(() => {
+    messaging().onNotificationOpenedApp(remoteMessage => {
+      if(remoteMessage.data.click_action) {
+        navigateToScreen(remoteMessage.data.click_action)
+      }
+    });
+
+    messaging()
+      .getInitialNotification()
+      .then(remoteMessage => {
+        if (remoteMessage && remoteMessage.data.click_action) {
+          navigateToScreen(remoteMessage.data.click_action)
+        }
+      });
+
+  }, []);
+
+  return (
+    <Tabs.Navigator initialRouteName={'Timetable'} tabBar={(props) => <MainTabBar {...props} />}>
+      <Tabs.Screen name={'Feed'} component={FeedTabs}
+      options={{
+        headerShown: false,
+        title: locale['feed']
+      }}/>
+      <Tabs.Screen name={'Menu'} component={MenuStackScreen} 
+      options={{
+        headerShown: false,
+        title: locale['menu']
+      }}/>
+      <Tabs.Screen name={'Timetable'} component={TimetableStackScreen}
+      options={{
+        headerShown: false,
+        title: locale['timetable']
+      }}
+      />
+      <Tabs.Screen name={'Services'} component={ServiceStackScreen} 
+      options={{
+        headerShown: false,
+        title: locale['services']
+      }}/>
+      <Tabs.Screen name={'Profile'} component={PersonStackScreen}
+      options={{
+        headerShown: false,
+        title: locale['profile']
+      }}/>
+    </Tabs.Navigator>
   )
 }
 
@@ -263,12 +301,16 @@ const HelloStack = createStackNavigator();
 export default function Navigation({firstLaunch}){
   var initialName = firstLaunch === true ? 'Hello' : 'Bottom' 
   console.log('Initial screen', initialName, firstLaunch)
+
   return(
     <NavigationContainer>
       <HelloStack.Navigator initialRouteName={initialName} headerMode='none'>
         <HelloStack.Screen name='Hello' component={HelloScreen} />
         <HelloStack.Screen name='Auth' component={AuthScreen} />
         <HelloStack.Screen name='Bottom' component={BottomTab} />
+        <HelloStack.Screen name="NotificationAttestation" component={AttestationScreen} />
+        <HelloStack.Screen name="NotificationMarks" component={MarksScreen} />
+        <HelloStack.Screen name="NotificationQuestions" component={QuestionsScreen} />
       </HelloStack.Navigator>
     </NavigationContainer>
   )
@@ -354,7 +396,12 @@ function TimetableStackScreen(){
 const PersonStack = createStackNavigator();
 
 function PersonStackScreen(){
-  const {isAuthorizated} = useUser();
+    const {isAuthorizated} = useUser();
+    const {theme} = useTheme()
+
+    if (isAuthorizated === null) {
+      return <View style={{flex: 1, backgroundColor: theme.primaryBackground}}></View>
+    }
 
     return(
       <PersonStack.Navigator headerMode={'none'}>
@@ -383,8 +430,6 @@ function ServiceStackScreen(){
     <ServiceStack.Navigator initialRouteName='Service' headerMode='none'>
       <ServiceStack.Screen name="Service" component={ServiceListScreen} />
       <ServiceStack.Screen name="StudentLife" component={StudentLifeNavigator} />
-      <ServiceStack.Screen name='Ermak' component={Ermak} />
-      <ServiceStack.Screen name="Ensemble" component={EnsembleScreen} />
       <ServiceStack.Screen name="Institutes" component={InstitutesScreen} />
       <ServiceStack.Screen name="IITK" component={IITK} />
       <ServiceStack.Screen name="Map" component={MapScreen} />

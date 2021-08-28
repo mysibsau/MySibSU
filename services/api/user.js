@@ -23,8 +23,9 @@ export const signInApiCall = async (login, password) => {
     }
 };
 
-export const getAttestationApiCall = async (authData) => {
+export const getAttestationApiCall = async () => {
     try {
+        const authData = JSON.parse(await AsyncStorage.getItem('AuthData'))
         const response = await axios.post('/v2/user/attestation/', authData)
         return response.data;
     } catch(err) {
@@ -33,8 +34,9 @@ export const getAttestationApiCall = async (authData) => {
     }
 };
 
-export const getMarksApiCall = async (authData) => {
+export const getMarksApiCall = async () => {
     try {
+        const authData = JSON.parse(await AsyncStorage.getItem('AuthData'))
         const response = await axios.post('/v2/user/marks/', authData)
         return response.data;
     } catch(err) {

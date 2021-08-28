@@ -8,6 +8,7 @@ import {useLocale} from '../../../services/locale/LocaleManager'
 import AsyncStorage from '@react-native-community/async-storage'
 import { useUser } from '../../../services/auth/AuthManager';
 import { sendRequestApiCall } from '../../../services/api/creativity';
+import { AntDesign } from '@expo/vector-icons';
 
 
 const REGEXES = [
@@ -16,7 +17,7 @@ const REGEXES = [
 {reg: /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/, type: 'link'}]
 
 export default function EnsembleScreen(props){
-    const {user} = useUser();
+    const {user, isAuthorizated} = useUser();
     const [onVisible, setVisible] = useState(false)
     const [fio, setFio] = useState(user.FIO)
     const [phone, setPhone] = useState('')
@@ -44,20 +45,10 @@ export default function EnsembleScreen(props){
            setVisible(false)
        }
     }
-
-    useEffect(() => {
-        BackHandler.addEventListener(
-          "hardwareBackPress", function(){
-              props.navigation.goBack();
-          }
-        );
-    
-      }, []);
-
     
     return(
         <View style={[styles.container, {backgroundColor: theme.primaryBackground}]}>
-            <Header title={data.short_name ? data.short_name : data.name} onPress={() => props.navigation.goBack()}/>
+            <Header title={data.short_name ? data.short_name : data.name} onPress={() => props.navigation.navigate('Art')}/>
             <ScrollView>
 
                 <View style={{ borderBottomWidth: 2, borderColor: 'gray'}}>
@@ -105,47 +96,39 @@ export default function EnsembleScreen(props){
                         })}
                     </View>
                 </View>
-                {data.instagram_link !== '' &&
-                <Pressable style={[styles.descriptionBox, {flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', paddingLeft: 10}]} onPress={() => Linking.openURL(info.instagram_link)}>
+                {data.vk_link &&
+                <Pressable style={[styles.descriptionBox, {flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', paddingLeft: 10, backgroundColor: theme.blockColor}]} onPress={() => Linking.openURL(data.vk_link)}>
                     <Entypo name="vk" size={30} color="rgb(115, 182, 28)" />
                     <Text style={{fontFamily: 'roboto', fontSize: 20, color: '#5575A7', paddingLeft: 10, textAlign: 'center'}}>{locale.group_vk}</Text>
                 </Pressable>}
-                {data.vk_link !== '' &&
-                <Pressable style={[styles.descriptionBox, {flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', paddingLeft: 10}]} onPress={() => Linking.openURL(info.instagram_link)}>
+                {data.instagram_link &&
+                <Pressable style={[styles.descriptionBox, {flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', paddingLeft: 10, backgroundColor: theme.blockColor}]} onPress={() => Linking.openURL(data.instagram_link)}>
                     <AntDesign name="instagram" size={30} color={'rgb(115, 182, 28)'} />
                     <Text style={{fontFamily: 'roboto', fontSize: 20, color: '#5575A7', paddingLeft: 10, textAlign: 'center'}}>Instagram</Text>
                 </Pressable>}
 
+                <Pressable style={[styles.descriptionBox, {flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', paddingLeft: 10, backgroundColor: theme.blockColor}]} onPress={() => setVisible(!onVisible)}>
+                    <Entypo name="circle-with-plus" size={30} color="rgb(115, 182, 28)" />
+                    <Text style={{fontFamily: 'roboto', fontSize: 20, color: '#5575A7', paddingLeft: 10, textAlign: 'center'}}>{locale.join}</Text>
+                </Pressable>
+
                 <View style={{flexDirection: 'column', paddingBottom: 180}}>
-
-                    <TouchableWithoutFeedback onPress={() => setVisible(!onVisible)}>
-                    <View style={[styles.box, styles.shadow2, { flexDirection: 'row', backgroundColor: theme.blockColor}]}>
-                        <View style={{ width: w * 0.1, justifyContent: 'center', alignItems: 'center'}}>
-                            <Entypo name="circle-with-plus" size={24} color="rgb(115, 182, 28)" />
-                        </View>
-                        <View style={{ justifyContent: 'center'}}>
-                            <Text style={styles.buttonText}>{locale['join']}</Text>
-                        </View> 
-                    </View>
-                    </TouchableWithoutFeedback>
-            
-
                     <Modal animationType="slide" visible={onVisible}>
-                        <View style={[styles.modal, {backgroundColor: theme.primaryBackground, width: w * 0.75, alignSelf: 'center'}]}>
-                            <TouchableWithoutFeedback onPress={() => setVisible(!onVisible)}>
+                        <View style={[styles.modal, {backgroundColor: theme.primaryBackground, alignItems: 'center', alignSelf: 'center'}]}>
+                            <TouchableWithoutFeedback onPress={() => setVisible(!onVisible)} style={{position: 'absolute'}}>
                                 <Text style={{color: '#006AB3', fontSize: 50, marginLeft: 6}}>˟</Text>
                             </TouchableWithoutFeedback>
 
-                            <Text style={{fontFamily: 'roboto', color: '#006AB3', fontSize: 24, marginBottom: 10}}>Заявка на вступление</Text>
+                            <Text style={{fontFamily: 'roboto', color: theme.headerTitle, fontSize: 24, marginBottom: 10}}>Заявка на вступление</Text>
 
-                            <TextInput style={[styles.input, {color: theme.labelColor}]} placeholderTextColor={'gray'} onChangeText={text => setFio(text)} placeholder={'ФИО'} defaultValue={user.FIO}/>
+                            {!isAuthorizated && <TextInput style={[styles.input, {color: theme.labelColor}]} placeholderTextColor={'gray'} onChangeText={text => setFio(text)} placeholder={'ФИО'} defaultValue={user.FIO}/>}
                             <TextInput style={[styles.input, {color: theme.labelColor}]} placeholderTextColor={'gray'} onChangeText={text => setPhone(text)} placeholder={'Телефон'} />
                             <TextInput style={[styles.input, {color: theme.labelColor}]} placeholderTextColor={'gray'} onChangeText={text => setVk(text)} placeholder={'ID в VK'} />
                             <TextInput style={[styles.input, {color: theme.labelColor}]} placeholderTextColor={'gray'} onChangeText={text => setExperience(text)} placeholder={'Ваш опыт'} multiline scrollEnabled={true}/>
                             <TextInput style={[styles.input, {color: theme.labelColor}]} placeholderTextColor={'gray'} onChangeText={text => setComment(text)} placeholder={'Комментарий к заявке'} multiline scrollEnabled={true} selectTextOnFocus={true}/>
 
                             <TouchableWithoutFeedback onPress={() => sendMessage()} style={{ padding: 10, backgroundColor: 'white'}}>
-                                <Text style={{fontFamily: 'roboto', color: theme.blueColor, fontSize: 15, textAlign: 'center', elevation: 5}}>ОТПРАВИТЬ</Text>
+                                <Text style={{fontFamily: 'roboto', color: theme.headerTitle, fontSize: 15, textAlign: 'center', elevation: 5}}>ОТПРАВИТЬ</Text>
                             </TouchableWithoutFeedback>
                         </View>
                     </Modal>
@@ -187,7 +170,7 @@ const styles = StyleSheet.create({
         width: w * 0.8,
         color: '#5575A7', 
         fontFamily: 'roboto', 
-        fontSize: 15,
+        fontSize: 20,
         paddingTop: 10,
         paddingBottom: 10, 
     },
@@ -207,6 +190,8 @@ const styles = StyleSheet.create({
     modal: {
         padding: 10,
         alignSelf: 'center',
+        width: w,
+        height: '100%',
     },
 
     box: {
@@ -217,5 +202,16 @@ const styles = StyleSheet.create({
         marginTop: 10,
         alignSelf: 'center',
         justifyContent: 'center'
+    },
+
+    descriptionBox: {
+        borderRadius: 15,
+        backgroundColor: 'white',
+        minHeight: 55,
+        width: w * 0.9,
+        marginTop: 10,
+        alignSelf: 'center',
+        justifyContent: 'center',
+        elevation: 10,
     },
 })

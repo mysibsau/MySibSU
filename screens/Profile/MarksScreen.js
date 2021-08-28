@@ -28,7 +28,7 @@ export default function MarksScreen(props){
 
     return(
         <View style={{flex: 1, backgroundColor: theme.primaryBackground}}>
-            <Header title={locale['marks']} onPress={() => props.navigation.goBack()} />
+            <Header title={locale['marks']} onPress={() => props.navigation.navigate('Profile')} />
             {!loaded ? 
             <View style={{flex: 1, paddingBottom: 100, justifyContent: 'center'}}>
                 <ActivityIndicator size='large' color='#006AB3' />

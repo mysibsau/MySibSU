@@ -1,5 +1,5 @@
 import React from 'react'
-import { View , Text, Image, TextInput, ScrollView, StyleSheet, ToastAndroid, AsyncStorage, TouchableOpacity, ActivityIndicator} from 'react-native'
+import { View , Text, Image, TextInput, ScrollView, StyleSheet, ToastAndroid, AsyncStorage, TouchableOpacity, ActivityIndicator, Linking} from 'react-native'
 import {useTheme} from '../../services/themes/ThemeManager'
 import {useLocale} from '../../services/locale/LocaleManager'
 import { h, w } from '../../modules/constants'
@@ -20,10 +20,6 @@ export default function AuthScreen(props){
     const [password, setPassword] = React.useState('')
     const [fetching, setFetching] = React.useState(false)
     const [isChecked, setIsChecked] = React.useState(false)
-
-    const prohibitUsing = () => {
-        
-    }
 
     const checkAgreement = () => {
         if (!isChecked) {
@@ -76,12 +72,12 @@ export default function AuthScreen(props){
                             <TextInput onSubmitEditing={() => toAuth()} value={password} onChangeText={value => setPassword(value)} placeholderTextColor={'gray'} placeholder={locale['password']} numberOfLines={1} secureTextEntry={true} style={{ width: w * 0.7, fontFamily: 'roboto', color: theme.labelColor}}/>
                         </View>
                     </View>
-                    <TouchableWithoutFeedback onPress={() => setIsChecked(!isChecked)}  style={{flexDirection: 'row', marginLeft: w * 0.1, marginTop: 10, overflow: 'visible'}}>
-                        <View style={{backgroundColor: 'white', width: 20, height: 20, borderRadius: 3, borderColor: theme.blueColor, borderWidth: 1, marginRight: 10}}>
+                    <View   style={{flexDirection: 'row', marginLeft: w * 0.1, marginTop: 10, overflow: 'visible'}}>
+                        <TouchableWithoutFeedback onPress={() => setIsChecked(!isChecked)} style={{backgroundColor: theme.primaryBackground, width: 20, height: 20, borderRadius: 3, borderColor: theme.blueColor, borderWidth: 1, marginRight: 10}}>
                             {isChecked && <MaterialIcons name="done" size={18} color={theme.blueColor} />}
-                        </View>
-                        <Text>{locale['accept']}<Text>{locale['user_agreement']}</Text></Text>
-                    </TouchableWithoutFeedback>
+                        </TouchableWithoutFeedback>
+                        <Text style={{width: w * 0.7, color: 'gray'}}>{locale['accept']}<Text style={{color: theme.blueColor}} onPress={() => Linking.openURL('https://mysibsau.ru/user-agreement/')}>{locale['user_agreement']}</Text></Text>
+                    </View>
                     <TouchableOpacity onPress={() => toAuth()}>
                         <View style={styles.okay_button}>
                             <Text style={styles.okay_button_text}>{locale['sign_in']}</Text>

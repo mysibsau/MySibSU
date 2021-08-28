@@ -35,21 +35,13 @@ export default function ArtScreen(props){
         setLoaded(true)
     };
 
-    useEffect(() => {
-        BackHandler.addEventListener(
-          "hardwareBackPress", function(){
-              props.navigation.goBack();
-          }
-        );
-      }, []);
-
     const sendQuestion = async (text, isPublic) => {
         await AskQuestionApiCall(text, 'ktc', isPublic);
     }
 
     return(
         <View style={{flex: 1, backgroundColor: theme.primaryBackground}}>
-            <AskHeader title={locale['art']} onPress={() => props.navigation.goBack()} onQuestion={() => setVisible(true)}/>
+            <AskHeader title={locale['art']} onPress={() => props.navigation.navigate('Navigator')} onQuestion={() => setVisible(true)}/>
             <AskModal visible={visible} onClose={() => setVisible(false)} onSend={(text, isPublic) => sendQuestion(text, isPublic)}/>
             <ScrollView contentContainerStyle={{paddingBottom: 120}}>
                 {loaded ? 
@@ -59,7 +51,7 @@ export default function ArtScreen(props){
                 </View>
 
 
-                <View style={styles.descriptionBox}>
+                <View style={[styles.descriptionBox, {backgroundColor: theme.blockColor}]}>
                     <Text style={{fontFamily: 'roboto', fontSize: 20, color: '#5575A7', paddingLeft: 5, textAlign: 'center'}}>{info.name}</Text>
                 </View>
                 <View>
@@ -70,7 +62,7 @@ export default function ArtScreen(props){
                 </View>
 
                 <Text style={{ fontFamily: 'roboto', fontSize: 20, marginTop: info.photo ? w * 0.2 + 20 : 20, marginLeft: 20, color: '#5575A7',}}>{locale['contacts']}</Text>
-                <View style={[styles.descriptionBox, {padding: 10}]}>
+                <View style={[styles.descriptionBox, {padding: 10, backgroundColor: theme.blockColor}]}>
                 {info.contacts.split('\n').map(item => {
                             let contact = {}
                             REGEXES.map(reg => {
@@ -101,13 +93,13 @@ export default function ArtScreen(props){
                             </Text>)
                         })}
                 </View>
-                {info.instagram_link !== '' &&
-                <Pressable style={[styles.descriptionBox, {flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', paddingLeft: 10}]} onPress={() => Linking.openURL(info.instagram_link)}>
+                {info.vk_link &&
+                <Pressable style={[styles.descriptionBox, {flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', paddingLeft: 10, backgroundColor: theme.blockColor}]} onPress={() => Linking.openURL(info.vk_link)}>
                     <Entypo name="vk" size={30} color="rgb(115, 182, 28)" />
                     <Text style={{fontFamily: 'roboto', fontSize: 20, color: '#5575A7', paddingLeft: 10, textAlign: 'center'}}>{locale.group_vk}</Text>
                 </Pressable>}
-                {info.vk_link !== '' &&
-                <Pressable style={[styles.descriptionBox, {flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', paddingLeft: 10}]} onPress={() => Linking.openURL(info.instagram_link)}>
+                {info.instagram_link &&
+                <Pressable style={[styles.descriptionBox, {flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', paddingLeft: 10, backgroundColor: theme.blockColor}]} onPress={() => Linking.openURL(info.instagram_link)}>
                     <AntDesign name="instagram" size={30} color={'rgb(115, 182, 28)'} />
                     <Text style={{fontFamily: 'roboto', fontSize: 20, color: '#5575A7', paddingLeft: 10, textAlign: 'center'}}>Instagram</Text>
                 </Pressable>}

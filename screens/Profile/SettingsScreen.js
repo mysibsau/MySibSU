@@ -53,7 +53,7 @@ export default function SettingsScreen(props){
 
     const signOut = async () => {
         await logout();
-        props.navigation.navigate('Person')
+        // props.navigation.navigate('Person')
     }
 
     return(

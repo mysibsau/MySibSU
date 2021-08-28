@@ -13,13 +13,6 @@ export default function PersonScreen(props){
     const {theme} = useTheme()
     const {user, authData} = useUser();
 
-    React.useEffect(() =>
-          props.navigation.addListener('beforeRemove', (e) => {
-            if(e.data.action.type === 'GO_BACK')
-                e.preventDefault();
-          }))
-
-
     return(
         <View style={[styles.container, {backgroundColor: theme.primaryBackground}]}>
             <View style={[styles.box, {backgroundColor: theme.blockColor}]}>

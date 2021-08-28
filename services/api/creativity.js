@@ -18,7 +18,7 @@ export const sendRequestApiCall = async (data) => {
     console.log(data)
     try {
         const token = JSON.parse(await AsyncStorage.getItem('User')).token
-        await axios.post('/v2/campus/ensembles/join/', {data}, {headers: {Authorization: `Bearer ${token}`}})
+        await axios.post('/v2/campus/ensembles/join/', data, {headers: {Authorization: `Bearer ${token}`}})
 
         return true
     } catch(err) {

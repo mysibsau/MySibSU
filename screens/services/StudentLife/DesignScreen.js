@@ -21,15 +21,8 @@ export default function DesignScreen(props){
                 setLoaded(true)
             })
             .catch(err => console.log(err))
-    }, [loaded])
+    }, [])
 
-    useEffect(() => {
-        BackHandler.addEventListener(
-          "hardwareBackPress", function(){
-              props.navigation.goBack();
-          }
-        );
-      }, []);
 
     return(
         <View style={{flex: 1, backgroundColor: theme.primaryBackground}}>

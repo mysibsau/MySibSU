@@ -3,8 +3,7 @@ import { AsyncStorage, Appearance } from 'react-native'
 import { getTheme } from './theme'
 
 // set default colour scheme from OS
-let osTheme = ''
-
+let osTheme = '';
 
 
 AsyncStorage.getItem('Theme')

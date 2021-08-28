@@ -12,24 +12,27 @@ import AttestationListElement from '../../modules/Profile/AttestationListElement
 export default function AttestationScreen(props){
     const [attestation, setAttestation] = React.useState([])
     const [loaded, setLoaded] = React.useState(false)
-    const {authData} = useUser();
-
+    const {authData, isAuthorizated} = useUser();
     const {theme} = useTheme()
     const {locale} = useLocale()
 
     React.useEffect(() => {
+        console.log(props.route)
         getAttestation()
     }, [])
 
     const getAttestation = async () => {
-        const data = await getAttestationApiCall(authData)
+        const data = await getAttestationApiCall()
         setAttestation(data);
         setLoaded(true)
     }
 
+    if (!isAuthorizated){
+        return null
+    } else {
     return(
         <View style={{flex: 1, backgroundColor: theme.primaryBackground}}>
-            <Header title={locale['attestation']} onPress={() => props.navigation.goBack()} />
+            <Header title={locale['attestation']} onPress={() => props.navigation.navigate('Profile')} />
             {!loaded ? 
             <View style={{flex: 1, justifyContent: 'center', paddingBottom: 100}}>
                 <ActivityIndicator size='large' color='#006AB3' />
@@ -42,5 +45,5 @@ export default function AttestationScreen(props){
             />}
         </View>
     )
-
+            }
 }

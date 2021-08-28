@@ -132,6 +132,7 @@ export const translations = {
         in_processing: 'В обработке',
         user_agreement_profile: 'User Agreement',
         help: "Help",
+        answer_is_in_processing: "There is no answer yet. We are working to ensure that you receive an answer to your question."
         },
   ru: { timetable: 'Расписание', 
         menu: 'Столовые',
@@ -265,6 +266,7 @@ export const translations = {
         in_processing: 'В обработке',
         user_agreement_profile: 'Пользовательское соглашение',
         help: 'Помощь',
+        answer_is_in_processing: "Ответа пока что нет. Мы работаем над тем, чтобы вы получили ответ на свой вопрос."
     },
 };
 // Set the locale once at the beginning of your app.

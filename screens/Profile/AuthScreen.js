@@ -19,7 +19,7 @@ export default function PersonScreen(props){
 
     const tryToLogin = async () => {
         setFetching(true)
-        const response = login(username, password)
+        const response = await login(username, password)
         if (response) {
             setUsername('');
             setPassword('');

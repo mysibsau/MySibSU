@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-community/async-storage';
 import React from 'react'
-import { CurrentWeekApiCall } from '../api/timetable';
+import messaging from '@react-native-firebase/messaging';
 import { signInApiCall } from '../api/user';
 
 
@@ -21,7 +21,7 @@ export class AuthManager extends React.Component {
         this.state = {
             user: {},
             authData: {},
-            isAuthorizated: false,
+            isAuthorizated: null,
         }
 
         this.login.bind(this);
@@ -38,6 +38,7 @@ export class AuthManager extends React.Component {
         const userData = JSON.parse(await AsyncStorage.getItem('User'));
         const authData = JSON.parse(await AsyncStorage.getItem('AuthData'));
         if (userData){
+            await messaging().subscribeToTopic(userData.token)
             this.setState({user: userData, authData: authData, isAuthorizated: true});
         } else {
             this.setState({user: {}, authData: {}, isAuthorizated: false})
@@ -47,6 +48,7 @@ export class AuthManager extends React.Component {
     login = async (login, password) => {
         const user = await signInApiCall(login, password);
         if (user) {
+            await messaging().subscribeToTopic(user.token)
             this.setState({user: user, authData: {username: login, password: password}, isAuthorizated: true})
             await AsyncStorage.setItem('User', JSON.stringify(user))
             await AsyncStorage.setItem('AuthData', JSON.stringify({username: login, password: password}))
@@ -57,6 +59,8 @@ export class AuthManager extends React.Component {
     }
 
     logout = async () => {
+        const token = JSON.parse(await AsyncStorage.getItem('User')).token;
+        await messaging().unsubscribeFromTopic(token)
         await AsyncStorage.removeItem('User');
         await AsyncStorage.removeItem('AuthData');
         this.setState({user: {}, authData: {}, isAuthorizated: false})

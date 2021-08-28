@@ -135,7 +135,7 @@ android {
         applicationId "com.SibSU.MySibSU"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 23
+        versionCode 25
         versionName "2.1"
     }
     splits {
