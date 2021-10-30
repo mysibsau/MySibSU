@@ -26,10 +26,10 @@ export default function TestScreen(props){
                     <Image source={require('../../../assets/icons/sport.png')} style={styles.image} tintColor={theme.blockColor}/>
                     </View>
                 </TouchableOpacity>
-                <TouchableOpacity style={[styles.block, {backgroundColor: theme.blockColor}]} onPress={() => props.navigation.navigate('Science')}>
-                    <Text style={[styles.label, {color: theme.headerTitle}]}>{locale.science}</Text>
+                <TouchableOpacity style={[styles.block, {backgroundColor: theme.blockColor}]} onPress={() => props.navigation.navigate('Tech')}>
+                    <Text style={[styles.label, {color: theme.headerTitle}]}>{locale.tech}</Text>
                     <View style={[styles.imageContainer, {backgroundColor: '#FF7133'}]}>
-                    <Image source={require('../../../assets/icons/science.png')} style={styles.image} tintColor={theme.blockColor}/>
+                    <Image source={require('../../../assets/icons/tech.png')} style={styles.image} tintColor={theme.blockColor}/>
                     </View>
                 </TouchableOpacity>
                 <TouchableOpacity style={[styles.block, {backgroundColor: theme.blockColor}]} onPress={() => props.navigation.navigate('Art')}>

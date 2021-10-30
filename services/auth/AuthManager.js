@@ -52,6 +52,7 @@ export class AuthManager extends React.Component {
             this.setState({user: user, authData: {username: login, password: password}, isAuthorizated: true})
             await AsyncStorage.setItem('User', JSON.stringify(user))
             await AsyncStorage.setItem('AuthData', JSON.stringify({username: login, password: password}))
+            console.log('USER', user)
             return true;
         } else {
             return false;

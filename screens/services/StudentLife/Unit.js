@@ -138,9 +138,9 @@ export default function Ermak(props){
                     </TouchableWithoutFeedback> : null}
             
 
-                    <Modal animationType="slide" transparent={true} visible={onVisible}>
+                    <Modal animationType="slide" transparent={false} visible={onVisible} style={{flex: 1}}>
                         <ScrollView>
-                        <View style={[styles.modal, styles.centerContent, styles.shadow2, {backgroundColor: theme.primaryBackground}]}>
+                        <View style={[styles.modal, styles.centerContent, {backgroundColor: theme.primaryBackground}]}>
                             <View style={{width: w * 0.8, height: 45}}>
                             <TouchableWithoutFeedback onPress={() => setVisible(!onVisible)}>
                                 <Text style={{color: '#006AB3', fontSize: 50, marginLeft: 6}}>˟</Text>
@@ -253,7 +253,8 @@ const styles = StyleSheet.create({
     modal: {
         borderRadius: 30,
         padding: 10,
-        width: w * 0.9,
+        width: w,
+        flex: 1,
         marginTop: Platform.OS === 'android' ? 50 : 100,
         alignSelf: 'center',
         justifyContent: 'center',

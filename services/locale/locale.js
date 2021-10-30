@@ -70,6 +70,7 @@ export const translations = {
         sport: 'Sport',
         science: 'Science',
         art: 'Creativity',
+        tech: 'Tech. creativity',
         active_head: 'Head',
         training_days: 'Training days',
         vacancies: 'Vacancies',
@@ -132,7 +133,8 @@ export const translations = {
         in_processing: 'В обработке',
         user_agreement_profile: 'User Agreement',
         help: "Help",
-        answer_is_in_processing: "There is no answer yet. We are working to ensure that you receive an answer to your question."
+        answer_is_in_processing: "There is no answer yet. We are working to ensure that you receive an answer to your question.",
+        faculties: 'Faculties',
         },
   ru: { timetable: 'Расписание', 
         menu: 'Столовые',
@@ -203,6 +205,7 @@ export const translations = {
         sport: 'Спорт',
         science: 'Наука',
         art: 'Творчество',
+        tech: 'Тех. творчество',
         active_head: 'Руководитель',
         training_days: 'Дни тренировок',
         vacancies: 'Вакансии',
@@ -266,7 +269,8 @@ export const translations = {
         in_processing: 'В обработке',
         user_agreement_profile: 'Пользовательское соглашение',
         help: 'Помощь',
-        answer_is_in_processing: "Ответа пока что нет. Мы работаем над тем, чтобы вы получили ответ на свой вопрос."
+        answer_is_in_processing: "Ответа пока что нет. Мы работаем над тем, чтобы вы получили ответ на свой вопрос.",
+        faculties: 'Факультеты'
     },
 };
 // Set the locale once at the beginning of your app.

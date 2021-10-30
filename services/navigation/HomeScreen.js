@@ -76,6 +76,8 @@ import { Ionicons } from '@expo/vector-icons'
 import ActiveNavScreen from '../../screens/Services/StudentLife/ActiveNavScreen'
 import { useUser } from '../auth/AuthManager'
 import AnotherSettingsScreen from '../../screens/Profile/AnotherSettingsScreen'
+import TechScreen from '../../screens/Services/StudentLife/TechScreen'
+import TechUnionScreen from '../../screens/Services/StudentLife/TechUnionScreen'
 
 function LibraryTabBar({ state, descriptors, navigation, position }) {
   const {mode, theme, toggle} = useTheme()
@@ -211,7 +213,7 @@ const StudentLifeStack = createStackNavigator();
 
 function StudentLifeNavigator(){
   return(
-    <StudentLifeStack.Navigator>
+    <StudentLifeStack.Navigator screenOptions={{headerShown: false}}>
       <StudentLifeStack.Screen options={{headerShown: false}} name="Navigator" component={ActiveNavScreen} />
       <StudentLifeStack.Screen options={{headerShown: false}} name="Active" component={ActiveScreen} />
       <StudentLifeStack.Screen options={{headerShown: false}} name="Sport" component={SportScreen} />
@@ -219,6 +221,8 @@ function StudentLifeNavigator(){
       <StudentLifeStack.Screen options={{headerShown: false}} name="Art" component={ArtScreen} />
       <StudentLifeStack.Screen options={{headerShown: false}} name='Ermak' component={Ermak} />
       <StudentLifeStack.Screen options={{headerShown: false}} name="Ensemble" component={EnsembleScreen} />
+      <StudentLifeStack.Screen options={{headerShown: false}} name="Tech" component={TechScreen} />
+      <StudentLifeStack.Screen options={{headerShown: false}} name="TechUnion" component={TechUnionScreen} />
     </StudentLifeStack.Navigator>
   )
 }

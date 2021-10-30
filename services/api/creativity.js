@@ -6,7 +6,9 @@ export const getCreativityApiCall = async () => {
     try {
         // const token = JSON.parse(await AsyncStorage.getItem('User')).token;
         let infoResponse = (await axios.get('/v2/campus/ensembles/ktc_info/')).data
+        console.log(infoResponse)
         let ensemblesList = (await axios.get('/v2/campus/ensembles/')).data
+        console.log(ensemblesList)
         infoResponse['ensembles'] = ensemblesList
         return infoResponse
     } catch(err) {
@@ -15,10 +17,8 @@ export const getCreativityApiCall = async () => {
 }
 
 export const sendRequestApiCall = async (data) => {
-    console.log(data)
     try {
-        const token = JSON.parse(await AsyncStorage.getItem('User')).token
-        await axios.post('/v2/campus/ensembles/join/', data, {headers: {Authorization: `Bearer ${token}`}})
+        await axios.post('/v2/campus/ensembles/join/', data)
 
         return true
     } catch(err) {

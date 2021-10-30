@@ -34,7 +34,7 @@ const storeData = async (value, name, mode) => {
 
 export default function SearchScreen(props){
     const [group, setGroup] = useState('')
-    const [timetableMode, setTimetableMode] = useState(-1)
+    const [timetableMode, setTimetableMode] = useState(0)
     const [loaded, setLoaded] = useState(false)
     const [shown, setShown] = useState([])
     const [lastGroups, setLast] = useState([])
@@ -57,7 +57,7 @@ export default function SearchScreen(props){
     useEffect(() => {
         AsyncStorage.getItem('@mode')
             .then(res => {
-                if (res !== null)
+                if (res)
                     setTimetableMode(Number(res))
                 else
                     setTimetableMode(0)
@@ -116,6 +116,7 @@ export default function SearchScreen(props){
     )
 
     function addFavourite(group){
+        group['mode'] = timetableMode;
         AsyncStorage.getItem('Favourite')
                     .then(res => {
                         let groups = []
@@ -130,7 +131,6 @@ export default function SearchScreen(props){
                             })
                             
                             if (!there_is){
-                                group['mode'] = timetableMode;
                                 console.log(group)
                                 groups.push(group);
                             }
@@ -142,7 +142,7 @@ export default function SearchScreen(props){
                         if (groups.length > 10){
                             groups = groups.slice(1, 11)
                         }
-                        
+                        console.log(groups)
                         setLast(groups)
                         AsyncStorage.setItem('Favourite', JSON.stringify(groups))
                     })
@@ -180,7 +180,7 @@ export default function SearchScreen(props){
         console.log(mode)
         setGroup(name)
         var choosed = ''
-        var type = [0, 1, 2].includes(mode) ? mode : timetableMode
+        var type = [0, 1, 2].includes(Number(mode)) ? Number(mode) : timetableMode
         type === 0 ? 
             choosed = name
             .toUpperCase()

@@ -15,11 +15,12 @@ export default function MapScreen(props){
         fetch('https://mysibsau.ru/v2/campus/buildings/', {method: 'GET'})
             .then(response => response.json())
             .then(json => {
+                console.log(json)
                 setBuildings(json)
                 setLoaded(true)
             })
             .catch(err => console.log(err))
-    }, [buildings])
+    }, [])
 
     return(
         <View style={{backgroundColor:'white', flex: 1, paddingBottom: 0}}>         

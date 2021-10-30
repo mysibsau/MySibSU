@@ -11,6 +11,7 @@ import { AntDesign } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons'; 
 import AskModal from '../../../modules/AskModal'
 import { AskQuestionApiCall } from '../../../services/api/faq'
+import { getTechCreativityApiCall } from '../../../services/api/techCreativity'
 
 const REGEXES = [
     {reg: /(\+7|8) ?[\( -]?\d{3}[\) -]? ?\d{3}[ -]?\d{2}[ -]?\d{2}/, type: 'phone'}, 
@@ -18,20 +19,26 @@ const REGEXES = [
 {reg: /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/, type: 'link'}]
 
 
-export default function ArtScreen(props){
+export default function TechScreen(props){
     const [info, setInfo] = useState({})
     const [loaded, setLoaded] = useState(false)
     const {theme} = useTheme()
     const {locale} = useLocale()
     const [visible, setVisible] = React.useState(false)
+    const [coef, setCoef] = React.useState(1);
 
     useEffect(() => {
         getInfo()
     }, [])
 
     const getInfo = async () => {
-        setInfo(await getCreativityApiCall());
-        setLoaded(true)
+        setInfo(await getTechCreativityApiCall());
+        const data = await getTechCreativityApiCall();
+        setInfo(data);
+        Image.getSize(BASE_URL + data.logo, (width, height) => {
+            setCoef(width / height)
+            setLoaded(true)
+        })
     };
 
     const sendQuestion = async (text, isPublic) => {
@@ -40,13 +47,13 @@ export default function ArtScreen(props){
 
     return(
         <View style={{flex: 1, backgroundColor: theme.primaryBackground}}>
-            <AskHeader title={locale['art']} onPress={() => props.navigation.navigate('Navigator')} onQuestion={() => setVisible(true)}/>
+            <AskHeader title={locale['tech']} onPress={() => props.navigation.navigate('Navigator')} onQuestion={() => setVisible(true)}/>
             <AskModal visible={visible} onClose={() => setVisible(false)} onSend={(text, isPublic) => sendQuestion(text, isPublic)}/>
             <ScrollView contentContainerStyle={{paddingBottom: 120}} showsVerticalScrollIndicator={false}>
                 {loaded ? 
                 <>
                 <View style={{ borderBottomWidth: 2, borderColor: 'gray'}}>
-                    <Image source={info.logo ? {uri: BASE_URL + info.logo} : require('../../../assets/back.png')}  style={{ width: w, height: w / 2, resizeMode: 'cover', backgroundColor: 'white'}}/>
+                    <Image source={info.logo ? {uri: BASE_URL + info.logo} : require('../../../assets/back.png')}  style={{ width: w, height: w / coef, resizeMode: 'contain', backgroundColor: 'white'}}/>
                 </View>
 
 
@@ -61,6 +68,7 @@ export default function ArtScreen(props){
                 </View>
 
                 <Text style={{ fontFamily: 'roboto', fontSize: 20, marginTop: info.photo ? w * 0.2 + 20 : 20, marginLeft: 20, color: '#5575A7',}}>{locale['contacts']}</Text>
+                {info.contacts && 
                 <View style={[styles.descriptionBox, {padding: 10, backgroundColor: theme.blockColor}]}>
                 {info.contacts.split('\n').map(item => {
                             let contact = {}
@@ -91,7 +99,7 @@ export default function ArtScreen(props){
                                 {contact.data ? contact.data : item}
                             </Text>)
                         })}
-                </View>
+                </View>}
                 {info.vk_link &&
                 <Pressable style={[styles.descriptionBox, {flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', paddingLeft: 10, backgroundColor: theme.blockColor}]} onPress={() => Linking.openURL(info.vk_link)}>
                     <Entypo name="vk" size={30} color="rgb(115, 182, 28)" />
@@ -103,9 +111,9 @@ export default function ArtScreen(props){
                     <Text style={{fontFamily: 'roboto', fontSize: 20, color: '#5575A7', paddingLeft: 10, textAlign: 'center'}}>Instagram</Text>
                 </Pressable>}
 
-                <Text style={{ fontFamily: 'roboto', fontSize: 20, marginTop: info.photo ? w * 0.2 + 20 : 20, marginLeft: 20, color: '#5575A7',}}>{locale['teams']}</Text>
-                {info.ensembles.map( item => {
-                    return(<ActiveElement onPress={() => props.navigation.navigate('Ensemble', {data: item})} title={item.name} source={item.logo} key={item[0]} />)
+                <Text style={{ fontFamily: 'roboto', fontSize: 20, marginTop: info.photo ? w * 0.2 + 20 : 20, marginLeft: 20, color: '#5575A7',}}>{locale['faculties']}</Text>
+                {info.techList.map( item => {
+                    return(<ActiveElement onPress={() => props.navigation.navigate('TechUnion', {data: item})} title={item.name} source={item.logo} key={item[0]} />)
                 })}
                 </> : <View style={{height: h, justifyContent: 'center', paddingBottom: 120}}><ActivityIndicator size='large' color='#0060B3' /></View>}   
             </ScrollView>

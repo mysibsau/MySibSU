@@ -88,7 +88,7 @@ export default function SettingsScreen(props){
                 <TouchableOpacity style={{padding: 10, width: w * 0.4, alignSelf: 'center', marginTop: 20, borderRadius: 15, elevation: 5, backgroundColor: theme.blockColor}} onPress={() => signOut()}>
                     <Text style={{alignSelf: 'center', color: '#EE7575', fontWeight: 'bold', fontFamily: 'roboto',}}>{locale['sign_out']}</Text>
                 </TouchableOpacity>}
-                <Text style={{fontFamily: 'roboto', alignSelf: 'center', color: 'gray', position: 'absolute', bottom: 60}}>{locale['version']}: 2.0.0</Text>
+                <Text style={{fontFamily: 'roboto', alignSelf: 'center', color: 'gray', position: 'absolute', bottom: 60}}>{locale['version']}: 2.2.0</Text>
                 
             </View>
         </View>
