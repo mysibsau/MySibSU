@@ -1,38 +1,39 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { View, Text, StyleSheet, Animated, StatusBar, TextInput, AsyncStorage, TouchableOpacity, TouchableHighlight, FlatList, ToastAndroid } from 'react-native'
+import { View, Text, StyleSheet, Animated, StatusBar, TextInput, TouchableOpacity, TouchableHighlight, FlatList, ToastAndroid } from 'react-native'
+import AsyncStorage from '@react-native-community/async-storage'
 import MainHeader from '../../modules/MainHeader'
 import Help from '../../modules/Timetable/Help'
 import { useTheme } from '../../services/themes/ThemeManager'
 import { useLocale } from '../../services/locale/LocaleManager'
 import { h, w } from '../../modules/constants'
 import SwitchSelector from "react-native-switch-selector";
-import { Ionicons } from '@expo/vector-icons'; 
+import { Ionicons } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
 
 const URLs = ['https://mysibsau.ru/v2/timetable/all_groups/',
-                'https://mysibsau.ru/v2/timetable/all_teachers/',
-                'https://mysibsau.ru/v2/timetable/all_places/']
+    'https://mysibsau.ru/v2/timetable/all_teachers/',
+    'https://mysibsau.ru/v2/timetable/all_places/']
 
 const fil = (fn, a) => {
     const f = []; //final
     for (let i = 0; i < a.length; i++) {
-      if (fn(a[i])) {
-        f.push(a[i]);
-      }
+        if (fn(a[i])) {
+            f.push(a[i]);
+        }
     }
     return f;
 };
 
 const storeData = async (value, name, mode) => {
     try {
-      AsyncStorage.setItem('@key', String(value))
-      AsyncStorage.setItem('@name', String(name))
-      AsyncStorage.setItem('@mode', String(mode))
+        AsyncStorage.setItem('@key', String(value))
+        AsyncStorage.setItem('@name', String(name))
+        AsyncStorage.setItem('@mode', String(mode))
     } catch (e) {
     }
 }
 
-export default function SearchScreen(props){
+export default function SearchScreen(props) {
     const [group, setGroup] = useState('')
     const [timetableMode, setTimetableMode] = useState(0)
     const [loaded, setLoaded] = useState(false)
@@ -45,8 +46,8 @@ export default function SearchScreen(props){
     const [groupList, setGroupList] = useState([])
     const lists = [groupList, teacherList, placeList]
 
-    const {mode, theme, toggle} = useTheme()
-    const {localeMode, locale, toggleLang} = useLocale()
+    const { mode, theme, toggle } = useTheme()
+    const { localeMode, locale, toggleLang } = useLocale()
 
     const modes = [
         { label: locale['groups'], value: 0 },
@@ -81,92 +82,93 @@ export default function SearchScreen(props){
         setLoaded(true)
     }, [])
 
-    function getList(storageTypeName, storageHashName, urlNumber, hashURL, fun){
+    function getList(storageTypeName, storageHashName, urlNumber, hashURL, fun) {
         AsyncStorage.getItem(storageHashName)
-        .then(res => {
-            console.log('Получаем хэш ' + storageTypeName)
-            fetch(hashURL, {method: 'GET'})
-                .then(response => response.json())
-                .then(json => {
-                    if(json.hash === res){
-                        console.log('Хэш ' + storageTypeName + ' совпадает', json.hash, res)
-                        AsyncStorage.getItem(storageTypeName)
-                            .then(res => fun(JSON.parse(res)))
-                    }
-                    else{
-                        console.log('Хэш ' + storageTypeName + ' не совпадает', json.hash, res)
-                        AsyncStorage.setItem(storageHashName, json.hash)
-                        fetch(URLs[urlNumber], {method: 'GET'})
-                            .then(response => response.json())
-                            .then(json => {
-                                fun(json)
-                                AsyncStorage.setItem(storageTypeName, JSON.stringify(json))
-                            })
-                    }
-                })
-                .catch(err => console.log('Не удалось получить хэш ' + storageTypeName ))
-        })  
+            .then(res => {
+                console.log('Получаем хэш ' + storageTypeName)
+                fetch(hashURL, { method: 'GET' })
+                    .then(response => response.json())
+                    .then(json => {
+                        if (json.hash === res) {
+                            console.log('Хэш ' + storageTypeName + ' совпадает', json.hash, res)
+                            AsyncStorage.getItem(storageTypeName)
+                                .then(res => fun(JSON.parse(res)))
+                        }
+                        else {
+                            console.log('Хэш ' + storageTypeName + ' не совпадает', json.hash, res)
+                            AsyncStorage.setItem(storageHashName, json.hash)
+                            fetch(URLs[urlNumber], { method: 'GET' })
+                                .then(response => response.json())
+                                .then(json => {
+                                    fun(json)
+                                    AsyncStorage.setItem(storageTypeName, JSON.stringify(json))
+                                })
+                        }
+                    })
+                    .catch(err => console.log('Не удалось получить хэш ' + storageTypeName))
+            })
     }
 
     const renderHelp = ({ item }) => (
         <Help group={item} onPress={() => setCurrentGroup(item.name)} onPlus={() => {
             addFavourite(item)
             setShown([])
-            ToastAndroid.show(locale['added_to_favourites'], ToastAndroid.SHORT)}}/>
+            ToastAndroid.show(locale['added_to_favourites'], ToastAndroid.SHORT)
+        }} />
     )
 
-    function addFavourite(group){
+    function addFavourite(group) {
         group['mode'] = timetableMode;
         AsyncStorage.getItem('Favourite')
-                    .then(res => {
-                        let groups = []
-                        let there_is = false
-                        if (res !== null){
-                            
-                            groups = JSON.parse(res)
-                            groups.map(item => {
-                                if(item.name === group.name){
-                                    there_is = true;
-                                }
-                            })
-                            
-                            if (!there_is){
-                                console.log(group)
-                                groups.push(group);
-                            }
+            .then(res => {
+                let groups = []
+                let there_is = false
+                if (res !== null) {
+
+                    groups = JSON.parse(res)
+                    groups.map(item => {
+                        if (item.name === group.name) {
+                            there_is = true;
                         }
-                        else{
-                            groups.push(group)
-                        }
-                        
-                        if (groups.length > 10){
-                            groups = groups.slice(1, 11)
-                        }
-                        console.log(groups)
-                        setLast(groups)
-                        AsyncStorage.setItem('Favourite', JSON.stringify(groups))
                     })
+
+                    if (!there_is) {
+                        console.log(group)
+                        groups.push(group);
+                    }
+                }
+                else {
+                    groups.push(group)
+                }
+
+                if (groups.length > 10) {
+                    groups = groups.slice(1, 11)
+                }
+                console.log(groups)
+                setLast(groups)
+                AsyncStorage.setItem('Favourite', JSON.stringify(groups))
+            })
     }
 
-    function similarGroup(text){
+    function similarGroup(text) {
         setGroup(text)
-        if(text !== '' && text.length > 0){
-            timetableMode === 0 ? 
-            setShown(fil(e => e.name.slice(0, text.length) === text.toUpperCase(), lists[timetableMode])) :
-            setShown(fil(e => e.name.slice(0, text.length) === text, lists[timetableMode]))
+        if (text !== '' && text.length > 0) {
+            timetableMode === 0 ?
+                setShown(fil(e => e.name.slice(0, text.length) === text.toUpperCase(), lists[timetableMode])) :
+                setShown(fil(e => e.name.slice(0, text.length) === text, lists[timetableMode]))
         }
-        else{
+        else {
             setShown([])
         }
     }
 
-    function removeGroup(group){
+    function removeGroup(group) {
         let groups = []
         AsyncStorage.getItem('Favourite')
             .then(res => {
                 groups = JSON.parse(res)
                 groups = groups.filter(item => {
-                    if(item.name !== group.name){
+                    if (item.name !== group.name) {
                         return item
                     }
                 })
@@ -176,98 +178,101 @@ export default function SearchScreen(props){
 
     }
 
-    function setCurrentGroup(name, mode){
+    function setCurrentGroup(name, mode) {
         console.log(mode)
         setGroup(name)
         var choosed = ''
         var type = [0, 1, 2].includes(Number(mode)) ? Number(mode) : timetableMode
-        type === 0 ? 
+        type === 0 ?
             choosed = name
-            .toUpperCase()
-            .split(' ')[0] : choosed = name    
+                .toUpperCase()
+                .split(' ')[0] : choosed = name
         console.log(type)
         lists[type].map(group => {
-            if (group.name === choosed){
+            if (group.name === choosed) {
                 storeData(group.id, group.name, type)
-                setGroup('') 
+                setGroup('')
                 setShown([])
-                
-                props.navigation.navigate('TimetableScreen', {group: group.id})
-                    
+
+                props.navigation.navigate('TimetableScreen', { group: group.id })
+
             }
         })
     }
-    return(
-        <View style={[styles.container, {backgroundColor: theme.primaryBackground}]}>
-            <StatusBar backgroundColor={theme.blockColor} barStyle={mode === 'light' ? 'dark-content' : 'light-content'}/>
-            <MainHeader title={locale['timetable']} onPress={() => props.navigation.goBack()}/>
+    return (
+        <View style={[styles.container, { backgroundColor: theme.primaryBackground }]}>
+            <StatusBar backgroundColor={theme.blockColor} barStyle={mode === 'light' ? 'dark-content' : 'light-content'} />
+            <MainHeader title={locale['timetable']} onPress={() => props.navigation.goBack()} />
             {timetableMode !== -1 ? <View>
-            <View style={{ elevation: 6, marginTop: 10, borderRadius: 15}}>
-                <SwitchSelector
+                <View style={{ elevation: 6, marginTop: 10, borderRadius: 15 }}>
+                    <SwitchSelector
                         options={modes}
                         initial={timetableMode}
                         borderRadius={15}
                         buttonColor={theme.blueColor}
-                        style={{alignSelf: 'center', width: w * 0.9}}
-                        textStyle={{fontFamily: 'roboto', height: 40, textAlignVertical: 'center', color: theme.labelColor}}
-                        selectedTextStyle={{fontFamily: 'roboto', height: 40, textAlignVertical: 'center', color: 'white'}}
+                        style={{ alignSelf: 'center', width: w * 0.9 }}
+                        textStyle={{ fontFamily: 'roboto', height: 40, textAlignVertical: 'center', color: theme.labelColor }}
+                        selectedTextStyle={{ fontFamily: 'roboto', height: 40, textAlignVertical: 'center', color: 'white' }}
                         backgroundColor={theme.blockColor}
                         onPress={value => {
                             AsyncStorage.setItem('@mode', String(value))
                             setShown([])
-                            setTimetableMode(value)}}
+                            setTimetableMode(value)
+                        }}
+                    />
+                </View>
+                <View style={{ flexDirection: 'row', marginTop: 10 }}>
+                    <TextInput style={[styles.input, { backgroundColor: theme.blockColor, color: theme.labelColor }]} placeholderTextColor={'lightgray'} value={group} onChangeText={text => similarGroup(text)} placeholder={locale['input_group_name']} />
+                    <TouchableHighlight style={{ borderRadius: 15 }} onPress={() => setCurrentGroup(group)}>
+                        <View style={[styles.button, { backgroundColor: theme.blockColor }]}>
+                            <Ionicons name="ios-search" size={24} color={theme.blueColor} />
+                        </View>
+                    </TouchableHighlight>
+                </View>
+                {shown.length !== 0 ?
+                    <View style={[{ position: 'absolute', top: 120, height: 8 * 40, width: w * 0.9, marginTop: -5, flexDirection: 'column', borderRadius: 15, backgroundColor: theme.blockColor, zIndex: 3, elevation: 6 }]}>
+                        <FlatList
+                            data={shown}
+                            showsVerticalScrollIndicator={false}
+                            renderItem={renderHelp}
+                            initialNumToRender={15}
+                            keyExtractor={item => item.name}
                         />
-            </View>
-            <View style={{flexDirection: 'row', marginTop: 10}}>
-                <TextInput style={[styles.input, {backgroundColor: theme.blockColor, color: theme.labelColor}]} placeholderTextColor={'lightgray'} value={group} onChangeText={text => similarGroup(text)} placeholder={locale['input_group_name']} />
-                <TouchableHighlight style={{borderRadius: 15}} onPress={() => setCurrentGroup(group)}>
-                    <View style={[styles.button, {backgroundColor: theme.blockColor}]}>
-                        <Ionicons name="ios-search" size={24} color={theme.blueColor} />
-                    </View>
-                </TouchableHighlight>
-            </View>
-            {shown.length !== 0 ?
-            <View style={[{ position: 'absolute', top: 120, height: 8 * 40, width: w * 0.9, marginTop: -5, flexDirection: 'column', borderRadius: 15, backgroundColor: theme.blockColor, zIndex: 3, elevation: 6}]}>
-                <FlatList 
-                    data={shown}
-                    showsVerticalScrollIndicator={false}
-                    renderItem={renderHelp}
-                    initialNumToRender={15}
-                    keyExtractor={item => item.name}
-                />
+                    </View> : null}
+                {lastGroups.length !== 0 ?
+                    <View style={[{
+                        shadowColor: "#000",
+                        shadowOffset: {
+                            width: 6,
+                            height: 6,
+                        },
+                        zIndex: 0,
+                        shadowOpacity: 0.30,
+                        shadowRadius: 4.65,
+                        elevation: 5,
+                    }, styles.shadow, { flex: 1, backgroundColor: theme.blockColor, width: w * 0.9, position: 'absolute', top: 115, zIndex: 0, borderRadius: 15, paddingBottom: 10 }]}>
+                        {lastGroups.length !== 0 ?
+                            <Text style={{ fontFamily: 'roboto', width: w, paddingLeft: 20, fontSize: 20, marginTop: 10, color: theme.blueColor }}>{locale['favourites']}</Text> : null}
+                        {lastGroups.map(item => {
+                            return (
+                                <View style={{ height: 30, flexDirection: 'row' }}>
+                                    <TouchableOpacity onPress={() => setCurrentGroup(item.name, item.mode)}>
+                                        <View style={{ height: 30, width: w * 0.8, paddingLeft: 20 }}>
+                                            <Text style={{ height: 30, textAlignVertical: 'center', fontFamily: 'roboto', fontSize: 15, color: 'gray' }}>{item.name}</Text>
+                                        </View>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity onPress={() => removeGroup(item)}>
+                                        <View style={{ height: 30, width: w * 0.1, alignItems: 'center', justifyContent: 'center' }}>
+                                            <FontAwesome name="trash-o" size={15} color={'gray'} />
+                                        </View>
+                                    </TouchableOpacity>
+                                </View>)
+                        })}
+                    </View> : <Text style={{ fontFamily: 'roboto', color: 'gray', alignSelf: 'center', width: w * 0.8, marginTop: 15 }}>{locale['add_favourites']}</Text>}
             </View> : null}
-            {lastGroups.length !== 0 ?
-            <View style={[{ shadowColor: "#000",
-                            shadowOffset: {
-                                width: 6,
-                                height: 6,
-                            },
-                            zIndex: 0,
-                            shadowOpacity: 0.30,
-                            shadowRadius: 4.65,
-                            elevation: 5,}, styles.shadow, { flex: 1, backgroundColor: theme.blockColor, width: w * 0.9, position: 'absolute', top: 115, zIndex: 0, borderRadius: 15, paddingBottom: 10}]}>
-                {lastGroups.length !== 0 ? 
-                <Text style={{ fontFamily: 'roboto', width: w, paddingLeft: 20, fontSize: 20, marginTop: 10, color: theme.blueColor}}>{locale['favourites']}</Text> : null}
-                    {lastGroups.map(item => {
-                        return(
-                            <View style={{ height: 30, flexDirection: 'row'}}>
-                                <TouchableOpacity onPress={() => setCurrentGroup(item.name, item.mode)}>
-                                    <View style={{ height: 30, width: w * 0.8, paddingLeft: 20 }}>
-                                        <Text style={{ height: 30, textAlignVertical: 'center', fontFamily: 'roboto', fontSize: 15, color: 'gray'}}>{item.name}</Text>
-                                    </View>
-                                </TouchableOpacity>
-                                <TouchableOpacity onPress={() => removeGroup(item)}>
-                                    <View style={{height: 30, width: w * 0.1, alignItems: 'center', justifyContent: 'center'}}>
-                                        <FontAwesome name="trash-o" size={15} color={'gray'} />
-                                    </View>
-                                </TouchableOpacity>
-                            </View>)
-                    })}
-            </View> : <Text style={{fontFamily: 'roboto', color: 'gray', alignSelf: 'center', width: w * 0.8, marginTop: 15}}>{locale['add_favourites']}</Text>}
-            </View> : null}
-            <Animated.View style={[{padding: 5, backgroundColor: 'white', borderRadius: 10, elevation: 6, position: 'absolute', bottom: 120, alignSelf: 'center'}, {opacity: fadeAnim}]}>
-                <Text style={{fontFamily: 'roboto', textAlign: 'center'}}>{locale['timetable_isnt_available']}</Text>
-            </Animated.View>  
+            <Animated.View style={[{ padding: 5, backgroundColor: 'white', borderRadius: 10, elevation: 6, position: 'absolute', bottom: 120, alignSelf: 'center' }, { opacity: fadeAnim }]}>
+                <Text style={{ fontFamily: 'roboto', textAlign: 'center' }}>{locale['timetable_isnt_available']}</Text>
+            </Animated.View>
 
         </View>
     )

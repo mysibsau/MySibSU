@@ -1,5 +1,5 @@
 #import <Foundation/Foundation.h>
-@interface PodsDummy_Pods_MySibSU_tvOS : NSObject
+@interface PodsDummy_Pods_mysibsu_tvOS : NSObject
 @end
-@implementation PodsDummy_Pods_MySibSU_tvOS
+@implementation PodsDummy_Pods_mysibsu_tvOS
 @end

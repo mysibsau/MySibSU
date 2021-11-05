@@ -1,5 +1,6 @@
 import React from 'react'
-import { AsyncStorage, Appearance } from 'react-native'
+import { Appearance } from 'react-native'
+import AsyncStorage from '@react-native-community/async-storage';
 import { getTheme } from './theme'
 
 // set default colour scheme from OS
@@ -9,10 +10,10 @@ let osTheme = '';
 AsyncStorage.getItem('Theme')
   .then(res => {
     console.log(res)
-    switch(res){
+    switch (res) {
       case 'Default':
         osTheme = Appearance.getColorScheme()
-        if (osTheme !== 'light' && osTheme !== 'dark'){
+        if (osTheme !== 'light' && osTheme !== 'dark') {
           osTheme = 'light'
         }
         break
@@ -24,7 +25,7 @@ AsyncStorage.getItem('Theme')
         break
       default:
         osTheme = Appearance.getColorScheme()
-        if (osTheme !== 'light' && osTheme !== 'dark'){
+        if (osTheme !== 'light' && osTheme !== 'dark') {
           osTheme = 'light'
         }
         AsyncStorage.setItem('Theme', 'Default')
@@ -51,7 +52,7 @@ export class ThemeManager extends React.Component {
     mode: osTheme
   };
 
-  componentDidUpdate () {
+  componentDidUpdate() {
     console.log('theme updated');
   }
 
@@ -65,7 +66,7 @@ export class ThemeManager extends React.Component {
       })
   }
 
-  render () {
+  render() {
     return (
       <ManageThemeContext.Provider value={{
         mode: this.state.mode,

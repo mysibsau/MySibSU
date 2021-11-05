@@ -7,9 +7,10 @@
  * @flow strict-local
  */
 import React, { useState, useEffect } from 'react'
-import { AsyncStorage, Text } from 'react-native'
+import { Text } from 'react-native'
+import AsyncStorage from '@react-native-community/async-storage'
 import Navigation from './services/navigation/HomeScreen'
-import AppLoading from 'expo-app-loading'
+// import AppLoading from 'expo-app-loading'
 import { useFonts } from '@use-expo/font'
 import { AppearanceProvider } from 'react-native-appearance'
 import { ThemeManager } from './services/themes/ThemeManager'
@@ -21,48 +22,48 @@ import messaging from '@react-native-firebase/messaging';
 
 function App() {
 
-  return <Text>sldkfjsldkj</Text>
+  // const { isAuthorizated } = useUser();
 
-  // const  {isAuthorizated} = useUser();
+  Text.defaultProps = Text.defaultProps || {};
+  Text.defaultProps.allowFontScaling = false;
 
-  // Text.defaultProps = Text.defaultProps || {};
-  // Text.defaultProps.allowFontScaling = false; 
+  const [firstLaunch, setFirstLaunch] = useState(null)
+  useEffect(() => {
+    const checkFirstLaunch = async () => {
+      const agreement = await AsyncStorage.getItem('agreement');
+      if (agreement) {
+        setFirstLaunch(false)
+      } else {
+        setFirstLaunch(true)
+        await AsyncStorage.removeItem('User');
+        await AsyncStorage.removeItem('AuthData');
+      }
+    }
 
-  // const [firstLaunch, setFirstLaunch] = useState(null)
-  // useEffect(() => {
-  //   const checkFirstLaunch = async () => {
-  //     const agreement = await AsyncStorage.getItem('agreement');
-  //     if (agreement) {
-  //       setFirstLaunch(false)
-  //     } else {
-  //       setFirstLaunch(true)
-  //       await AsyncStorage.removeItem('User');
-  //       await AsyncStorage.removeItem('AuthData');
-  //     }
-  //   }
+    checkFirstLaunch()
+  }, [])
 
-  //   checkFirstLaunch()
-  // }, [])
+  // // // Устанавливаем кастомный шрифт, который лежит в ./assets/fonts/
+  // // let [fontsLoaded] = useFonts({
+  // //   'roboto': require('./assets/fonts/18811.ttf'),
+  // // });
 
-  // // Устанавливаем кастомный шрифт, который лежит в ./assets/fonts/
-  // let [fontsLoaded] = useFonts({
-  //   'roboto': require('./assets/fonts/18811.ttf'),
-  // });
+  // Если шрифты еще не были установлены, продолжаем загружать приложение
+  if (firstLaunch === null) {
+    return <Text>sldkfjsldkjfsld</Text>;
+  }
 
-  // // Если шрифты еще не были установлены, продолжаем загружать приложение
-  // if (!fontsLoaded || firstLaunch === null) {
-  //   return <AppLoading />;
-  // }
+
 
   // // Проверяем наличие UUID в хранилище. Если его нет, то генерируем и записываем
   // AsyncStorage.getItem('UUID')
-  // .then(res => {
-  //   if (res === null){
-  //     AsyncStorage.setItem('UUID', Math.random().toString(36).substr(2, 8) + '-' + Math.random().toString(36).substr(2, 4) + '-' + 
-  //     Math.random().toString(36).substr(2, 4) + '-' + Math.random().toString(36).substr(2, 4) + '-' + 
-  //     Math.random().toString(36).substr(2, 12))
-  //   }
-  // })
+  //   .then(res => {
+  //     if (res === null) {
+  //       AsyncStorage.setItem('UUID', Math.random().toString(36).substr(2, 8) + '-' + Math.random().toString(36).substr(2, 4) + '-' +
+  //         Math.random().toString(36).substr(2, 4) + '-' + Math.random().toString(36).substr(2, 4) + '-' +
+  //         Math.random().toString(36).substr(2, 12))
+  //     }
+  //   })
 
   // AsyncStorage.getItem('@mode')
   //   .then(res => {
@@ -70,19 +71,19 @@ function App() {
   //       AsyncStorage.setItem('@mode', '0')
   //   })
 
-  // return (
-  //   <AuthManager>
-  //     <WeekManager>
-  //       <AppearanceProvider>
-  //         <LocaleManager>
-  //           <ThemeManager>
-  //             <Navigation firstLaunch={firstLaunch}/>
-  //           </ThemeManager>
-  //         </LocaleManager>
-  //       </AppearanceProvider> 
-  //     </WeekManager> 
-  //   </AuthManager>
-  // )
+  return (
+    <AuthManager>
+      <WeekManager>
+        <AppearanceProvider>
+          <LocaleManager>
+            <ThemeManager>
+              <Navigation firstLaunch={true} />
+            </ThemeManager>
+          </LocaleManager>
+        </AppearanceProvider>
+      </WeekManager>
+    </AuthManager>
+  )
 }
 
 export default App;

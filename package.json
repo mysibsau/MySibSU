@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@dudigital/react-native-zoomable-view": "^1.0.16",
+    "@expo/vector-icons": "^12.0.5",
     "@react-native-community/async-storage": "^1.12.1",
     "@react-native-community/cli": "^4.13.1",
     "@react-native-community/eslint-config": "^3.0.0",

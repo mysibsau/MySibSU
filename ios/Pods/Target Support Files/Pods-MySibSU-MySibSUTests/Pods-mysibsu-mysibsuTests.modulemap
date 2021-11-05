@@ -1,0 +1,6 @@
+module Pods_mysibsu_mysibsuTests {
+  umbrella header "Pods-mysibsu-mysibsuTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

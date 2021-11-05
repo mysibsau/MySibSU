@@ -25,6 +25,7 @@ axios.defaults.baseURL = BASE_URL
 
 
 AppRegistry.registerComponent('mysibsu', () => App);
+// AppRegistry.registerComponent('MySibSU', () => App);
 
 // registerRootComponent(App)
 
