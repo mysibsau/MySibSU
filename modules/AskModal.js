@@ -32,7 +32,7 @@ const AskModal = ({visible, onClose, onSend}) => {
                 <TouchableOpacity onPress={() => setIsPublic(!isPublic)} style={{width: 20, height: 20, borderRadius: 5, borderColor: theme.blueColor, borderWidth: 1, marginRight: 10, marginLeft: 10}}>
                     {isPublic && <MaterialIcons name="done" size={18} color={theme.blueColor} />}
                 </TouchableOpacity>
-                <Text style={{fontFamily: 'roboto', color: theme.headerTitle}}>{locale['make_the_question_public']}</Text>
+                <Text style={{fontFamily: 'System', color: theme.headerTitle}}>{locale['make_the_question_public']}</Text>
             </View>
             <TouchableOpacity style={[styles.send_button, {backgroundColor: theme.blockColor}]} onPress={() => {
                 if (text.length) {
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
     },
 
     send_text: {
-        fontFamily: 'roboto', 
+        fontFamily: 'System', 
         color: '#006AB3', 
         fontSize: 15
     },

@@ -18,6 +18,7 @@ import { LocaleManager } from './services/locale/LocaleManager'
 import { WeekManager } from './services/week/WeekManager'
 import { AuthManager, useUser } from './services/auth/AuthManager'
 import messaging from '@react-native-firebase/messaging';
+import { SafeAreaView } from 'react-native-safe-area-context'
 
 
 function App() {
@@ -43,10 +44,10 @@ function App() {
     checkFirstLaunch()
   }, [])
 
-  // // // Устанавливаем кастомный шрифт, который лежит в ./assets/fonts/
-  // // let [fontsLoaded] = useFonts({
-  // //   'roboto': require('./assets/fonts/18811.ttf'),
-  // // });
+  // Устанавливаем кастомный шрифт, который лежит в ./assets/fonts/
+  // let [fontsLoaded] = useFonts({
+    // 'System': require('./assets/fonts/18811.ttf'),
+  // });
 
   // Если шрифты еще не были установлены, продолжаем загружать приложение
   if (firstLaunch === null) {
@@ -77,7 +78,7 @@ function App() {
         <AppearanceProvider>
           <LocaleManager>
             <ThemeManager>
-              <Navigation firstLaunch={true} />
+                <Navigation firstLaunch={false} />
             </ThemeManager>
           </LocaleManager>
         </AppearanceProvider>

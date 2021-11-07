@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         textAlign: 'center',
         width: w/3.5,
-        fontFamily: 'roboto'
+        fontFamily: 'System'
         
     },
 

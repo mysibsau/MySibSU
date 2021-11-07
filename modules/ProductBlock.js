@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     },
 
     name: {
-        fontFamily: 'roboto',
+        fontFamily: 'System',
         fontSize: 13,
         marginLeft: 10,
         marginRight: 10,
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
 
     price: {
         fontSize: 13,
-        fontFamily: 'roboto',
+        fontFamily: 'System',
         marginLeft: 10,
         marginRight: 10,
         color: 'gray',

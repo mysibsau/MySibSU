@@ -33,7 +33,7 @@ export default function DinersScreen(props){
             <View>
                 {
                     menu.length === 0 ? 
-                    <Text style={{fontFamily: 'roboto', fontSize: 18, alignSelf: 'center', marginTop: 20, color: theme.labelColor}}>{locale['canteens_dont_work']}</Text> : null
+                    <Text style={{fontFamily: 'System', fontSize: 18, alignSelf: 'center', marginTop: 20, color: theme.labelColor}}>{locale['canteens_dont_work']}</Text> : null
                 }
                 <FlatList 
                     data={menu}
@@ -44,7 +44,7 @@ export default function DinersScreen(props){
                                 props.navigation.navigate('MenuScreen')
                             }}
                             style={{ width: w * 0.9, padding: 10, marginTop: 10, backgroundColor: theme.blockColor, borderRadius: 15, elevation: 5, alignSelf: 'center'}}>
-                            <Text style={{fontFamily: 'roboto', fontSize: 16, color: theme.labelColor}}>{item.name}</Text>
+                            <Text style={{fontFamily: 'System', fontSize: 16, color: theme.labelColor}}>{item.name}</Text>
                         </TouchableOpacity>
                     }
                     keyExtractor={item => item.name}

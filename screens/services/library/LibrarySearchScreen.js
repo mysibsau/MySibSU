@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         paddingLeft: 10,
         fontSize: 15,
-        fontFamily: 'roboto',
+        fontFamily: 'System',
         textAlignVertical: 'center',
         elevation: 4,
         marginRight: w * 0.01

@@ -10,6 +10,7 @@ import Swiper from 'react-native-swiper'
 import {useTheme} from '../../services/themes/ThemeManager'
 import {useLocale} from '../../services/locale/LocaleManager'
 import {useWeek} from '../../services/week/WeekManager'
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context'
 
 const URLs = ['group', 'teacher', 'place']
 
@@ -17,6 +18,7 @@ const URLs = ['group', 'teacher', 'place']
 export default function TimetableScreen(props){
     const {mode, theme} = useTheme()
     const {locale} = useLocale()
+    const insets = useSafeAreaInsets();
     // const {week} = useWeek()
 
     const [group, setGroup] = useState(null)
@@ -117,8 +119,8 @@ export default function TimetableScreen(props){
     const TimetableHeader = ({}) =>{
         return(
             <View style={[{backgroundColor: 'white',
-                            height: w / 8,
                             width: w,
+                            paddingTop: insets.top,
                             elevation: 10,
                             position: 'relative',
                             flexDirection: 'row',
@@ -139,15 +141,16 @@ export default function TimetableScreen(props){
                         height: 40,
                         textAlignVertical: 'center',
                         fontSize: 25,
-                        fontFamily: 'roboto',
+                        fontFamily: 'System',
                         color: theme.headerTitle}]}>{textGroup}</Text>
                 </View>
                 <TouchableOpacity onPress={() => {
                     index === 1 ?
                     swiper.current.scrollBy(1, true) : swiper.current.scrollBy(-1, true)}} style={[{
-                                height: w / 12,
+                                padding: 10,
                                 width: 100,
                                 alignItems: 'center',
+                                justifyContent: 'center',
                                 paddingLeft: 5,
                                 paddingRight: 5,
                                 borderRadius: 15,
@@ -164,7 +167,7 @@ export default function TimetableScreen(props){
                                 position: 'absolute',
                                 right: 10,
                                 bottom: (w/8 - w/12)/2}, {backgroundColor: theme.headerColor}]}>
-                    <Text style={[{height: w/12, textAlignVertical: 'center', fontFamily: 'roboto',
+                    <Text style={[{textAlignVertical: 'center', fontFamily: 'System',
                                 fontSize: 17,
                                 color: 'gray'}, {color: theme.headerTitle}]}>{index} {locale['week']}</Text>
                 </TouchableOpacity>

@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
         width: w * 0.9 - 80,
         fontSize: 14,
         color: '#006AB3',
-        fontFamily: 'roboto',
+        fontFamily: 'System',
         textAlign: 'left',
         marginLeft: w * 0.9 - (w * 0.9 - 80) - 60
     },

@@ -42,7 +42,7 @@ const FeedModule = ({data, type}) => {
                         <View>
                             <Hyperlink linkStyle={{ color: theme.blueColor, fontSize: 16 }}
                             linkText={ url => regExpHelper.setLink(url)}>
-                                <Text numberOfLines={3} style={{width: w * 0.85, color: theme.labelColor, padding: 5, alignSelf: 'center', fontFamily: 'roboto', fontSize: 16}}>{regExpHelper.text}</Text>
+                                <Text numberOfLines={3} style={{width: w * 0.85, color: theme.labelColor, padding: 5, alignSelf: 'center', fontFamily: 'System', fontSize: 16}}>{regExpHelper.text}</Text>
                             </Hyperlink>
                             <TouchableWithoutFeedback onPress={() => {
                                 setView();
@@ -57,7 +57,7 @@ const FeedModule = ({data, type}) => {
                             onPress={(url, text) => Linking.openURL(url)}
                             linkText={url => regExpHelper.setLink(url)}
                             >
-                                <Text style={{width: w * 0.85, padding: 5, alignSelf: 'center', fontFamily: 'roboto', fontSize: 16, color: theme.labelColor}}>{regExpHelper.text}</Text>
+                                <Text style={{width: w * 0.85, padding: 5, alignSelf: 'center', fontFamily: 'System', fontSize: 16, color: theme.labelColor}}>{regExpHelper.text}</Text>
                             </Hyperlink>
                                 {String(regExpHelper.text).length >= 100 &&
                                 <TouchableWithoutFeedback onPress={() => setMode(!mode)}>
@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
     },
 
     tip: { 
-        fontFamily: 'roboto', 
+        fontFamily: 'System', 
         fontSize: 16, 
         color: 'gray', 
         marginLeft: 15

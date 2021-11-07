@@ -109,7 +109,7 @@ export default function PollScreen(props){
                         return(
                         <View style={[styles.question, styles.shadow, {backgroundColor: theme.blockColor}]}>
                             <View style={{ flexDirection: 'row'}}>
-                                <Text style={{color: theme.labelColor, fontSize: 15, fontFamily: 'roboto'}}>{item.name}</Text>
+                                <Text style={{color: theme.labelColor, fontSize: 15, fontFamily: 'System'}}>{item.name}</Text>
                                 {item.necessarily ? <Text style={{ position: 'absolute', right: 10, top: 0, color: 'red'}}>*</Text> : null}
                             </View>
                             {renderItem(item.id, item.type, item.responses)}
@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
     text: {
         marginTop: 30,
         fontSize: 20,
-        fontFamily: 'roboto',
+        fontFamily: 'System',
         color: '#006AB3'
     },
 
@@ -159,7 +159,7 @@ const styles = StyleSheet.create({
 
     name: {
         width: w,
-        fontFamily: 'roboto',
+        fontFamily: 'System',
         fontSize: 20,
         color: '#006AB3',
         textAlign: 'left',

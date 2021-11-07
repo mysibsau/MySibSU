@@ -56,14 +56,14 @@ export default function EnsembleScreen(props){
                 </View>
 
                 <View>
-                    <Text style={{ fontFamily: 'roboto', fontSize: 20, marginTop: data.photo ? w * 0.2 + 20 : 20, marginLeft: 20, color: '#5575A7',}}>{locale['description']}</Text>
+                    <Text style={{ fontFamily: 'System', fontSize: 20, marginTop: data.photo ? w * 0.2 + 20 : 20, marginLeft: 20, color: '#5575A7',}}>{locale['description']}</Text>
                     <View style={[styles.box, styles.centerContent, styles.shadow2, {padding: 10, backgroundColor: theme.blockColor}]}>
-                        <Text style={{fontFamily: 'roboto', fontSize: 15, color: '#5575A7', paddingLeft: 5}}>{data.about}</Text>
+                        <Text style={{fontFamily: 'System', fontSize: 15, color: '#5575A7', paddingLeft: 5}}>{data.about}</Text>
                     </View>
                 </View>
 
                 <View>
-                <Text style={{ fontFamily: 'roboto', fontSize: 20, marginTop: data.photo ? w * 0.2 + 20 : 20, marginLeft: 20, color: '#5575A7',}}>{locale['contacts']}</Text>
+                <Text style={{ fontFamily: 'System', fontSize: 20, marginTop: data.photo ? w * 0.2 + 20 : 20, marginLeft: 20, color: '#5575A7',}}>{locale['contacts']}</Text>
                     <View style={[styles.box, styles.centerContent, styles.shadow2, {padding: 10, backgroundColor: theme.blockColor}]}>
                         {data.contacts.split('\n').map(item => {
                             let contact = {}
@@ -75,7 +75,7 @@ export default function EnsembleScreen(props){
                             })
 
                             return(
-                            <Text style={{fontFamily: 'roboto', fontSize: 15, color: '#5575A7', paddingLeft: 5, textDecorationLine: contact.type ? 'underline' : 'none'}} onPress={() => {
+                            <Text style={{fontFamily: 'System', fontSize: 15, color: '#5575A7', paddingLeft: 5, textDecorationLine: contact.type ? 'underline' : 'none'}} onPress={() => {
                                 if (contact.data){
                                     switch(contact.type){
                                         case 'phone':
@@ -99,17 +99,17 @@ export default function EnsembleScreen(props){
                 {data.vk_link &&
                 <Pressable style={[styles.descriptionBox, {flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', paddingLeft: 10, backgroundColor: theme.blockColor}]} onPress={() => Linking.openURL(data.vk_link)}>
                     <Entypo name="vk" size={30} color="rgb(115, 182, 28)" />
-                    <Text style={{fontFamily: 'roboto', fontSize: 20, color: '#5575A7', paddingLeft: 10, textAlign: 'center'}}>{locale.group_vk}</Text>
+                    <Text style={{fontFamily: 'System', fontSize: 20, color: '#5575A7', paddingLeft: 10, textAlign: 'center'}}>{locale.group_vk}</Text>
                 </Pressable>}
                 {data.instagram_link &&
                 <Pressable style={[styles.descriptionBox, {flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', paddingLeft: 10, backgroundColor: theme.blockColor}]} onPress={() => Linking.openURL(data.instagram_link)}>
                     <AntDesign name="instagram" size={30} color={'rgb(115, 182, 28)'} />
-                    <Text style={{fontFamily: 'roboto', fontSize: 20, color: '#5575A7', paddingLeft: 10, textAlign: 'center'}}>Instagram</Text>
+                    <Text style={{fontFamily: 'System', fontSize: 20, color: '#5575A7', paddingLeft: 10, textAlign: 'center'}}>Instagram</Text>
                 </Pressable>}
 
                 <Pressable style={[styles.descriptionBox, {flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', paddingLeft: 10, backgroundColor: theme.blockColor}]} onPress={() => setVisible(!onVisible)}>
                     <Entypo name="circle-with-plus" size={30} color="rgb(115, 182, 28)" />
-                    <Text style={{fontFamily: 'roboto', fontSize: 20, color: '#5575A7', paddingLeft: 10, textAlign: 'center'}}>{locale.join}</Text>
+                    <Text style={{fontFamily: 'System', fontSize: 20, color: '#5575A7', paddingLeft: 10, textAlign: 'center'}}>{locale.join}</Text>
                 </Pressable>
 
                 <View style={{flexDirection: 'column', paddingBottom: 180}}>
@@ -121,7 +121,7 @@ export default function EnsembleScreen(props){
                             </TouchableWithoutFeedback>
                             </View>
 
-                            <Text style={{fontFamily: 'roboto', color: theme.blueColor, fontSize: 24, marginBottom: 10}}>Заявка на вступление</Text>
+                            <Text style={{fontFamily: 'System', color: theme.blueColor, fontSize: 24, marginBottom: 10}}>Заявка на вступление</Text>
 
                             {!isAuthorizated && <TextInput style={[styles.input, {color: theme.labelColor}]} placeholderTextColor={'gray'} onChangeText={text => setFio(text)} placeholder={'ФИО'} defaultValue={user.FIO}/>}
                             <TextInput style={[styles.input, {color: theme.labelColor}]} placeholderTextColor={'gray'} onChangeText={text => setPhone(text)} placeholder={'Телефон'} />
@@ -130,7 +130,7 @@ export default function EnsembleScreen(props){
                             <TextInput style={[styles.input, {color: theme.labelColor}]} placeholderTextColor={'gray'} onChangeText={text => setComment(text)} placeholder={'Комментарий к заявке'} multiline scrollEnabled={true} selectTextOnFocus={true}/>
 
                             <Pressable onPress={() => sendMessage()} style={{borderWidth: 1, borderColor: theme.blueColor, borderRadius: 4, paddingBottom: 3, paddingTop: 3, paddingLeft: 5, paddingRight: 5, marginBottom: 10}}>
-                                <Text style={{fontFamily: 'roboto', color: theme.blueColor, fontSize: 15, textAlign: 'center'}}>ОТПРАВИТЬ</Text>
+                                <Text style={{fontFamily: 'System', color: theme.blueColor, fontSize: 15, textAlign: 'center'}}>ОТПРАВИТЬ</Text>
                             </Pressable>
                         </View>
                     </Modal>
@@ -164,14 +164,14 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         borderColor: '#5575A7',
         marginBottom: 15,
-        fontFamily: 'roboto',
+        fontFamily: 'System',
         fontSize: 18
     },
 
     buttonText: {
         width: w * 0.8,
         color: '#5575A7', 
-        fontFamily: 'roboto', 
+        fontFamily: 'System', 
         fontSize: 20,
         paddingTop: 10,
         paddingBottom: 10, 

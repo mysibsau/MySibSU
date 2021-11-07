@@ -28,14 +28,14 @@ export default function Vacancy(props){
             <Header title={locale['vacancies']} onPress={() => props.navigation.goBack()} />
             <View style={{flex: 1, backgroundColor: theme.primaryBackground}}>
                 <ScrollView contentContainerStyle={{paddingBottom: 120}}>
-                <Text style={{ fontFamily: 'roboto', fontSize: 18, color: 'gray', padding: w * 0.05}}>{data[1][1]}</Text>
+                <Text style={{ fontFamily: 'System', fontSize: 18, color: 'gray', padding: w * 0.05}}>{data[1][1]}</Text>
                 {data.slice(2, data.length).map(item => {
                     if(item[1])
                         return(
                             <View style={{ marginBottom: 15, alignSelf: 'center'}}>
-                                <Text style={{ fontFamily: 'roboto', fontSize: 17, color: '#006AB3', marginBottom: 5}}>{params[item[0]]}</Text>
+                                <Text style={{ fontFamily: 'System', fontSize: 17, color: '#006AB3', marginBottom: 5}}>{params[item[0]]}</Text>
                                 <View style={{ padding: 10, width: w * 0.9, backgroundColor: theme.blockColor, borderRadius: 15, elevation: 5}}>
-                                    <Text style={{fontFamily: 'roboto', fontSize: 14, color: theme.labelColor}}>{item[1]}</Text>
+                                    <Text style={{fontFamily: 'System', fontSize: 14, color: theme.labelColor}}>{item[1]}</Text>
                                 </View>
                             </View>
                         )

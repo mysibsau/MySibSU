@@ -27,7 +27,7 @@ const MultipleAnswer = ({responses, onChange}) => {
                             <View style={{ width: 20, height: 20, borderRadius: 5, borderWidth: 1, borderColor: theme.labelColor, alignItems: 'center', justifyContent: 'center'}}>
                                 {checkedIDs.includes(item.id) ? <View style={{width: 10, height: 10, borderRadius: 2, backgroundColor: theme.labelColor}}></View> : null}
                             </View>
-                            <Text style={{ fontFamily: 'roboto', fontSize: 15, color: theme.labelColor, marginLeft: 10}}>{item.text}</Text>
+                            <Text style={{ fontFamily: 'System', fontSize: 15, color: theme.labelColor, marginLeft: 10}}>{item.text}</Text>
                         </View>
                     </TouchableOpacity>)
             })}

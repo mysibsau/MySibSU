@@ -65,12 +65,12 @@ export default function AuthScreen(props) {
                     <View style={{ width: w * 0.8, borderRadius: 15, elevation: 6, backgroundColor: theme.blockColor, alignSelf: 'center', marginTop: 40 }}>
                         <View style={{ flexDirection: 'row', }}>
                             <Ionicons name='md-person' size={26} color={'gray'} style={{ marginTop: 'auto', marginBottom: 'auto', alignSelf: 'center', marginLeft: 10, marginRight: 10 }} />
-                            <TextInput value={login} onChangeText={value => setUsername(value)} placeholderTextColor={'gray'} placeholder={locale['login']} numberOfLines={1} style={{ width: w * 0.7, fontFamily: 'roboto', color: theme.labelColor }} />
+                            <TextInput value={login} onChangeText={value => setUsername(value)} placeholderTextColor={'gray'} placeholder={locale['login']} numberOfLines={1} style={{ width: w * 0.7, fontFamily: 'System', color: theme.labelColor }} />
                         </View>
                         <View style={{ alignSelf: 'center', width: w * 0.7, height: 1, backgroundColor: 'gray', opacity: 0.5 }} />
                         <View style={{ flexDirection: 'row' }}>
                             <MaterialCommunityIcons name="key" size={26} color={'gray'} style={{ marginTop: 'auto', marginBottom: 'auto', alignSelf: 'center', marginLeft: 10, marginRight: 10 }} />
-                            <TextInput onSubmitEditing={() => toAuth()} value={password} onChangeText={value => setPassword(value)} placeholderTextColor={'gray'} placeholder={locale['password']} numberOfLines={1} secureTextEntry={true} style={{ width: w * 0.7, fontFamily: 'roboto', color: theme.labelColor }} />
+                            <TextInput onSubmitEditing={() => toAuth()} value={password} onChangeText={value => setPassword(value)} placeholderTextColor={'gray'} placeholder={locale['password']} numberOfLines={1} secureTextEntry={true} style={{ width: w * 0.7, fontFamily: 'System', color: theme.labelColor }} />
                         </View>
                     </View>
                     <View style={{ flexDirection: 'row', marginLeft: w * 0.1, marginTop: 10, overflow: 'visible' }}>
@@ -85,7 +85,7 @@ export default function AuthScreen(props) {
                         </View>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => checkAgreement() && signIn()}>
-                        <Text style={{ alignSelf: 'center', fontFamily: 'roboto', marginTop: 20, color: 'gray' }}>{locale['sign_in_as_guest']}</Text>
+                        <Text style={{ alignSelf: 'center', fontFamily: 'System', marginTop: 20, color: 'gray' }}>{locale['sign_in_as_guest']}</Text>
                     </TouchableOpacity>
                 </View>
                 {fetching && <ActivityIndicator color={'#006AB3'} size={'large'} />}
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
 
     okay_button_text: {
         color: 'white',
-        fontFamily: 'roboto',
+        fontFamily: 'System',
         alignSelf: 'center',
         height: 40,
         textAlignVertical: 'center',

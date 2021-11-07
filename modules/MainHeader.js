@@ -3,13 +3,15 @@ import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native'
 import { h, w } from './constants'
 import { useTheme } from '../services/themes/ThemeManager'
 import { useLocale } from '../services/locale/LocaleManager'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 const MainHeader = ({title, onPress}) => {
     const {mode, theme, toggle} = useTheme() 
-    const {localeMode, locale, toggleLang} = useLocale()
+    const insets = useSafeAreaInsets();
+
     return(
-        <View style={[styles.box, styles.shadow2, {backgroundColor: theme.blockColor}]}>
-            <Image source={require('../assets/header_logo.png')} style={{ width: 25, height: 25, marginBottom: 3, marginRight: 10, marginLeft: 10}} />
+        <View style={[styles.box, styles.shadow2, {backgroundColor: theme.blockColor, paddingTop: insets.top}]}>
+            <Image source={require('../assets/header_logo.png')} style={{ width: 25, height: 25,}} />
             <Text allowFontScaling={false} style={[styles.maintext, {color: theme.headerTitle}]}>{title}</Text>
         </View>
     )
@@ -27,26 +29,22 @@ function elevationShadowStyle(elevation) {
 
 const styles = StyleSheet.create({
     maintext: {
-        height: w / 8,
-        width: w * 0.75,
         fontSize: 25,
         color: 'grey',
         textAlignVertical: 'center',
-        fontFamily: 'roboto',
+        fontFamily: 'System',
         textAlign: 'left',
+        paddingLeft: 10,
     },
 
       shadow2: elevationShadowStyle(5),
       box: {
           backgroundColor: 'white',
-          height: w/8,
           width: w,
-          paddingLeft: 10,
+          padding: 10,
           elevation: 10,
-          position: 'relative',
           flexDirection: 'row',
           alignItems: 'center',
-          zIndex: 4,
         },
 })
 

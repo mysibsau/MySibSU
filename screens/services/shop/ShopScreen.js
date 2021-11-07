@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     text: {
         marginTop: 30,
         fontSize: 20,
-        fontFamily: 'roboto',
+        fontFamily: 'System',
         color: '#006AB3'
     },
 

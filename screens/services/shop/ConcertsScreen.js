@@ -32,9 +32,9 @@ export default function ConcertsScreen(props){
                     data={concerts}
                     renderItem={({ item }) => 
                         <TouchableOpacity onPress={() => props.navigation.navigate('CurrentConcert', {id: item.id})} style={{width: w * 0.9, borderRadius: 15, padding: 10, backgroundColor: theme.blockColor, elevation: 5, alignSelf: 'center', marginTop: 10}}>
-                            <Text style={{fontFamily: 'roboto', fontSize: 17, color: theme.labelColor}}>{locale['date']}: {item.date}</Text>
-                            <Text style={{fontFamily: 'roboto', fontSize: 17, color: theme.labelColor}}>{locale['time']}: {item.time}</Text>
-                            <Text style={{fontFamily: 'roboto', fontSize: 17, color: theme.labelColor}}>{locale['hall']}: {item.hall}</Text>
+                            <Text style={{fontFamily: 'System', fontSize: 17, color: theme.labelColor}}>{locale['date']}: {item.date}</Text>
+                            <Text style={{fontFamily: 'System', fontSize: 17, color: theme.labelColor}}>{locale['time']}: {item.time}</Text>
+                            <Text style={{fontFamily: 'System', fontSize: 17, color: theme.labelColor}}>{locale['hall']}: {item.hall}</Text>
                         </TouchableOpacity>
                     }
                     // keyExtractor={item => item.name}

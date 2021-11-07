@@ -31,13 +31,13 @@ export default function LibrarySearch(props){
         <View style={{flex: 1, backgroundColor: theme.primaryBackground}}>
             {!loaded ? <View style={{flex: 1, justifyContent: 'center', paddingBottom: 100}}><ActivityIndicator size={'large'} color={'#006AB3'}/></View> :
             <>
-            {books.physical.length === 0 ? <Text style={{fontFamily: 'roboto', fontSize: 18, alignSelf: 'center', marginTop: 20, color: theme.labelColor}}>{locale['empty']}</Text> : null}
+            {books.physical.length === 0 ? <Text style={{fontFamily: 'System', fontSize: 18, alignSelf: 'center', marginTop: 20, color: theme.labelColor}}>{locale['empty']}</Text> : null}
             <FlatList 
                 data={books.physical}
                 renderItem={({ item }) => 
                     <View style={{width: w * 0.9, backgroundColor: theme.blockColor, borderRadius: 15, elevation: 5, marginTop: 10, alignSelf: 'center', padding: 10}}>
-                        <Text style={{color: theme.labelColor, fontFamily: 'roboto', fontSize: 16}}>{item.name}</Text>
-                        <Text style={{color: 'gray', fontFamily: 'roboto', fontSize: 16}}>{item.author}</Text>
+                        <Text style={{color: theme.labelColor, fontFamily: 'System', fontSize: 16}}>{item.name}</Text>
+                        <Text style={{color: 'gray', fontFamily: 'System', fontSize: 16}}>{item.author}</Text>
                         <Text style={{ alignSelf: 'flex-end', color: 'gray', marginTop: 5}}>{item.place} ({item.count} шт.)</Text>
                         
                     </View>
@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         paddingLeft: 10,
         fontSize: 15,
-        fontFamily: 'roboto',
+        fontFamily: 'System',
         textAlignVertical: 'center',
         elevation: 4,
         marginRight: w * 0.01

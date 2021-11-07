@@ -31,7 +31,7 @@ export default function EventsScreen(){
             </View> :
             <>
             {eventList.length === 0 &&
-                <Text style={{fontFamily: 'roboto', fontSize: 18, alignSelf: 'center', marginTop: 20, color: theme.labelColor}}>{locale['empty']}</Text>}
+                <Text style={{fontFamily: 'System', fontSize: 18, alignSelf: 'center', marginTop: 20, color: theme.labelColor}}>{locale['empty']}</Text>}
             <FlatList 
                 data={eventList}
                 renderItem={({ item }) => <FeedModule data={item} type={'events'}/>}

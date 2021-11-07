@@ -27,7 +27,7 @@ const Subject = ({data, timetableMode}) =>{
                             <View style={styles.line}></View>
                             {
                                 (item.num !== 0) ? <Text style={{fontSize: 14,
-                                    fontFamily: 'roboto',
+                                    fontFamily: 'System',
                                     color: 'rgb(154,158,159)',
                                     marginBottom: -5, marginRight: 10}}>{subgroups[Number(item.num)]}</Text> : <View></View>
                             }
@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
     },
 
     time: {
-        fontFamily: 'roboto',
+        fontFamily: 'System',
         fontSize: 18,
         alignSelf: 'center'
     },
@@ -86,18 +86,18 @@ const styles = StyleSheet.create({
     subject: {
         marginTop: 4,
         fontSize: 16,
-        fontFamily: 'roboto',
+        fontFamily: 'System',
         fontWeight: 'bold'
     },
 
     type: {
         fontSize: 18,
-        fontFamily: 'roboto',
+        fontFamily: 'System',
     },
 
     professor: {
         fontSize: 16,
-        fontFamily: 'roboto',
+        fontFamily: 'System',
         color: 'rgb(154,158,159)',
         marginBottom: -5
     },
@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
     place: {
         fontSize: 16,
         color: 'gray',
-        fontFamily: 'roboto',
+        fontFamily: 'System',
         width: w * 0.82,
         textAlign: 'right',
         marginBottom: 3

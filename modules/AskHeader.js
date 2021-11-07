@@ -5,12 +5,14 @@ import { Ionicons } from '@expo/vector-icons';
 import { useTheme } from '../services/themes/ThemeManager'
 import { useUser } from '../services/auth/AuthManager';
 import AsyncStorage from '@react-native-community/async-storage';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const AskHeader = ({title, onPress, onQuestion}) => {
     const {isAuthorizated} = useUser();
     const {theme} = useTheme()
+    const insets = useSafeAreaInsets();
     return(
-        <View style={[styles.box,{backgroundColor: theme.blockColor}]}>
+        <View style={[styles.box,{backgroundColor: theme.blockColor, paddingTop: insets.top}]}>
             <View style={{flexDirection: 'row'}}>
             <TouchableOpacity onPress={onPress}>
                 <View style={{ height: w / 8 , justifyContent: 'center'}}>
@@ -36,7 +38,7 @@ const styles = StyleSheet.create({
         color: 'gray',
         textAlignVertical: 'center',
         marginLeft: 10,
-        fontFamily: 'roboto',
+        fontFamily: 'System',
       },
 
     box: {

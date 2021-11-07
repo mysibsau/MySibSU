@@ -13,7 +13,7 @@ const HelloModule = ({color, name, image, what, how}) => {
     return(
         <View style={{height: h, backgroundColor: color}}>
             <View style={{height: h * 0.25, width: w}}>
-                <Text style={{ color: 'white', fontFamily: 'roboto', padding: w * 0.05, fontSize: 40, fontWeight: 'bold'}}>{name}</Text>
+                <Text style={{ color: 'white', fontFamily: 'System', padding: w * 0.05, fontSize: 40, fontWeight: 'bold'}}>{name}</Text>
                 {image}
             </View>
             
@@ -21,15 +21,15 @@ const HelloModule = ({color, name, image, what, how}) => {
                 <View style={{flexDirection: 'row'}}>
                     <FontAwesome name="magic" size={35} color={color} style={{ width: w * 0.1 }} />
                     <View style={{ width: w * 0.7}}>
-                        <Text style={{ color: theme.labelColor, fontFamily: 'roboto', fontSize: 20, fontWeight: 'bold', paddingLeft: 10}}>{locale['what_it']}</Text>
-                        <Text style={{ color: theme.labelColor, fontFamily: 'roboto', fontSize: 16, paddingLeft: 10}}>{what}</Text>
+                        <Text style={{ color: theme.labelColor, fontFamily: 'System', fontSize: 20, fontWeight: 'bold', paddingLeft: 10}}>{locale['what_it']}</Text>
+                        <Text style={{ color: theme.labelColor, fontFamily: 'System', fontSize: 16, paddingLeft: 10}}>{what}</Text>
                     </View>
                 </View>
                 <View style={{flexDirection: 'row', marginTop: 10}}>
                     <FontAwesome name="question" size={35} color={color} style={{ width: w * 0.1 }} />
                     <View style={{ width: w * 0.7}}>
-                        <Text style={{ color: theme.labelColor, fontFamily: 'roboto', fontSize: 20, fontWeight: 'bold', paddingLeft: 10}}>{locale['how_it_work']}</Text>
-                        <Text style={{ color: theme.labelColor, fontFamily: 'roboto', fontSize: 16, paddingLeft: 10}}>{how}</Text>
+                        <Text style={{ color: theme.labelColor, fontFamily: 'System', fontSize: 20, fontWeight: 'bold', paddingLeft: 10}}>{locale['how_it_work']}</Text>
+                        <Text style={{ color: theme.labelColor, fontFamily: 'System', fontSize: 16, paddingLeft: 10}}>{how}</Text>
                     </View>
                 </View>
             </View>            

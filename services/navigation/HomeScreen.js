@@ -1,6 +1,6 @@
 // LIBS
 import React, { useState, useEffect } from 'react'
-import { Text, StyleSheet, View, Dimensions, TouchableOpacity } from 'react-native'
+import { Text, StyleSheet, View, Dimensions, TouchableOpacity, SafeAreaView } from 'react-native'
 import AsyncStorage from '@react-native-community/async-storage'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
@@ -26,44 +26,44 @@ import SearchScreen from '../../screens/Timetable/SearchScreen'
 import TimetableScreen from '../../screens/Timetable/TimetableScreen'
 
 // Services 
-// import ServiceListScreen from '../../screens/Services/ServiceListScreen'
-// // Institutes
-// import InstitutesScreen from '../../screens/Services/Institutes/InstitutesScreen'
-// import IITK from '../../screens/Services/Institutes/Institute'
-// // Student Life
-// import ActiveScreen from '../../screens/Services/StudentLife/ActiveScreen'
-// import SportScreen from '../../screens/Services/StudentLife/SportScreen'
-// import DesignScreen from '../../screens/Services/StudentLife/DesignScreen'
-// import ArtScreen from '../../screens/Services/StudentLife/ArtScreen'
-// import Ermak from '../../screens/Services/StudentLife/Unit'
-// import EnsembleScreen from '../../screens/Services/StudentLife/EnsembleScreen'
-// //Map
-// import MapScreen from '../../screens/Services/MapScreen'
-// // Online Catalog (tickets)
-// import ShopScreen from '../../screens/Services/Shop/ShopScreen'
-// import ProductScreen from '../../screens/Services/Shop/ProductScreen'
-// import ConcertsScreen from '../../screens/Services/Shop/ConcertsScreen'
-// import ConcertScreen from '../../screens/Services/Shop/ConcertScreen'
-// // Vacancies
-// import VacanciesScreen from '../../screens/Services/Vacancies/VacanciesScreen'
-// import Vacancy from '../../screens/Services/Vacancies/Vacancy'
-// // Feedback
-// import TopicsScreen from '../../screens/Services/Surveys/TopicsScreen'
-// import PollScreen from '../../screens/Services/Surveys/PollScreen'
-// // FAQ
-// import FAQScreen from '../../screens/Services/FAQScreen'
-// // Library
-// import LibrarySearchScreen from '../../screens/Services/Library/LibrarySearchScreen'
-// import DigitalScreen from '../../screens/Services/Library/DigitalScreen'
-// import PhysicalScreen from '../../screens/Services/Library/PhysicalScreen'
+import ServiceListScreen from '../../screens/Services/ServiceListScreen'
+// Institutes
+import InstitutesScreen from '../../screens/Services/Institutes/InstitutesScreen'
+import IITK from '../../screens/Services/Institutes/Institute'
+// Student Life
+import ActiveScreen from '../../screens/Services/StudentLife/ActiveScreen'
+import SportScreen from '../../screens/Services/StudentLife/SportScreen'
+import DesignScreen from '../../screens/Services/StudentLife/DesignScreen'
+import ArtScreen from '../../screens/Services/StudentLife/ArtScreen'
+import Ermak from '../../screens/Services/StudentLife/Unit'
+import EnsembleScreen from '../../screens/Services/StudentLife/EnsembleScreen'
+//Map
+import MapScreen from '../../screens/Services/MapScreen'
+// Online Catalog (tickets)
+import ShopScreen from '../../screens/Services/Shop/ShopScreen'
+import ProductScreen from '../../screens/Services/Shop/ProductScreen'
+import ConcertsScreen from '../../screens/Services/Shop/ConcertsScreen'
+import ConcertScreen from '../../screens/Services/Shop/ConcertScreen'
+// Vacancies
+import VacanciesScreen from '../../screens/Services/Vacancies/VacanciesScreen'
+import Vacancy from '../../screens/Services/Vacancies/Vacancy'
+// Feedback
+import TopicsScreen from '../../screens/Services/Surveys/TopicsScreen'
+import PollScreen from '../../screens/Services/Surveys/PollScreen'
+// FAQ
+import FAQScreen from '../../screens/Services/FAQScreen'
+// Library
+import LibrarySearchScreen from '../../screens/Services/Library/LibrarySearchScreen'
+import DigitalScreen from '../../screens/Services/Library/DigitalScreen'
+import PhysicalScreen from '../../screens/Services/Library/PhysicalScreen'
 
 // // Person
 import PersonScreen from '../../screens/Profile/AuthScreen'
-// import ProfileScreen from '../../screens/Profile/ProfileScreen'
-// import SettingsScreen from '../../screens/Profile/SettingsScreen'
-// import AttestationScreen from '../../screens/Profile/AttestationScreen'
-// import MarksScreen from '../../screens/Profile/MarksScreen'
-// import QuestionsScreen from '../../screens/Profile/QuestionsScreen'
+import ProfileScreen from '../../screens/Profile/ProfileScreen'
+import SettingsScreen from '../../screens/Profile/SettingsScreen'
+import AttestationScreen from '../../screens/Profile/AttestationScreen'
+import MarksScreen from '../../screens/Profile/MarksScreen'
+import QuestionsScreen from '../../screens/Profile/QuestionsScreen'
 
 // MODULES
 import { useTheme } from '../themes/ThemeManager'
@@ -74,118 +74,121 @@ import { MaterialIcons } from '@expo/vector-icons'
 import { AntDesign } from '@expo/vector-icons'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { Ionicons } from '@expo/vector-icons'
-// import ActiveNavScreen from '../../screens/Services/StudentLife/ActiveNavScreen'
+import ActiveNavScreen from '../../screens/Services/StudentLife/ActiveNavScreen'
 import { useUser } from '../auth/AuthManager'
 import AnotherSettingsScreen from '../../screens/Profile/AnotherSettingsScreen'
-// import TechScreen from '../../screens/Services/StudentLife/TechScreen'
-// import TechUnionScreen from '../../screens/Services/StudentLife/TechUnionScreen'
+import TechScreen from '../../screens/Services/StudentLife/TechScreen'
+import TechUnionScreen from '../../screens/Services/StudentLife/TechUnionScreen'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
-// function LibraryTabBar({ state, descriptors, navigation, position }) {
-//   const {mode, theme, toggle} = useTheme()
-//   const inputRange = state.routes.map((_, i) => i);
-//   const translateX = Animated.interpolate(position, {
-//     inputRange,
-//     outputRange: inputRange.map(i => i * Dimensions.get('window').width / 4)
-//   })
+function LibraryTabBar({ state, descriptors, navigation, position }) {
+  const {mode, theme, toggle} = useTheme()
+  const insets = useSafeAreaInsets();
+  const inputRange = state.routes.map((_, i) => i);
+  const translateX = Animated.interpolate(position, {
+    inputRange,
+    outputRange: inputRange.map(i => i * Dimensions.get('window').width / 4)
+  })
 
-//   return (
-//     <View style={{ flexDirection: 'row', backgroundColor: theme.blockColor, elevation: 6}}>
-//       <TouchableOpacity onPress={() => navigation.navigate('LibrarySearch')}>
-//         <View style={{ height: Dimensions.get('window').width / 8, width: Dimensions.get('window').width / 4 , justifyContent: 'center'}}>
-//           <Ionicons name="ios-arrow-back" size={30} color="black" style={{ color: '#006AB3', paddingRight: 10, paddingLeft: 15}}/>
-//         </View>
-//       </TouchableOpacity>
-//       <Animated.View
-//         style={[
-//             style.slider,
-//             {
-//                 left: Dimensions.get('window').width / 4,
-//                 transform: [{translateX}],
-//                 width: Dimensions.get('window').width / 4,
-//                 height: 2,
-//                 backgroundColor: theme.blueColor
-//             },
-//         ]}
-//           />
-//       {state.routes.map((route, index) => {
-//         const { options } = descriptors[route.key];
-//         const label = options.title
+  return (
+    <View style={{ flexDirection: 'row', backgroundColor: theme.blockColor, elevation: 6, paddingTop: insets.top}}>
+      <TouchableOpacity onPress={() => navigation.navigate('LibrarySearch')}>
+        <View style={{ height: Dimensions.get('window').width / 8, width: Dimensions.get('window').width / 4 , justifyContent: 'center'}}>
+          <Ionicons name="ios-arrow-back" size={30} color="black" style={{ color: '#006AB3', paddingRight: 10, paddingLeft: 15}}/>
+        </View>
+      </TouchableOpacity>
+      <Animated.View
+        style={[
+            style.slider,
+            {
+                left: Dimensions.get('window').width / 4,
+                transform: [{translateX}],
+                width: Dimensions.get('window').width / 4,
+                height: 2,
+                backgroundColor: theme.blueColor
+            },
+        ]}
+          />
+      {state.routes.map((route, index) => {
+        const { options } = descriptors[route.key];
+        const label = options.title
 
-//         const isFocused = state.index === index;
+        const isFocused = state.index === index;
 
-//         const onPress = () => {
-//           const event = navigation.emit({
-//             type: 'tabPress',
-//             target: route.key,
-//             canPreventDefault: true,
-//           });
+        const onPress = () => {
+          const event = navigation.emit({
+            type: 'tabPress',
+            target: route.key,
+            canPreventDefault: true,
+          });
 
-//           if (!isFocused && !event.defaultPrevented) {
-//             navigation.navigate(route.name);
-//           }
-//         };
+          if (!isFocused && !event.defaultPrevented) {
+            navigation.navigate(route.name);
+          }
+        };
 
-//         const onLongPress = () => {
-//           navigation.emit({
-//             type: 'tabLongPress',
-//             target: route.key,
-//           });
-//         };
+        const onLongPress = () => {
+          navigation.emit({
+            type: 'tabLongPress',
+            target: route.key,
+          });
+        };
 
-//         const inputRange = state.routes.map((_, i) => i);
-//         const opacity = Animated.interpolate(position, {
-//           inputRange,
-//           outputRange: inputRange.map(i => (i === index ? 1 : 0.5)),
-//         });
+        const inputRange = state.routes.map((_, i) => i);
+        const opacity = Animated.interpolate(position, {
+          inputRange,
+          outputRange: inputRange.map(i => (i === index ? 1 : 0.5)),
+        });
 
-//         return (
-//           <TouchableOpacity
-//             accessibilityRole="button"
-//             accessibilityState={isFocused ? { selected: true } : {}}
-//             accessibilityLabel={options.tabBarAccessibilityLabel}
-//             testID={options.tabBarTestID}
-//             onPress={onPress}
-//             onLongPress={onLongPress}
-//             style={{ width: Dimensions.get('window').width / 4, alignItems: 'center', justifyContent: 'center' }}
-//           >
-//             <Animated.Text style={{ textTransform: 'uppercase', fontFamily: 'roboto', color: theme.labelColor, fontSize: 13, opacity }}>
-//               {label}
-//             </Animated.Text>
-//           </TouchableOpacity>
-//         );
-//       })}
-//     </View>
-//   );
-// }
+        return (
+          <TouchableOpacity
+            accessibilityRole="button"
+            accessibilityState={isFocused ? { selected: true } : {}}
+            accessibilityLabel={options.tabBarAccessibilityLabel}
+            testID={options.tabBarTestID}
+            onPress={onPress}
+            onLongPress={onLongPress}
+            style={{ width: Dimensions.get('window').width / 4, alignItems: 'center', justifyContent: 'center' }}
+          >
+            <Animated.Text style={{ textTransform: 'uppercase', fontFamily: 'System', color: theme.labelColor, fontSize: 13, opacity }}>
+              {label}
+            </Animated.Text>
+          </TouchableOpacity>
+        );
+      })}
+    </View>
+  );
+}
 
-// const LibraryTab = createMaterialTopTabNavigator();
+const LibraryTab = createMaterialTopTabNavigator();
 
-// function LibraryTabs({route}){
-//   const {localeMode, locale, toggleLang} = useLocale()
-//   const {mode, theme, toggle} = useTheme()
-//   return (
-//     <LibraryTab.Navigator 
-//       tabBar={props => <LibraryTabBar {...props} />} 
-//       tabBarOptions={{
-//         activeTintColor: theme.labelColor,
-//         allowFontScaling: false,
-//       }}
-//     >
-//       <LibraryTab.Screen options={ ({route}) => ({ title: locale['digital'], data: route.params })} name="Digital" component={DigitalScreen} />
-//       <LibraryTab.Screen options={ ({route}) => ({ title: locale['printed'], data: route.params })} name="Physical" component={PhysicalScreen} />
-//     </LibraryTab.Navigator>
-//   );
-// }
+function LibraryTabs({route}){
+  const {localeMode, locale, toggleLang} = useLocale()
+  const {mode, theme, toggle} = useTheme()
+  return (
+    <LibraryTab.Navigator 
+      tabBar={props => <LibraryTabBar {...props} />} 
+      tabBarOptions={{
+        activeTintColor: theme.labelColor,
+        allowFontScaling: false,
+      }}
+    >
+      <LibraryTab.Screen options={ ({route}) => ({ title: locale['digital'], data: route.params })} name="Digital" component={DigitalScreen} />
+      <LibraryTab.Screen options={ ({route}) => ({ title: locale['printed'], data: route.params })} name="Physical" component={PhysicalScreen} />
+    </LibraryTab.Navigator>
+  );
+}
 
 const FeedTab = createMaterialTopTabNavigator();
 
 function FeedTabs() {
   const { localeMode, locale, toggleLang } = useLocale()
+  const insets = useSafeAreaInsets();
   const { mode, theme, toggle } = useTheme()
   return (
     <FeedTab.Navigator tabBarOptions={{
       labelStyle: {
-        fontFamily: 'roboto',
+        fontFamily: 'System',
         fontSize: 13,
       },
       tabStyle: {
@@ -195,6 +198,7 @@ function FeedTabs() {
       style: {
         backgroundColor: theme.blockColor,
         paddingLeft: Dimensions.get('window').width / 4,
+        paddingTop: insets.top,
         elevation: 6
       },
       indicatorStyle: {
@@ -210,23 +214,23 @@ function FeedTabs() {
   );
 }
 
-// const StudentLifeStack = createStackNavigator();
+const StudentLifeStack = createStackNavigator();
 
-// function StudentLifeNavigator(){
-//   return(
-//     <StudentLifeStack.Navigator screenOptions={{headerShown: false}}>
-//       <StudentLifeStack.Screen options={{headerShown: false}} name="Navigator" component={ActiveNavScreen} />
-//       <StudentLifeStack.Screen options={{headerShown: false}} name="Active" component={ActiveScreen} />
-//       <StudentLifeStack.Screen options={{headerShown: false}} name="Sport" component={SportScreen} />
-//       <StudentLifeStack.Screen options={{headerShown: false}} name="Science" component={DesignScreen} />
-//       <StudentLifeStack.Screen options={{headerShown: false}} name="Art" component={ArtScreen} />
-//       <StudentLifeStack.Screen options={{headerShown: false}} name='Ermak' component={Ermak} />
-//       <StudentLifeStack.Screen options={{headerShown: false}} name="Ensemble" component={EnsembleScreen} />
-//       <StudentLifeStack.Screen options={{headerShown: false}} name="Tech" component={TechScreen} />
-//       <StudentLifeStack.Screen options={{headerShown: false}} name="TechUnion" component={TechUnionScreen} />
-//     </StudentLifeStack.Navigator>
-//   )
-// }
+function StudentLifeNavigator(){
+  return(
+    <StudentLifeStack.Navigator screenOptions={{headerShown: false}}>
+      <StudentLifeStack.Screen  name="Navigator" component={ActiveNavScreen} />
+      <StudentLifeStack.Screen  name="Active" component={ActiveScreen} />
+      <StudentLifeStack.Screen  name="Sport" component={SportScreen} />
+      <StudentLifeStack.Screen  name="Science" component={DesignScreen} />
+      <StudentLifeStack.Screen  name="Art" component={ArtScreen} />
+      <StudentLifeStack.Screen  name='Ermak' component={Ermak} />
+      <StudentLifeStack.Screen  name="Ensemble" component={EnsembleScreen} />
+      <StudentLifeStack.Screen  name="Tech" component={TechScreen} />
+      <StudentLifeStack.Screen  name="TechUnion" component={TechUnionScreen} />
+    </StudentLifeStack.Navigator>
+  )
+}
 
 const Tabs = createBottomTabNavigator();
 
@@ -410,9 +414,9 @@ function PersonStackScreen() {
 
   return (
     <PersonStack.Navigator headerMode={'none'}>
-      <PersonStack.Screen name='Person' component={PersonScreen} />
-      <PersonStack.Screen name='AnotherSettings' component={AnotherSettingsScreen} />
-      {/* {isAuthorizated ? 
+      {/* <PersonStack.Screen name='Person' component={PersonScreen} />
+      <PersonStack.Screen name='AnotherSettings' component={AnotherSettingsScreen} /> */}
+      {isAuthorizated ? 
         <>
           <PersonStack.Screen name='Profile' component={ProfileScreen} />
           <PersonStack.Screen name='Settings' component={SettingsScreen} />
@@ -421,11 +425,11 @@ function PersonStackScreen() {
           <PersonStack.Screen name="Questions" component={QuestionsScreen} />
           <PersonStack.Screen name='FAQ' component={FAQScreen} />
           <PersonStack.Screen name='Poll' component={PollScreen} />
-        {/* </> :
-        // <>
+         </> :
+        <>
           <PersonStack.Screen name='Person' component={PersonScreen} />
           <PersonStack.Screen name='AnotherSettings' component={AnotherSettingsScreen} />  
-        {/* </>} */}
+        </>}
     </PersonStack.Navigator>
   )
 }
@@ -435,7 +439,7 @@ const ServiceStack = createStackNavigator();
 function ServiceStackScreen() {
   return (
     <ServiceStack.Navigator initialRouteName='Service' headerMode='none'>
-      {/* <ServiceStack.Screen name="Service" component={ServiceListScreen} />
+      <ServiceStack.Screen name="Service" component={ServiceListScreen} />
       <ServiceStack.Screen name="StudentLife" component={StudentLifeNavigator} />
       <ServiceStack.Screen name="Institutes" component={InstitutesScreen} />
       <ServiceStack.Screen name="IITK" component={IITK} />
@@ -448,7 +452,7 @@ function ServiceStackScreen() {
       <ServiceStack.Screen name='Vacancy' component={Vacancy} />
       <ServiceStack.Screen name='Topics' component={TopicsScreen} />
       <ServiceStack.Screen name='LibrarySearch' component={LibrarySearchScreen} />
-      <ServiceStack.Screen name='LibraryResult' component={LibraryTabs} /> */}
+      <ServiceStack.Screen name='LibraryResult' component={LibraryTabs} />
     </ServiceStack.Navigator>
   )
 }
@@ -474,17 +478,18 @@ const BottomMenuItem = ({ iconName, label, isCurrent }) => {
       }}
     >
       {icons[iconName]}
-      <Text style={{ fontFamily: 'roboto', fontSize: 10, color: color }}>{label}</Text>
+      <Text style={{ fontFamily: 'System', fontSize: 10, color: color }}>{label}</Text>
     </View>
   );
 };
 
 
 const MainTabBar = ({ state, descriptors, navigation }) => {
+  const insets = useSafeAreaInsets();
   const { mode, theme, toggle } = useTheme()
   const totalWidth = Dimensions.get("window").width;
   return (
-    <View style={[style.tabContainer, { width: totalWidth, backgroundColor: theme.blockColor }]}>
+    <View style={[style.tabContainer, { width: totalWidth, backgroundColor: theme.blockColor, paddingBottom: insets.bottom }]}>
       <View style={{ flexDirection: "row" }}>
         {state.routes.map((route, index) => {
           const { options } = descriptors[route.key];

@@ -26,15 +26,15 @@ const Information = ({ number, data }) => {
                 <View style={[styles.profile, styles.centerContent, styles.shadow1]}>
                     <Image source={{uri: url + data.image}} style={{width: w*0.4, height: w*0.4, borderRadius: w*0.4, borderWidth: 2, borderColor: 'gray'}} />
                 </View>
-                <Text style={{ fontFamily: 'roboto', fontSize: 22, marginTop: w * 0.2 + 20, marginLeft: 20, color: theme.blueColor,}}>{locale['director']}</Text>
+                <Text style={{ fontFamily: 'System', fontSize: 22, marginTop: w * 0.2 + 20, marginLeft: 20, color: theme.blueColor,}}>{locale['director']}</Text>
                 <View style={[styles.box, styles.centerContent, styles.shadow2, {backgroundColor: theme.blockColor}]}>
-                    <Text style={{fontFamily: 'roboto', fontSize: 20, color: theme.blueColor}}>{data.name}</Text>
+                    <Text style={{fontFamily: 'System', fontSize: 20, color: theme.blueColor}}>{data.name}</Text>
                 </View>
                 <View style={[styles.box, styles.centerContent, styles.shadow2, {flexDirection: 'row', backgroundColor: theme.blockColor}]}>
                     <View style={{ width: w * 0.1, justifyContent: 'center', alignItems: 'center'}}>
                         <MaterialCommunityIcons name="map-marker" size={24} color="rgb(115, 182, 28)" />
                     </View>
-                    <Text style={{ width: w * 0.8, color: theme.blueColor, fontFamily: 'roboto', fontSize: 15, justifyContent:'center'}}>{data.address}</Text>
+                    <Text style={{ width: w * 0.8, color: theme.blueColor, fontFamily: 'System', fontSize: 15, justifyContent:'center'}}>{data.address}</Text>
                 </View>
                 <View style={{flexDirection: 'column', paddingBottom: 180}}>
                     <TouchableWithoutFeedback onPress={() => Linking.openURL(`tel:${data.phone}`)}>
@@ -61,7 +61,7 @@ const Information = ({ number, data }) => {
     else if(number == 2){
         return(
             <View style={{ minHeight: h, paddingBottom: 150}}>
-                <Text style={{fontFamily: 'roboto', fontSize: 30, color: theme.blueColor, marginLeft: 20, marginTop: 25, marginBottom: 20}}>{locale['departments']}</Text>
+                <Text style={{fontFamily: 'System', fontSize: 30, color: theme.blueColor, marginLeft: 20, marginTop: 25, marginBottom: 20}}>{locale['departments']}</Text>
                 {data.map( item => {
                     return( 
                         <Cafedra name={item.name} fio={item.fio} address={item.address} phone={item.phone} email={item.mail} key={item.name}/>
@@ -79,15 +79,15 @@ const Information = ({ number, data }) => {
                 <View style={[styles.profile, styles.centerContent, styles.shadow1]}>
                     <Image source={{ uri: url + data.image}} style={{width: w*0.4, height: w*0.4, borderRadius: w*0.4, borderWidth: 2, borderColor: 'gray'}} />
                 </View>
-                <Text style={{ fontFamily: 'roboto', fontSize: 22, marginTop: w * 0.2 + 20, marginLeft: 20, color: theme.blueColor,}}>{locale['chairperson']}</Text>
+                <Text style={{ fontFamily: 'System', fontSize: 22, marginTop: w * 0.2 + 20, marginLeft: 20, color: theme.blueColor,}}>{locale['chairperson']}</Text>
                 <View style={[styles.box, styles.centerContent, styles.shadow2, {backgroundColor: theme.blockColor}]}>
-                    <Text style={{fontFamily: 'roboto', fontSize: 20, color: theme.blueColor}}>{data.fio}</Text>
+                    <Text style={{fontFamily: 'System', fontSize: 20, color: theme.blueColor}}>{data.fio}</Text>
                 </View>
                 <View style={[styles.box, styles.centerContent, styles.shadow2, {flexDirection: 'row', backgroundColor: theme.blockColor}]}>
                     <View style={{ width: w * 0.1, justifyContent: 'center', alignItems: 'center'}}>
                         <MaterialCommunityIcons name="map-marker" size={24} color="rgb(115, 182, 28)" />
                     </View>
-                    <Text style={{ width: w * 0.8, color: theme.blueColor, fontFamily: 'roboto', fontSize: 15, justifyContent:'center'}}>{data.address}</Text>
+                    <Text style={{ width: w * 0.8, color: theme.blueColor, fontFamily: 'System', fontSize: 15, justifyContent:'center'}}>{data.address}</Text>
                 </View>
                 <View style={{flexDirection: 'column', paddingBottom: 180}}>
                     <TouchableWithoutFeedback onPress={() => Linking.openURL(`tel:${data.phone}`)}>
@@ -177,7 +177,7 @@ const styles = StyleSheet.create({
     },
 
     generalText: {
-        fontFamily: 'roboto',
+        fontFamily: 'System',
         fontSize: 30,
         color: '#006AB3', 
         textAlign: 'center',
@@ -208,7 +208,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         color: '#5575A7', 
         fontSize: 15, 
-        fontFamily: 'roboto',
+        fontFamily: 'System',
     },
 
     info: {
@@ -232,7 +232,7 @@ const styles = StyleSheet.create({
 
     buttonText: {
         width: w * 0.8,
-        fontFamily: 'roboto',
+        fontFamily: 'System',
         color: '#006AB3',
         fontSize: 18,
         textAlignVertical: 'center'

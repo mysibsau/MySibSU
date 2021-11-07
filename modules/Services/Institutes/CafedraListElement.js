@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     view: { 
         textAlignVertical: 'center',
         color: '#006AB3', 
-        fontFamily: 'roboto', 
+        fontFamily: 'System', 
         fontSize: 14, 
         flexWrap:'wrap', 
         marginLeft: 10,
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     text: {
         height: 'auto', 
         color: '#006AB3', 
-        fontFamily: 'roboto', 
+        fontFamily: 'System', 
         fontSize: 14, 
         flexWrap:'wrap',
     },

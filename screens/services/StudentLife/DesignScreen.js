@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     text: {
         fontSize: 25,
         color: '#006AB3',
-        fontFamily: 'roboto',
+        fontFamily: 'System',
         marginTop: 10,
         marginLeft: 10,
     },

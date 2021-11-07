@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     },
 
     listText: {
-        fontFamily: 'roboto',
+        fontFamily: 'System',
         fontSize: 15
     }
 })

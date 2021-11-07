@@ -37,7 +37,7 @@ export default function QuestionsScreen(props){
                 {Object.keys(questions).map(topic => {
                     return(
                         <View>
-                            <Text style={{marginLeft: '5%', fontFamily: 'roboto', fontWeight: 'bold', color: theme.headerTitle, marginTop: 20}}>{topic}</Text>
+                            <Text style={{marginLeft: '5%', fontFamily: 'System', fontWeight: 'bold', color: theme.headerTitle, marginTop: 20}}>{topic}</Text>
                             {questions[topic].map(item => {
                                 return(<QuestionModule data={{question: item.question, answer: item.answer}} />)
                             })}

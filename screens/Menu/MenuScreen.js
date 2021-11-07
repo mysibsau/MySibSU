@@ -54,14 +54,14 @@ export default function MenuScreen(props){
             <View>
                 {
                 dayList.length === 0 ?
-                <Text style={{fontFamily: 'roboto', fontSize: 18, alignSelf: 'center', marginTop: 20, color: theme.labelColor}}>{locale['no_menu']}</Text> : 
+                <Text style={{fontFamily: 'System', fontSize: 18, alignSelf: 'center', marginTop: 20, color: theme.labelColor}}>{locale['no_menu']}</Text> : 
                 <FlatList 
                     data={dayList.menu}
                     renderItem={({ item }) => 
                         {console.log(item)
                         return(
                             <View>
-                                <Text style={{fontFamily: 'roboto', marginLeft: w * 0.05, fontSize: 18, color: '#006AB3', marginTop: 20}}>{item.type}</Text>
+                                <Text style={{fontFamily: 'System', marginLeft: w * 0.05, fontSize: 18, color: '#006AB3', marginTop: 20}}>{item.type}</Text>
                                 <MenuElement data={item.diners} />
                             </View>)
                         }

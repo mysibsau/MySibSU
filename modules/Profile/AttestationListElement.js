@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     },
 
     header: {
-        fontFamily: 'roboto', 
+        fontFamily: 'System', 
         fontSize: 15, 
         borderBottomWidth: 1,
     },
@@ -55,12 +55,12 @@ const styles = StyleSheet.create({
     },
 
     number: {
-        fontFamily: 'roboto',
+        fontFamily: 'System',
         color: 'gray',
     },
 
     count: {
-        fontFamily: 'roboto',  
+        fontFamily: 'System',  
         marginTop: 3
     },
 })

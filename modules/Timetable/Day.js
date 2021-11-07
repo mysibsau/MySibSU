@@ -35,10 +35,10 @@ const Day = ({day, date, week, currentWeek, weekDay, timetableMode}) => {
                             shadowOpacity: 0.27,
                             shadowRadius: 4.65,
                             elevation: 10}}>
-                            <Text style={{ fontSize: 18, color: 'white', fontFamily: 'roboto'}}>{locale['today']}</Text></View> : null
+                            <Text style={{ fontSize: 18, color: 'white', fontFamily: 'System'}}>{locale['today']}</Text></View> : null
                         }
                 </View>
-                <Text style={{minHeight: h * 0.05, fontFamily: 'roboto', textAlignVertical: 'center', marginTop: h * 0.015, maxHeight: h * 0.05, fontSize: 16, color: 'gray', position: 'absolute', right: 20}}>{date}</Text>
+                <Text style={{minHeight: h * 0.05, fontFamily: 'System', textAlignVertical: 'center', marginTop: h * 0.015, maxHeight: h * 0.05, fontSize: 16, color: 'gray', position: 'absolute', right: 20}}>{date}</Text>
             </View>
             {
                 day.lessons.length === 0 ?
@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
         textAlign: 'left',
         textAlignVertical: 'center',
         color: '#5575A7', 
-        fontFamily: 'roboto',
+        fontFamily: 'System',
         fontWeight: 'bold',
         fontSize: 20,
         alignSelf: 'center'

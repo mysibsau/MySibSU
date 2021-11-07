@@ -4,14 +4,16 @@ import { h, w } from '../constants'
 import { AntDesign } from '@expo/vector-icons'
 import {useLocale} from '../locale/LocaleManager'
 import {useTheme} from '../themes/ThemeManager'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 const MainHeader = ({title, onPress, week}) => {
     const [index, setIndex] = useState(week)
     const {mode, theme, toggle} = useTheme()
     const {localeMode, locale, toggleLang} = useLocale()
+    const insets = useSafeAreaInsets();
 
     return(
-        <View style={[styles.box, styles.shadow2, {backgroundColor: theme.blockColor}]}>
+        <View style={[styles.box, styles.shadow2, {backgroundColor: theme.blockColor, paddingTop: insets.top}]}>
             <TouchableWithoutFeedback style={{ zIndex: 4}} onPress={onPress}>
                 <AntDesign name="logout" size={20} color={theme.headerTitle} style={{ position: 'absolute', left: 20, transform:[{rotate: '180deg'}] }}/>
             </TouchableWithoutFeedback>
@@ -40,7 +42,7 @@ const styles = StyleSheet.create({
         fontSize: 25,
         color: 'grey',
         textAlignVertical: 'bottom',
-        fontFamily: 'roboto',
+        fontFamily: 'System',
         position: 'absolute',
         left: w * 0.15,
       },
@@ -69,7 +71,7 @@ const styles = StyleSheet.create({
     },
     
     week_text: {
-        fontFamily: 'roboto',
+        fontFamily: 'System',
         fontSize: 17,
         color: 'gray'
     },
