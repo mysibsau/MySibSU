@@ -51,16 +51,16 @@ export default function ArtScreen(props){
 
 
                 <View style={[styles.descriptionBox, {backgroundColor: theme.blockColor}]}>
-                    <Text style={{fontFamily: 'System', fontSize: 20, color: '#5575A7', paddingLeft: 5, textAlign: 'center'}}>{info.name}</Text>
+                    <Text style={{ fontSize: 20, color: '#5575A7', paddingLeft: 5, textAlign: 'center'}}>{info.name}</Text>
                 </View>
                 <View>
-                    <Text style={{ fontFamily: 'System', fontSize: 20, marginTop: info.photo ? w * 0.2 + 20 : 20, marginLeft: 20, color: '#5575A7',}}>{locale['description']}</Text>
+                    <Text style={{  fontSize: 20, marginTop: info.photo ? w * 0.2 + 20 : 20, marginLeft: 20, color: '#5575A7',}}>{locale['description']}</Text>
                     <View style={[styles.descriptionBox, {padding: 10, backgroundColor: theme.blockColor}]}>
-                        <Text style={{fontFamily: 'System', fontSize: 15, color: '#5575A7', paddingLeft: 5}}>{info.about}</Text>
+                        <Text style={{ fontSize: 15, color: '#5575A7', paddingLeft: 5}}>{info.about}</Text>
                     </View>
                 </View>
 
-                <Text style={{ fontFamily: 'System', fontSize: 20, marginTop: info.photo ? w * 0.2 + 20 : 20, marginLeft: 20, color: '#5575A7',}}>{locale['contacts']}</Text>
+                <Text style={{  fontSize: 20, marginTop: info.photo ? w * 0.2 + 20 : 20, marginLeft: 20, color: '#5575A7',}}>{locale['contacts']}</Text>
                 <View style={[styles.descriptionBox, {padding: 10, backgroundColor: theme.blockColor}]}>
                 {info.contacts.split('\n').map(item => {
                             let contact = {}
@@ -72,7 +72,7 @@ export default function ArtScreen(props){
                             })
 
                             return(
-                            <Text style={{fontFamily: 'System', fontSize: 15, color: '#5575A7', paddingLeft: 5, textDecorationLine: contact.type ? 'underline' : 'none'}} onPress={() => {
+                            <Text style={{ fontSize: 15, color: '#5575A7', paddingLeft: 5, textDecorationLine: contact.type ? 'underline' : 'none'}} onPress={() => {
                                 if (contact.data){
                                     switch(contact.type){
                                         case 'phone':
@@ -95,15 +95,15 @@ export default function ArtScreen(props){
                 {info.vk_link &&
                 <Pressable style={[styles.descriptionBox, {flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', paddingLeft: 10, backgroundColor: theme.blockColor}]} onPress={() => Linking.openURL(info.vk_link)}>
                     <Entypo name="vk" size={30} color="rgb(115, 182, 28)" />
-                    <Text style={{fontFamily: 'System', fontSize: 20, color: '#5575A7', paddingLeft: 10, textAlign: 'center'}}>{locale.group_vk}</Text>
+                    <Text style={{ fontSize: 20, color: '#5575A7', paddingLeft: 10, textAlign: 'center'}}>{locale.group_vk}</Text>
                 </Pressable>}
                 {info.instagram_link &&
                 <Pressable style={[styles.descriptionBox, {flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', paddingLeft: 10, backgroundColor: theme.blockColor}]} onPress={() => Linking.openURL(info.instagram_link)}>
                     <AntDesign name="instagram" size={30} color={'rgb(115, 182, 28)'} />
-                    <Text style={{fontFamily: 'System', fontSize: 20, color: '#5575A7', paddingLeft: 10, textAlign: 'center'}}>Instagram</Text>
+                    <Text style={{ fontSize: 20, color: '#5575A7', paddingLeft: 10, textAlign: 'center'}}>Instagram</Text>
                 </Pressable>}
 
-                <Text style={{ fontFamily: 'System', fontSize: 20, marginTop: info.photo ? w * 0.2 + 20 : 20, marginLeft: 20, color: '#5575A7',}}>{locale['teams']}</Text>
+                <Text style={{  fontSize: 20, marginTop: info.photo ? w * 0.2 + 20 : 20, marginLeft: 20, color: '#5575A7',}}>{locale['teams']}</Text>
                 {info.ensembles.map( item => {
                     return(<ActiveElement onPress={() => props.navigation.navigate('Ensemble', {data: item})} title={item.name} source={item.logo} key={item[0]} />)
                 })}
@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
     text: {
         fontSize: 25,
         color: '#006AB3',
-        fontFamily: 'System',
+        
         marginTop: 10,
         marginLeft: 10,
     },

@@ -211,8 +211,8 @@ export default function SearchScreen(props) {
                         borderRadius={15}
                         buttonColor={theme.blueColor}
                         style={{ alignSelf: 'center', width: w * 0.9 }}
-                        textStyle={{ fontFamily: 'System', height: 40, textAlignVertical: 'center', color: theme.labelColor }}
-                        selectedTextStyle={{ fontFamily: 'System', height: 40, textAlignVertical: 'center', color: 'white' }}
+                        textStyle={{  height: 40, textAlignVertical: 'center', color: theme.labelColor }}
+                        selectedTextStyle={{  height: 40, textAlignVertical: 'center', color: 'white' }}
                         backgroundColor={theme.blockColor}
                         onPress={value => {
                             AsyncStorage.setItem('@mode', String(value))
@@ -252,13 +252,13 @@ export default function SearchScreen(props) {
                         elevation: 5,
                     }, styles.shadow, { flex: 1, backgroundColor: theme.blockColor, width: w * 0.9, position: 'absolute', top: 115, zIndex: 0, borderRadius: 15, paddingBottom: 10 }]}>
                         {lastGroups.length !== 0 ?
-                            <Text style={{ fontFamily: 'System', width: w, paddingLeft: 20, fontSize: 20, marginTop: 10, color: theme.blueColor }}>{locale['favourites']}</Text> : null}
+                            <Text style={{  width: w, paddingLeft: 20, fontSize: 20, marginTop: 10, color: theme.blueColor }}>{locale['favourites']}</Text> : null}
                         {lastGroups.map(item => {
                             return (
                                 <View style={{ height: 30, flexDirection: 'row' }}>
                                     <TouchableOpacity onPress={() => setCurrentGroup(item.name, item.mode)}>
                                         <View style={{ height: 30, width: w * 0.8, paddingLeft: 20 }}>
-                                            <Text style={{ height: 30, textAlignVertical: 'center', fontFamily: 'System', fontSize: 15, color: 'gray' }}>{item.name}</Text>
+                                            <Text style={{ height: 30, textAlignVertical: 'center',  fontSize: 15, color: 'gray' }}>{item.name}</Text>
                                         </View>
                                     </TouchableOpacity>
                                     <TouchableOpacity onPress={() => removeGroup(item)}>
@@ -268,10 +268,10 @@ export default function SearchScreen(props) {
                                     </TouchableOpacity>
                                 </View>)
                         })}
-                    </View> : <Text style={{ fontFamily: 'System', color: 'gray', alignSelf: 'center', width: w * 0.8, marginTop: 15 }}>{locale['add_favourites']}</Text>}
+                    </View> : <Text style={{  color: 'gray', alignSelf: 'center', width: w * 0.8, marginTop: 15 }}>{locale['add_favourites']}</Text>}
             </View> : null}
             <Animated.View style={[{ padding: 5, backgroundColor: 'white', borderRadius: 10, elevation: 6, position: 'absolute', bottom: 120, alignSelf: 'center' }, { opacity: fadeAnim }]}>
-                <Text style={{ fontFamily: 'System', textAlign: 'center' }}>{locale['timetable_isnt_available']}</Text>
+                <Text style={{  textAlign: 'center' }}>{locale['timetable_isnt_available']}</Text>
             </Animated.View>
 
         </View>
@@ -294,7 +294,7 @@ const styles = StyleSheet.create({
         fontSize: 15,
         paddingTop: 0,
         paddingBottom: 0,
-        fontFamily: 'System',
+        
         textAlignVertical: 'center',
         elevation: 4,
         marginRight: w * 0.01

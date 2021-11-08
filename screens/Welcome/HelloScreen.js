@@ -22,12 +22,12 @@ export default function HelloScreen(props) {
             <Swiper ref={swiper_ref} loop={false} showsPagination={false}>
                 <View style={{ flex: 1, backgroundColor: theme.primaryBackground, justifyContent: 'center', paddingBottom: 60 }}>
                     <View>
-                        <Text style={{ width: w, padding: 20, fontFamily: 'System', fontSize: 30, color: theme.labelColor, fontWeight: 'bold' }}>{locale['welcome_to_application']}</Text>
+                        <Text style={{ width: w, padding: 20,  fontSize: 30, color: theme.labelColor, fontWeight: 'bold' }}>{locale['welcome_to_application']}</Text>
                         <View style={{ flexDirection: 'row', paddingLeft: 25 }}>
                             <Image source={require('../../assets/header_logo.png')} style={{ height: 100, width: 100 }} />
-                            <Text style={{ height: 100, textAlignVertical: 'center', fontFamily: 'System', fontWeight: 'bold', fontSize: 30 }}>Мой СибГУ</Text>
+                            <Text style={{ height: 100, textAlignVertical: 'center',  fontWeight: 'bold', fontSize: 30 }}>Мой СибГУ</Text>
                         </View>
-                        <Text style={{ fontFamily: 'System', fontSize: 20, color: theme.labelColor, fontWeight: 'bold', padding: 20 }}>{locale['lets_tell']}</Text>
+                        <Text style={{  fontSize: 20, color: theme.labelColor, fontWeight: 'bold', padding: 20 }}>{locale['lets_tell']}</Text>
                     </View>
                 </View>
                 <HelloModule what={locale['hello_feed_what']} how={"sldkfjsldkjfsld"} color={'#006AB3'} name={locale['feed']} image={<MaterialCommunityIcons name="timetable" size={86} style={{ position: 'absolute', right: 0, bottom: 0, opacity: 0.5 }} color={'white'} />} />
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
 
     okay_button_text: {
         color: 'white',
-        fontFamily: 'System',
+        
         alignSelf: 'center',
         fontSize: 20
     }

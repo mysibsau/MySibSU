@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     },
 
     label: {
-        fontFamily: 'System',
+        
         textAlign: 'center',
         // fontWeight: 'bold',
         fontSize: w / 15,

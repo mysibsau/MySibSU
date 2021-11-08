@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
         color: 'gray',
         textAlignVertical: 'center',
         marginLeft: 10,
-        fontFamily: 'System',
+        
       },
 
     box: {

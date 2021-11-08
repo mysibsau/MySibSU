@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
 
     head: {
         fontSize: 20,
-        fontFamily: 'System',
+        
         color: 'grey',
         width: w * 0.94,
         marginBottom: 8,
@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
     text: {
         height: '100%',
         fontSize: 13,
-        fontFamily: 'System',
+        
         alignSelf: 'flex-start',
         color: 'black',
         paddingBottom: 0,
@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
     number: {
         height: '100%',
         fontSize: 15,
-        fontFamily: 'System',
+        
         color: 'black',
         textAlignVertical: 'center',
         textAlign: 'center',
@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
         borderLeftWidth: 2,
         borderLeftColor: 'rgb(125, 199, 28)',
         fontSize: 13,
-        fontFamily: 'System',
+        
         alignSelf: 'flex-start',
         color: 'black',
         paddingBottom: 0,
@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
 
     changeText: {
         fontSize: 20,
-        fontFamily: 'System',
+        
         color: '#006AB3',
     },
 

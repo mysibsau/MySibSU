@@ -18,7 +18,7 @@ const LangElem = ({name, current, first, onPress}) => {
 const styles = StyleSheet.create({
     small_text: {
         height: 35,
-        fontFamily: 'System',
+        
         fontSize: 18,
         color: '#006AB3',
         textAlignVertical: 'center'

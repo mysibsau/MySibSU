@@ -14,13 +14,13 @@ const MenuElement = ({data}) => {
                     data.map(item => (
                         <View style={{ elevation: 5, width: w * 0.9, padding: 10, borderRadius: 15, marginTop: 10, flexDirection: 'row', heigth: 20, backgroundColor: theme.blockColor}}>
                             <View style={{ minHeight: 20, width: '55%', }}>
-                                <Text style={{ minHeight: '100%', fontFamily: 'System', fontSize: 15, textAlign: 'left', textAlignVertical: 'center', color: theme.labelColor }}>{item.diner_name}{item.included ? <Text style={{color: 'gray'}}> ({item.included})</Text> : null}</Text>
+                                <Text style={{ minHeight: '100%',  fontSize: 15, textAlign: 'left', textAlignVertical: 'center', color: theme.labelColor }}>{item.diner_name}{item.included ? <Text style={{color: 'gray'}}> ({item.included})</Text> : null}</Text>
                             </View>
                             <View style={{ minHeight: 20, width: '25%', }}>
-                                <Text style={{ minHeight: '100%', fontFamily: 'System', fontSize: 15, textAlign: 'center', textAlignVertical: 'center', color: theme.labelColor }}>{item.weight}г.</Text>
+                                <Text style={{ minHeight: '100%',  fontSize: 15, textAlign: 'center', textAlignVertical: 'center', color: theme.labelColor }}>{item.weight}г.</Text>
                             </View>
                             <View style={{ minHeight: 20, width: '25%',}}>
-                                <Text style={{ minHeight: '100%', fontFamily: 'System', fontSize: 15, textAlign: 'center', textAlignVertical: 'center', color: theme.labelColor }}>{item.price}₽</Text>
+                                <Text style={{ minHeight: '100%',  fontSize: 15, textAlign: 'center', textAlignVertical: 'center', color: theme.labelColor }}>{item.price}₽</Text>
                             </View>
                         </View>
                     ))
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     h1: {
         color: '#5575A7',
         fontSize: 22,
-        fontFamily: 'System',
+        
     },
 
     downtext:{

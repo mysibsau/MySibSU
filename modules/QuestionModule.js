@@ -44,13 +44,13 @@ const styles = StyleSheet.create({
     },
 
     question: {
-        fontFamily: 'System', 
+         
         fontSize: 18, 
         color: '#0060B3'
     },
 
     answer: {
-        fontFamily: 'System', 
+         
         fontSize: 16, 
         marginTop: 10
     }

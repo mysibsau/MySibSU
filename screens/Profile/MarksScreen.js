@@ -37,14 +37,14 @@ export default function MarksScreen(props){
                 {marks.map(item => {
                     return(
                         <View key={item.term}>
-                            <Text style={{ fontFamily: 'System', fontSize: 18, color: '#006AB3', marginBottom: 5, marginTop: 15, paddingLeft: w * 0.05}}>{item.term} {locale['term']}</Text>
+                            <Text style={{  fontSize: 18, color: '#006AB3', marginBottom: 5, marginTop: 15, paddingLeft: w * 0.05}}>{item.term} {locale['term']}</Text>
                             <View style={{ width: w * 0.9, borderRadius: 15, backgroundColor: theme.blockColor, elevation: 5, alignSelf: 'center', paddingTop: 10, paddingBottom: 10}}>
                             {item.items.map(subject => {
                                 return(
                                 <>
                                 <View style={{flexDirection: 'row', marginTop: 5, marginBottom: 5}}>
-                                    <Text style={{width: w * 0.7, paddingLeft: 10, fontFamily: 'System', color: theme.labelColor}}>{subject.name} <Text style={{color: 'gray'}}>({subject.type})</Text></Text>
-                                    <Text style={{width: w * 0.2, textAlign: 'center', textAlignVertical: 'center', fontFamily: 'System', color: theme.labelColor}}>{subject.mark}</Text>
+                                    <Text style={{width: w * 0.7, paddingLeft: 10,  color: theme.labelColor}}>{subject.name} <Text style={{color: 'gray'}}>({subject.type})</Text></Text>
+                                    <Text style={{width: w * 0.2, textAlign: 'center', textAlignVertical: 'center',  color: theme.labelColor}}>{subject.mark}</Text>
                                 </View>
                                 {item.items.indexOf(subject) !== item.items.length - 1 ? 
                                 <View style={{width: w * 0.9, height: 1, backgroundColor: 'gray', opacity: 0.5, alignSelf: 'center'}}/> : null}

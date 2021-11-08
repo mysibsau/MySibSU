@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
     text: {
         marginTop: 30,
         fontSize: 20,
-        fontFamily: 'System',
+        
         color: '#006AB3'
     },
 
@@ -159,7 +159,7 @@ const styles = StyleSheet.create({
 
     name: {
         width: w,
-        fontFamily: 'System',
+        
         fontSize: 20,
         color: '#006AB3',
         textAlign: 'left',

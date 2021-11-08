@@ -150,7 +150,7 @@ function LibraryTabBar({ state, descriptors, navigation, position }) {
             onLongPress={onLongPress}
             style={{ width: Dimensions.get('window').width / 4, alignItems: 'center', justifyContent: 'center' }}
           >
-            <Animated.Text style={{ textTransform: 'uppercase', fontFamily: 'System', color: theme.labelColor, fontSize: 13, opacity }}>
+            <Animated.Text style={{ textTransform: 'uppercase',  color: theme.labelColor, fontSize: 13, opacity }}>
               {label}
             </Animated.Text>
           </TouchableOpacity>
@@ -188,7 +188,7 @@ function FeedTabs() {
   return (
     <FeedTab.Navigator tabBarOptions={{
       labelStyle: {
-        fontFamily: 'System',
+        
         fontSize: 13,
       },
       tabStyle: {
@@ -478,7 +478,7 @@ const BottomMenuItem = ({ iconName, label, isCurrent }) => {
       }}
     >
       {icons[iconName]}
-      <Text style={{ fontFamily: 'System', fontSize: 10, color: color }}>{label}</Text>
+      <Text style={{  fontSize: 10, color: color }}>{label}</Text>
     </View>
   );
 };

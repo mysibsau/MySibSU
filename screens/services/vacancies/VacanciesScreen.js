@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     },
 
     listText: {
-        fontFamily: 'System',
+        
         fontSize: 15
     }
 })

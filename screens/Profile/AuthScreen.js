@@ -49,12 +49,12 @@ export default function PersonScreen(props){
                     <View style={{ width: w * 0.8, borderRadius: 15, elevation: 6, backgroundColor: theme.blockColor, alignSelf: 'center', marginTop: 40}}>
                         <View style={{flexDirection: 'row', }}>
                             <Ionicons name='md-person' size={26} color={'gray'} style={{ marginTop: 'auto', marginBottom: 'auto', alignSelf: 'center', marginLeft: 10, marginRight: 10}}/>
-                            <TextInput value={username} onChangeText={value => setUsername(value)} placeholderTextColor={'gray'} placeholder={locale['login']} numberOfLines={1} style={{width: w * 0.7, fontFamily: 'System', color: theme.labelColor}}/>
+                            <TextInput value={username} onChangeText={value => setUsername(value)} placeholderTextColor={'gray'} placeholder={locale['login']} numberOfLines={1} style={{width: w * 0.7,  color: theme.labelColor}}/>
                         </View>
                         <View  style={{alignSelf: 'center', width: w * 0.7, height: 1, backgroundColor: 'gray', opacity: 0.5}}/>
                         <View style={{flexDirection: 'row'}}>
                             <MaterialCommunityIcons name="key" size={26} color={'gray'} style={{ marginTop: 'auto', marginBottom: 'auto', alignSelf: 'center', marginLeft: 10, marginRight: 10}} />
-                            <TextInput value={password} onChangeText={value => setPassword(value)} placeholderTextColor={'gray'} placeholder={locale['password']} numberOfLines={1} secureTextEntry={true} style={{width: w * 0.7, fontFamily: 'System', color: theme.labelColor}}/>
+                            <TextInput value={password} onChangeText={value => setPassword(value)} placeholderTextColor={'gray'} placeholder={locale['password']} numberOfLines={1} secureTextEntry={true} style={{width: w * 0.7,  color: theme.labelColor}}/>
                         </View>
                         
                     </View>
@@ -65,7 +65,7 @@ export default function PersonScreen(props){
                             <Text style={styles.okay_button_text}>{locale['sign_in']}</Text>
                         </View>
                     </TouchableOpacity>
-                    <Text style={{width: w * 0.8, fontFamily: 'System', marginTop: 20, alignSelf: 'center', textAlign: 'center', color: 'gray'}}>{locale['sign_in_tip']}</Text>
+                    <Text style={{width: w * 0.8,  marginTop: 20, alignSelf: 'center', textAlign: 'center', color: 'gray'}}>{locale['sign_in_tip']}</Text>
                 </View>
                 {fetching && <ActivityIndicator color={'#006AB3'} size={'large'}/>}
             </ScrollView>
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
     text: {
         marginTop: 30,
         fontSize: 20,
-        fontFamily: 'System',
+        
         color: '#006AB3'
     },
 
@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
         fontSize: 25,
         color: 'grey',
         textAlignVertical: 'center',
-        fontFamily: 'System',
+        
         textAlign: 'left',
     },
 
@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
 
     okay_button_text: {
         color: 'white',
-        fontFamily: 'System',
+        
         alignSelf: 'center',
         height: 40,
         textAlignVertical: 'center',

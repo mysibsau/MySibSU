@@ -52,14 +52,14 @@ const styles = StyleSheet.create({
         paddingTop: 5,
         fontSize: 24,
         color: '#006AB3',
-        fontFamily: 'System',
+        
         marginBottom: -5,
         textAlign: 'center',
     },
 
     down: {
         width: w * 0.7 * 0.94,
-        fontFamily: 'System',
+        
         color: '#006AB3',
         marginBottom: 5,
         textAlign: 'center',

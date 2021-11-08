@@ -31,7 +31,7 @@ export default function NewsScreen() {
                 </View> :
                 <>
                     {newsList.length === 0 &&
-                        <Text style={{ fontFamily: 'System', fontSize: 18, alignSelf: 'center', marginTop: 20, color: theme.labelColor }}>{locale['empty']}</Text>}
+                        <Text style={{  fontSize: 18, alignSelf: 'center', marginTop: 20, color: theme.labelColor }}>{locale['empty']}</Text>}
                     <FlatList
                         data={newsList}
                         renderItem={({ item }) => <FeedModule data={item} type={'news'} />}

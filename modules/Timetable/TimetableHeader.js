@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
         fontSize: 25,
         color: 'grey',
         textAlignVertical: 'bottom',
-        fontFamily: 'System',
+        
         position: 'absolute',
         left: w * 0.15,
       },
@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
     },
     
     week_text: {
-        fontFamily: 'System',
+        
         fontSize: 17,
         color: 'gray'
     },

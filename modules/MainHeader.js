@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
         fontSize: 25,
         color: 'grey',
         textAlignVertical: 'center',
-        fontFamily: 'System',
+        
         textAlign: 'left',
         paddingLeft: 10,
     },

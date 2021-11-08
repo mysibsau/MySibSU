@@ -57,26 +57,26 @@ export default function Ermak(props){
 
                 {data.about ?
                 <View>
-                    <Text style={{ fontFamily: 'System', fontSize: 20, marginTop: data.photo ? w * 0.2 + 20 : 20, marginLeft: 20, color: '#5575A7',}}>{locale['description']}</Text>
+                    <Text style={{  fontSize: 20, marginTop: data.photo ? w * 0.2 + 20 : 20, marginLeft: 20, color: '#5575A7',}}>{locale['description']}</Text>
                     <View style={[styles.box, styles.centerContent, styles.shadow2, {padding: 10, backgroundColor: theme.blockColor}]}>
-                        <Text style={{fontFamily: 'System', fontSize: 15, color: '#5575A7', paddingLeft: 5}}>{data.about}</Text>
+                        <Text style={{ fontSize: 15, color: '#5575A7', paddingLeft: 5}}>{data.about}</Text>
                     </View>
                 </View> : null}
 
                 {data.dates ? 
                 <View>
-                    <Text style={{ fontFamily: 'System', fontSize: 20, marginTop: data.photo ? w * 0.2 + 20 : 20, marginLeft: 20, color: '#5575A7',}}>{locale['training_days']}</Text>
+                    <Text style={{  fontSize: 20, marginTop: data.photo ? w * 0.2 + 20 : 20, marginLeft: 20, color: '#5575A7',}}>{locale['training_days']}</Text>
                     <View style={[styles.box, styles.centerContent, styles.shadow2, {padding: 10, backgroundColor: theme.blockColor}]}>
-                        <Text style={{fontFamily: 'System', fontSize: 16, color: '#5575A7', paddingLeft: 5}}>{data.dates}</Text>
+                        <Text style={{ fontSize: 16, color: '#5575A7', paddingLeft: 5}}>{data.dates}</Text>
                     </View>
                 </View> : null}
                 
                 {data.fio && 
                 <>
-                <Text style={{ fontFamily: 'System', fontSize: 20, marginTop: 15, marginLeft: 20, color: '#5575A7',}}>{data.leader_rank ? data.leader_rank : locale['active_head']}</Text>
+                <Text style={{  fontSize: 20, marginTop: 15, marginLeft: 20, color: '#5575A7',}}>{data.leader_rank ? data.leader_rank : locale['active_head']}</Text>
                 {data.fio !== '-' ? 
                     <View style={[styles.box, styles.centerContent, styles.shadow2, {backgroundColor: theme.blockColor, padding: 10}]}>
-                        <Text style={{fontFamily: 'System', fontSize: 20, textAlign: 'center', color: '#5575A7'}}>{data.fio}</Text>
+                        <Text style={{ fontSize: 20, textAlign: 'center', color: '#5575A7'}}>{data.fio}</Text>
                     </View> : null}
                 </>}
 
@@ -147,7 +147,7 @@ export default function Ermak(props){
                             </TouchableWithoutFeedback>
                             </View>
 
-                            <Text style={{fontFamily: 'System', color: '#006AB3', fontSize: 24, marginBottom: 10}}>Заявка на вступление</Text>
+                            <Text style={{ color: '#006AB3', fontSize: 24, marginBottom: 10}}>Заявка на вступление</Text>
 
                             <TextInput style={[styles.input, {color: theme.headerTitle}]} placeholderTextColor={'gray'} onChangeText={text => setFio(text)} placeholder={'ФИО'}/>
                             <TextInput style={[styles.input, {color: theme.headerTitle}]} placeholderTextColor={'gray'} onChangeText={text => setInstitute(text)} placeholder={'Институт'} />
@@ -161,7 +161,7 @@ export default function Ermak(props){
                                 setVisible(false)
                             }}>
                             <View style={{borderWidth: 1, borderColor: '#006AB3', borderRadius: 4, paddingBottom: 3, paddingTop: 3, paddingLeft: 5, paddingRight: 5, marginBottom: 10}}>
-                                <Text style={{fontFamily: 'System', color: '#006AB3', fontSize: 15}}>ОТПРАВИТЬ</Text>
+                                <Text style={{ color: '#006AB3', fontSize: 15}}>ОТПРАВИТЬ</Text>
                             </View>
                             </TouchableWithoutFeedback>
                         </View>
@@ -218,7 +218,7 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         borderColor: '#5575A7',
         marginBottom: 15,
-        fontFamily: 'System',
+        
         fontSize: 18
     },
 
@@ -232,7 +232,7 @@ const styles = StyleSheet.create({
     buttonText: {
         width: w * 0.8,
         color: '#5575A7', 
-        fontFamily: 'System', 
+         
         fontSize: 15,
         paddingTop: 10,
         paddingBottom: 10, 

@@ -77,18 +77,18 @@ export default function SettingsScreen(props){
                     initial={scheme}
                     borderRadius={15}
                     buttonColor={'#006AB3'}
-                    textStyle={{fontFamily: 'System', height: 40, textAlignVertical: 'center', color: theme.headerTitle}}
-                    selectedTextStyle={{fontFamily: 'System', height: 40, textAlignVertical: 'center',}}
+                    textStyle={{ height: 40, textAlignVertical: 'center', color: theme.headerTitle}}
+                    selectedTextStyle={{ height: 40, textAlignVertical: 'center',}}
                     backgroundColor={theme.blockColor}
                     onPress={value => changeTheme(value)}
                     />
                 </View>
-                <Text style={{ width: w * 0.9, alignSelf: 'center', color: 'gray', fontSize: 12, fontFamily: 'System', marginTop: 15}}>{locale['color_settings']}</Text>
+                <Text style={{ width: w * 0.9, alignSelf: 'center', color: 'gray', fontSize: 12,  marginTop: 15}}>{locale['color_settings']}</Text>
                 {isAuthorizated &&
                 <TouchableOpacity style={{padding: 10, width: w * 0.4, alignSelf: 'center', marginTop: 20, borderRadius: 15, elevation: 5, backgroundColor: theme.blockColor}} onPress={() => signOut()}>
-                    <Text style={{alignSelf: 'center', color: '#EE7575', fontWeight: 'bold', fontFamily: 'System',}}>{locale['sign_out']}</Text>
+                    <Text style={{alignSelf: 'center', color: '#EE7575', fontWeight: 'bold', }}>{locale['sign_out']}</Text>
                 </TouchableOpacity>}
-                <Text style={{fontFamily: 'System', alignSelf: 'center', color: 'gray', position: 'absolute', bottom: 60}}>{locale['version']}: 2.2.0</Text>
+                <Text style={{ alignSelf: 'center', color: 'gray', position: 'absolute', bottom: 60}}>{locale['version']}: 2.2.0</Text>
                 
             </View>
         </View>
@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
     shadow: elevationShadowStyle(10),
     
     large_text: {
-        fontFamily: 'System',
+        
         fontSize: 20,
         color: '#006AB3', 
         marginLeft: w * 0.05,
@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
 
     small_text: {
         height: 30,
-        fontFamily: 'System',
+        
         fontSize: 18,
         color: '#006AB3',
     }

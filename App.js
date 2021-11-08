@@ -26,6 +26,7 @@ function App() {
   // const { isAuthorizated } = useUser();
 
   Text.defaultProps = Text.defaultProps || {};
+  Text.defaultProps.style = {fontFamily: 'System'}
   Text.defaultProps.allowFontScaling = false;
 
   const [firstLaunch, setFirstLaunch] = useState(null)
@@ -71,6 +72,8 @@ function App() {
   //     if (res === null)
   //       AsyncStorage.setItem('@mode', '0')
   //   })
+
+  Text.defa
 
   return (
     <AuthManager>

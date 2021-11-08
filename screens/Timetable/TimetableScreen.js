@@ -141,7 +141,7 @@ export default function TimetableScreen(props){
                         height: 40,
                         textAlignVertical: 'center',
                         fontSize: 25,
-                        fontFamily: 'System',
+                        
                         color: theme.headerTitle}]}>{textGroup}</Text>
                 </View>
                 <TouchableOpacity onPress={() => {
@@ -167,7 +167,7 @@ export default function TimetableScreen(props){
                                 position: 'absolute',
                                 right: 10,
                                 bottom: (w/8 - w/12)/2}, {backgroundColor: theme.headerColor}]}>
-                    <Text style={[{textAlignVertical: 'center', fontFamily: 'System',
+                    <Text style={[{textAlignVertical: 'center', 
                                 fontSize: 17,
                                 color: 'gray'}, {color: theme.headerTitle}]}>{index} {locale['week']}</Text>
                 </TouchableOpacity>
