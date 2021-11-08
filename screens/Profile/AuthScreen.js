@@ -7,6 +7,7 @@ import {useTheme} from '../../services/themes/ThemeManager'
 import { Ionicons } from '@expo/vector-icons'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { useUser } from '../../services/auth/AuthManager';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export default function PersonScreen(props){
     const {locale} = useLocale()
@@ -16,6 +17,7 @@ export default function PersonScreen(props){
     const [password, setPassword] = React.useState('')
 
     const [fetching, setFetching] = React.useState(false)
+    const insets = useSafeAreaInsets();
 
     const tryToLogin = async () => {
         setFetching(true)
@@ -32,7 +34,7 @@ export default function PersonScreen(props){
 
     return(
         <View style={[styles.container, {backgroundColor: theme.primaryBackground}]}>
-            <View style={[styles.box, styles.shadow, {backgroundColor: theme.blockColor}]}>
+            <View style={[styles.box, styles.shadow, {backgroundColor: theme.blockColor, paddingTop: insets.top}]}>
                 <Image source={require('../../assets/header_logo.png')} style={{ width: 25, height: 25, marginBottom: 3, marginRight: 10, marginLeft: 10}} />
                 <Text style={[styles.maintext, {color: theme.headerTitle}]}>{locale['personal_account']}</Text>
                 <TouchableOpacity onPress={() => {
@@ -103,9 +105,8 @@ const styles = StyleSheet.create({
     shadow: elevationShadowStyle(5),
     box: {
         backgroundColor: 'white',
-        height: w/8,
         width: w,
-        paddingLeft: 10,
+        padding: 10,
         elevation: 10,
         position: 'relative',
         flexDirection: 'row',
@@ -114,7 +115,6 @@ const styles = StyleSheet.create({
     },
 
     maintext: {
-        height: w / 8,
         width: w * 0.75,
         fontSize: 25,
         color: 'grey',

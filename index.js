@@ -1,6 +1,6 @@
 // import { registerRootComponent } from 'expo';
 import App from './App';
-import { AppRegistry } from 'react-native';
+import { AppRegistry, Platform } from 'react-native';
 import messaging from '@react-native-firebase/messaging';
 import axios from 'axios'
 import { BASE_URL } from './modules/constants';
@@ -24,7 +24,7 @@ axios.defaults.baseURL = BASE_URL
 
 
 
-AppRegistry.registerComponent('mysibsu', () => App);
+AppRegistry.registerComponent(Platform.OS === 'ios' ? 'mysibsu' : 'main', () => App);
 // AppRegistry.registerComponent('MySibSU', () => App);
 
 // registerRootComponent(App)
