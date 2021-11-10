@@ -7,7 +7,7 @@ import { useTheme } from '../../services/themes/ThemeManager'
 import { MaterialIcons } from '@expo/vector-icons';
 import { useUser } from '../../services/auth/AuthManager';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-
+import DefaultIcon from '../../services/icons/default-icon'
 
 export default function PersonScreen(props) {
     const { locale } = useLocale()
@@ -25,7 +25,7 @@ export default function PersonScreen(props) {
                     AsyncStorage.getItem('Theme')
                         .then(res => props.navigation.navigate('Settings', { theme: modes[res], user: user }))
                 }}>
-                    <DefaultIcon name={'gear.png'} color={theme.headerTitle} style={{ marginBottom: 3, marginRight: 10, marginLeft: 10 }} />
+                    <DefaultIcon image={require('../../assets/icons/gear.png')} color={theme.headerTitle} style={{ marginBottom: 3, marginRight: 10, marginLeft: 10 }} />
                 </TouchableOpacity>
             </View>
             <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ width: w, padding: w * 0.05, paddingBottom: 120 }}>

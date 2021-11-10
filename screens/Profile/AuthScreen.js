@@ -10,6 +10,8 @@ import { useUser } from '../../services/auth/AuthManager';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import DefaultIcon from '../../services/icons/icon'
 import { useToast } from '../../services/toasts/ToastsManager';
+
+export default function PersonScreen(props) {
     const {callToast} = useToast();
     const {locale} = useLocale()
     const {theme} = useTheme()
@@ -43,7 +45,7 @@ import { useToast } from '../../services/toasts/ToastsManager';
                     AsyncStorage.getItem('Theme')
                         .then(res => props.navigation.navigate('AnotherSettings', { theme: modes[res], user: {} }))
                 }}>
-                    <DefaultIcon name={'gear.png'} color={theme.headerTitle} style={{ marginBottom: 3, marginRight: 10, marginLeft: 10 }} />
+                    <DefaultIcon image={require('../../assets/icons/gear.png')} color={theme.headerTitle} style={{ marginBottom: 3, marginRight: 10, marginLeft: 10 }} />
                 </TouchableOpacity>
             </View>
             <ScrollView contentContainerStyle={{ flex: 1 }}>
