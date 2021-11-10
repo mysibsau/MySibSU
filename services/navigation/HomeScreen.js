@@ -80,6 +80,7 @@ import AnotherSettingsScreen from '../../screens/Profile/AnotherSettingsScreen'
 import TechScreen from '../../screens/services/StudentLife/TechScreen'
 import TechUnionScreen from '../../screens/services/StudentLife/TechUnionScreen'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import { BackButtonIcon } from '../icons/icons'
 
 function LibraryTabBar({ state, descriptors, navigation, position }) {
   const { mode, theme, toggle } = useTheme()
@@ -94,7 +95,7 @@ function LibraryTabBar({ state, descriptors, navigation, position }) {
     <View style={{ flexDirection: 'row', backgroundColor: theme.blockColor, elevation: 6, paddingTop: insets.top }}>
       <TouchableOpacity onPress={() => navigation.navigate('LibrarySearch')}>
         <View style={{ height: Dimensions.get('window').width / 8, width: Dimensions.get('window').width / 4, justifyContent: 'center' }}>
-          <Ionicons name="ios-arrow-back" size={30} color="black" style={{ color: '#006AB3', paddingRight: 10, paddingLeft: 15 }} />
+          <BackButtonIcon />
         </View>
       </TouchableOpacity>
       <Animated.View

@@ -8,11 +8,11 @@ import { Ionicons } from '@expo/vector-icons'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { useUser } from '../../services/auth/AuthManager';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { BackButtonIcon } from '../../services/icons/icons';
 import DefaultIcon from '../../services/icons/icon'
 import { useToast } from '../../services/toasts/ToastsManager';
 
 export default function PersonScreen(props) {
-    const {callToast} = useToast();
     const {locale} = useLocale()
     const {theme} = useTheme()
     const {login} = useUser()
