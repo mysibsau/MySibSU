@@ -1,7 +1,7 @@
 import { Image } from "react-native";
 import React from "react";
 
-export default DefaultIcon = (props) => {
+export const DefaultIcon = (props) => {
     const defaultSize = 20
     const defaultColor = 'gray'
 
