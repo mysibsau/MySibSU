@@ -81,6 +81,7 @@ import TechScreen from '../../screens/services/StudentLife/TechScreen'
 import TechUnionScreen from '../../screens/services/StudentLife/TechUnionScreen'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { BackButtonIcon } from '../icons/icons'
+import { DefaultIcon } from '../icons/default-icon'
 
 function LibraryTabBar({ state, descriptors, navigation, position }) {
   const { mode, theme, toggle } = useTheme()
@@ -462,12 +463,19 @@ const BottomMenuItem = ({ iconName, label, isCurrent }) => {
   const { theme } = useTheme()
 
   const color = isCurrent ? theme.blueColor : 'gray'
+  const iconColor = isCurrent ? theme.blueColor : 'rgb(159, 165, 163)'
+
+  const getIcon = (image) => <DefaultIcon
+    image={image}
+    size={26}
+    color={iconColor} />
+
   const icons = {
-    'Feed': <MaterialCommunityIcons name="timetable" size={26} color={isCurrent ? theme.blueColor : 'rgb(159, 165, 163)'} />,
-    'Menu': <MaterialIcons name="restaurant-menu" size={26} color={isCurrent ? theme.blueColor : 'rgb(159, 165, 163)'} />,
-    'Timetable': <MaterialCommunityIcons name="calendar-text" size={26} color={isCurrent ? theme.blueColor : 'rgb(159, 165, 163)'} />,
-    'Services': <AntDesign name="appstore-o" size={26} color={isCurrent ? theme.blueColor : 'rgb(159, 165, 163)'} />,
-    'Profile': <Ionicons name='md-person' size={26} color={isCurrent ? theme.blueColor : 'rgb(159, 165, 163)'} />
+    'Feed': getIcon(require('../../assets/icons/tabs/news.png')),
+    'Menu': getIcon(require('../../assets/icons/tabs/restaurant.png')),
+    'Timetable': getIcon(require('../../assets/icons/tabs/timetable.png')),
+    'Services': getIcon(require('../../assets/icons/tabs/grid.png')),
+    'Profile': getIcon(require('../../assets/icons/tabs/profile.png'))
   }
 
   return (

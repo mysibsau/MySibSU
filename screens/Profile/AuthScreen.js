@@ -8,7 +8,7 @@ import { Ionicons } from '@expo/vector-icons'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { useUser } from '../../services/auth/AuthManager';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { BackButtonIcon } from '../../services/icons/icons';
+import { DefaultIcon } from '../../services/icons/default-icon';
 
 export default function PersonScreen(props) {
     const { locale } = useLocale()
