@@ -6,7 +6,7 @@ export default DefaultIcon = (props) => {
     const defaultColor = 'gray'
 
     return <Image
-        source={require('../../assets/icons/gear.png')}
+        source={props.image}
         style={[
             {
                 width: props.size || defaultSize,
@@ -16,5 +16,4 @@ export default DefaultIcon = (props) => {
             props.style]
         }
     />
-
 }
