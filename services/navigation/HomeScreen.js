@@ -498,7 +498,7 @@ const MainTabBar = ({ state, descriptors, navigation }) => {
   const { mode, theme, toggle } = useTheme()
   const totalWidth = Dimensions.get("window").width;
   return (
-    <View style={[style.tabContainer, { width: totalWidth, backgroundColor: theme.blockColor, paddingBottom: insets.bottom }]}>
+    <View style={[style.tabContainer, { width: totalWidth, backgroundColor: theme.blockColor, paddingTop: 3, paddingBottom: insets.bottom }]}>
       <View style={{ flexDirection: "row" }}>
         {state.routes.map((route, index) => {
           const { options } = descriptors[route.key];
@@ -548,7 +548,6 @@ const MainTabBar = ({ state, descriptors, navigation }) => {
 
 const style = StyleSheet.create({
   tabContainer: {
-    height: 50,
     shadowOffset: {
       width: 0,
       height: -3,
