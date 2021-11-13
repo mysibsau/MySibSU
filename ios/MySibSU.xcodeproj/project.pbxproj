@@ -17,7 +17,8 @@
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* mysibsuTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* mysibsuTests.m */; };
 		491E856CAA8109158633FF91 /* libPods-mysibsu-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BCE7C20A175192B656B8DE25 /* libPods-mysibsu-tvOSTests.a */; };
-		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		7CC23ADF273FC06900E625F6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CC23ADE273FC06900E625F6 /* LaunchScreen.storyboard */; };
+		7CC23AE0273FC06900E625F6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CC23ADE273FC06900E625F6 /* LaunchScreen.storyboard */; };
 		A9EFA34DF71EA05363B88CF5 /* libPods-mysibsu-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FD41A0AF5797B89AE8FA90F2 /* libPods-mysibsu-tvOS.a */; };
 		AD7496BBB06A594118BFCFF6 /* libPods-mysibsu-mysibsuTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0A47D2ECB1C0856F99689C /* libPods-mysibsu-mysibsuTests.a */; };
 /* End PBXBuildFile section */
@@ -58,7 +59,7 @@
 		2D02E4901E0B4A5D006451C7 /* mysibsu-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "mysibsu-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A35F9BE7C4624950C958655 /* Pods-mysibsu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mysibsu.debug.xcconfig"; path = "Target Support Files/Pods-mysibsu/Pods-mysibsu.debug.xcconfig"; sourceTree = "<group>"; };
 		6BFA8D69EBA3CAD0E7BB5023 /* Pods-mysibsu-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mysibsu-tvOS.release.xcconfig"; path = "Target Support Files/Pods-mysibsu-tvOS/Pods-mysibsu-tvOS.release.xcconfig"; sourceTree = "<group>"; };
-		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = mysibsu/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		7CC23ADE273FC06900E625F6 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = MySibSU/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		86BF12AA76782F722A81216A /* Pods-mysibsu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mysibsu.release.xcconfig"; path = "Target Support Files/Pods-mysibsu/Pods-mysibsu.release.xcconfig"; sourceTree = "<group>"; };
 		BCE7C20A175192B656B8DE25 /* libPods-mysibsu-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-mysibsu-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C84501D0385E2E195EC7B20E /* Pods-mysibsu-mysibsuTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mysibsu-mysibsuTests.release.xcconfig"; path = "Target Support Files/Pods-mysibsu-mysibsuTests/Pods-mysibsu-mysibsuTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -130,8 +131,8 @@
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
-				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				7CC23ADE273FC06900E625F6 /* LaunchScreen.storyboard */,
 			);
 			name = mysibsu;
 			sourceTree = "<group>";
@@ -340,8 +341,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				7CC23ADF273FC06900E625F6 /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -350,6 +351,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */,
+				7CC23AE0273FC06900E625F6 /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
