@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useEffect } from 'react'
-import {View, Text, StyleSheet, TouchableOpacity, ActivityIndicator, TextInput, ScrollView, Modal, ToastAndroid} from 'react-native'
+import {View, StyleSheet, ActivityIndicator,} from 'react-native'
 import Header from '../../modules/Header'
 import {useTheme} from '../../services/themes/ThemeManager'
 import {useLocale} from '../../services/locale/LocaleManager'

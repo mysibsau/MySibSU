@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react'
-import { View, Text, ScrollView, StyleSheet, ToastAndroid, ActivityIndicator, TouchableOpacity, AsyncStorage } from 'react-native'
+import { View, Text, ScrollView, StyleSheet, ActivityIndicator, TouchableOpacity, AsyncStorage } from 'react-native'
 import Header from '../../../modules/Header'
 import { h, w } from '../../../modules/constants'
 
@@ -9,11 +9,13 @@ import {useLocale} from '../../../services/locale/LocaleManager'
 import SingleAnswer from '../../../modules/answers/SingleAnswer'
 import MultipleAnswer from '../../../modules/answers/MultipleAnswer'
 import TextAnswer from '../../../modules/answers/TextAnswer'
+import { useToast } from '../../../services/toasts/ToastsManager'
 
 
 export default function PollScreen(props){
     const {mode, theme, toggle} = useTheme()
     const {localeMode, locale, toggleLang} = useLocale()
+    const {callToast} = useToast();
 
     const [poll, setPoll] = useState({})
     const [loaded, setLoaded] = useState(false)
@@ -71,13 +73,8 @@ export default function PollScreen(props){
             })
         })
         .then(response => {
-            console.log(response['status'])
             if(response['status'] === 405)
-            ToastAndroid.showWithGravity(
-                "Заполните все необходимые ответы",
-                ToastAndroid.SHORT,
-                ToastAndroid.CENTER
-              );
+                callToast('Заполните все необходимые ответы', theme.blockColor, theme.labelColor)
             else if(response['status'] === 200)
                 props.navigation.goBack()
                 })

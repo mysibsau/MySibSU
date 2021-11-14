@@ -1,15 +1,17 @@
 import React from 'react'
-import {StyleSheet, View, Text, TouchableOpacity, TextInput, ScrollView, AsyncStorage, ToastAndroid} from 'react-native'
+import {StyleSheet, View, Text, TouchableOpacity, TextInput, ScrollView, AsyncStorage} from 'react-native'
 import { Ionicons } from '@expo/vector-icons'; 
 import {useTheme} from '../../../services/themes/ThemeManager'
 import {useLocale} from '../../../services/locale/LocaleManager'
 import { h, w } from '../../../modules/constants'
 import Header from '../../../modules/Header'
+import { useToast } from '../../../services/toasts/ToastsManager';
 
 
 export default function LibrarySearch(props){
     const {mode, theme, toggle} = useTheme()
     const {localeMode, locale, toggleLang} = useLocale()
+    const {callToast} = useToast();
 
     const [recent, setRecent] = React.useState([])
     const [search, setSearch] = React.useState('')
@@ -21,7 +23,7 @@ export default function LibrarySearch(props){
                     props.navigation.navigate('LibraryResult', {screen: 'Digital'})  
                 })
         else
-            ToastAndroid.show(locale['input_is_empty'], ToastAndroid.SHORT)
+            callToast(locale['input_is_empty'], theme.blockColor, theme.labelColor)
     }
 
     return(

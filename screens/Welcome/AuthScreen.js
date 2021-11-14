@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, Image, TextInput, ScrollView, StyleSheet, ToastAndroid, TouchableOpacity, ActivityIndicator, Linking } from 'react-native'
+import { View, Text, Image, TextInput, ScrollView, StyleSheet, TouchableOpacity, ActivityIndicator, Linking } from 'react-native'
 import AsyncStorage from '@react-native-community/async-storage'
 import { useTheme } from '../../services/themes/ThemeManager'
 import { useLocale } from '../../services/locale/LocaleManager'
@@ -9,6 +9,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useUser } from '../../services/auth/AuthManager'
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler'
 import { MaterialIcons } from '@expo/vector-icons';
+import { useToast } from '../../services/toasts/ToastsManager'
 
 
 
@@ -16,6 +17,7 @@ export default function AuthScreen(props) {
     const { theme } = useTheme()
     const { locale } = useLocale()
     const { login } = useUser()
+    const {callToast} = useToast();
 
     const [username, setUsername] = React.useState('')
     const [password, setPassword] = React.useState('')
@@ -24,10 +26,7 @@ export default function AuthScreen(props) {
 
     const checkAgreement = () => {
         if (!isChecked) {
-            ToastAndroid.show(
-                locale['should_accept'],
-                ToastAndroid.LONG,
-            );
+            callToast(locale['should_accept'], theme.blockColor, theme.labelColor)
             return false
         }
 
@@ -43,9 +42,10 @@ export default function AuthScreen(props) {
                 setPassword('');
                 signIn();
             } else {
-                ToastAndroid.show(
+                callToast(
                     locale['wrong_login'],
-                    ToastAndroid.LONG,
+                    theme.blockColor,
+                    theme.labelColor
                 );
                 setFetching(false)
             }
