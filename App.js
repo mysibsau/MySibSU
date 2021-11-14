@@ -19,6 +19,7 @@ import { WeekManager } from './services/week/WeekManager'
 import { AuthManager, useUser } from './services/auth/AuthManager'
 import messaging from '@react-native-firebase/messaging';
 import { SafeAreaView } from 'react-native-safe-area-context'
+import { ToastsManager } from './services/toasts/ToastsManager'
 
 
 function App() {
@@ -81,7 +82,9 @@ function App() {
         <AppearanceProvider>
           <LocaleManager>
             <ThemeManager>
+              <ToastsManager>
                 <Navigation firstLaunch={false} />
+              </ToastsManager>
             </ThemeManager>
           </LocaleManager>
         </AppearanceProvider>

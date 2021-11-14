@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { View, Text, ScrollView, StyleSheet, Image, TouchableOpacity, TextInput, ToastAndroid, AsyncStorage, ActivityIndicator } from 'react-native'
+import { View, Text, ScrollView, StyleSheet, Image, TouchableOpacity, TextInput, AsyncStorage, ActivityIndicator } from 'react-native'
 import { Octicons } from '@expo/vector-icons'; 
 import { h, w } from '../../modules/constants'
 import {useLocale} from '../../services/locale/LocaleManager'
@@ -8,8 +8,10 @@ import { Ionicons } from '@expo/vector-icons'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { useUser } from '../../services/auth/AuthManager';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useToast } from '../../services/toasts/ToastsManager';
 
 export default function PersonScreen(props){
+    const {callToast} = useToast();
     const {locale} = useLocale()
     const {theme} = useTheme()
     const {login} = useUser()
@@ -27,7 +29,7 @@ export default function PersonScreen(props){
             setPassword('');
             props.navigation.navigate('Profile')
         } else {
-            ToastAndroid.show(locale.wrong_login, ToastAndroid.LONG)
+            callToast(locale.wrong_login, theme.blockColor, theme.labelColor)
         }
         setFetching(false);
     }

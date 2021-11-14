@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { View, Text, StyleSheet, Animated, StatusBar, TextInput, TouchableOpacity, TouchableHighlight, FlatList, ToastAndroid } from 'react-native'
+import { View, Text, StyleSheet, Animated, StatusBar, TextInput, TouchableOpacity, TouchableHighlight, FlatList } from 'react-native'
 import AsyncStorage from '@react-native-community/async-storage'
 import MainHeader from '../../modules/MainHeader'
 import Help from '../../modules/Timetable/Help'
@@ -9,6 +9,7 @@ import { h, w } from '../../modules/constants'
 import SwitchSelector from "react-native-switch-selector";
 import { Ionicons } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
+import { useToast } from '../../services/toasts/ToastsManager'
 
 const URLs = ['https://mysibsau.ru/v2/timetable/all_groups/',
     'https://mysibsau.ru/v2/timetable/all_teachers/',
@@ -48,6 +49,7 @@ export default function SearchScreen(props) {
 
     const { mode, theme, toggle } = useTheme()
     const { localeMode, locale, toggleLang } = useLocale()
+    const {callToast} = useToast();
 
     const modes = [
         { label: locale['groups'], value: 0 },
@@ -113,7 +115,7 @@ export default function SearchScreen(props) {
         <Help group={item} onPress={() => setCurrentGroup(item.name)} onPlus={() => {
             addFavourite(item)
             setShown([])
-            ToastAndroid.show(locale['added_to_favourites'], ToastAndroid.SHORT)
+            callToast(locale['added_to_favourites'], theme.blockColor, theme.labelColor);
         }} />
     )
 
