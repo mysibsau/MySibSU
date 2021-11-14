@@ -48,7 +48,7 @@ export class AuthManager extends React.Component {
     login = async (login, password) => {
         const user = await signInApiCall(login, password);
         if (user) {
-            await messaging().subscribeToTopic(user.token)
+            // await messaging().subscribeToTopic(user.token)
             this.setState({user: user, authData: {username: login, password: password}, isAuthorizated: true})
             await AsyncStorage.setItem('User', JSON.stringify(user))
             await AsyncStorage.setItem('AuthData', JSON.stringify({username: login, password: password}))
