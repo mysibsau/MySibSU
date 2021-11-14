@@ -5,19 +5,20 @@ import { h, w } from '../../modules/constants'
 import { AntDesign } from '@expo/vector-icons'
 import Day from '../../modules/Timetable/Day'
 import Swiper from 'react-native-swiper'
+import { DefaultIcon } from '../../services/icons/default-icon'
 
 
-import {useTheme} from '../../services/themes/ThemeManager'
-import {useLocale} from '../../services/locale/LocaleManager'
-import {useWeek} from '../../services/week/WeekManager'
+import { useTheme } from '../../services/themes/ThemeManager'
+import { useLocale } from '../../services/locale/LocaleManager'
+import { useWeek } from '../../services/week/WeekManager'
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context'
 
 const URLs = ['group', 'teacher', 'place']
 
 
-export default function TimetableScreen(props){
-    const {mode, theme} = useTheme()
-    const {locale} = useLocale()
+export default function TimetableScreen(props) {
+    const { mode, theme } = useTheme()
+    const { locale } = useLocale()
     const insets = useSafeAreaInsets();
     // const {week} = useWeek()
 
@@ -25,7 +26,7 @@ export default function TimetableScreen(props){
     const [weekDay, setWeekDay] = useState('')
     const [currentWeek, setCurrentWeek] = useState(getIndex())
     const [textGroup, setTextGroup] = useState('')
-    const [timetable, setTimetable] = useState({even_week: [], odd_week: []})
+    const [timetable, setTimetable] = useState({ even_week: [], odd_week: [] })
     const [loaded, setLoaded] = useState(false)
     const [index, setIndex] = useState(getIndex())
     const [first_dates, setFirstDates] = useState([])
@@ -36,7 +37,7 @@ export default function TimetableScreen(props){
     const f_scrollViewRef = useRef()
     const s_scrollViewRef = useRef()
     const swiper = useRef()
-    
+
     const didFocusSubscription = props.navigation.addListener(
         'state',
         payload => {
@@ -45,26 +46,28 @@ export default function TimetableScreen(props){
             AsyncStorage.getItem('@key').then((id) => setGroup(id))
             AsyncStorage.getItem('@name').then((name) => setTextGroup(name))
         }
-      );
+    );
 
     useEffect(() => {
-        if(group !== null){
-            console.log('Получение расписания группы ' + textGroup )
+        if (group !== null) {
+            console.log('Получение расписания группы ' + textGroup)
             let uri = 'https://mysibsau.ru/v2/timetable/' + URLs[Number(timetableMode)] + '/' + String(group) + '/'
             console.log(uri)
-            fetch(uri, {method: 'GET'})
+            fetch(uri, { method: 'GET' })
                 .then(response => {
-                    if(response['status'] !== 200){
+                    if (response['status'] !== 200) {
                         AsyncStorage.removeItem('@key')
                         AsyncStorage.removeItem('@group')
                         props.navigation.navigate('SearchScreen')
-                        return {odd_week: [], even_week: []}
+                        return { odd_week: [], even_week: [] }
                     }
-                    return response.json()})
+                    return response.json()
+                })
                 .then(json => {
                     console.warn(json)
                     setTimetable(json)
-                    setLoaded(true)})
+                    setLoaded(true)
+                })
                 .catch(err => console.log(err))
         }
     }, [group])
@@ -73,7 +76,7 @@ export default function TimetableScreen(props){
         console.log('Определение дат')
         var d = new Date();
         var day = d.getDay(),
-            diff = d.getDate() - day + (day == 0 ? -6:1)
+            diff = d.getDate() - day + (day == 0 ? -6 : 1)
 
         var now_week = []
         var next_week = []
@@ -86,18 +89,18 @@ export default function TimetableScreen(props){
             next_week.push(new Date(monday.getTime() + i * (24 * 60 * 60 * 1000)))
 
 
-        if (currentWeek === 1){
+        if (currentWeek === 1) {
             setFirstDates(now_week)
             setSecondDates(next_week)
         }
-        else{
+        else {
             setFirstDates(next_week)
             setSecondDates(now_week)
         }
     }, [group])
 
-    function getIndex(){
-        if (((new Date() - new Date(2020, 9, 12, 0, 0, 0, 0))/1000/60/60/24)%14 <= 7){
+    function getIndex() {
+        if (((new Date() - new Date(2020, 9, 12, 0, 0, 0, 0)) / 1000 / 60 / 60 / 24) % 14 <= 7) {
             return 1
         }
         else
@@ -112,126 +115,137 @@ export default function TimetableScreen(props){
         setWeekDay(locale[days[date.getDay()]])
     }, [])
 
-    function changeIndex(){
+    function changeIndex() {
         index === 1 ? setIndex(2) : setIndex(1)
     }
- 
-    const TimetableHeader = ({}) =>{
-        return(
-            <View style={[{backgroundColor: 'white',
-                            width: w,
-                            paddingTop: insets.top,
-                            elevation: 10,
-                            position: 'relative',
-                            flexDirection: 'row',
-                            alignItems: 'center',
-                            zIndex: 4,}, styles.shadow, {backgroundColor: theme.blockColor}]}>
-                <View style={{flexDirection: 'row'}}>
-                    <View style={{ width: 60, height: 40, alignItems: 'center', justifyContent: 'center'}}>
-                        <TouchableOpacity onPress={() => {
-                            setTextGroup(''); setTimetable({even_week: [], odd_week: []}); setLoaded(false); setGroup(null)
+
+    const TimetableHeader = ({ }) => {
+        return (
+            <View style={[{
+                backgroundColor: 'white',
+                width: w,
+                paddingTop: insets.top,
+                elevation: 10,
+                position: 'relative',
+                flexDirection: 'row',
+                alignItems: 'center',
+                zIndex: 4,
+            }, styles.shadow, { backgroundColor: theme.blockColor }]}>
+                <View style={{ flexDirection: 'row', alignItems: 'center', padding: 10 }}>
+                    <TouchableOpacity
+                        style={{ justifyContent: 'center', paddingRight: 10 }}
+                        onPress={() => {
+                            setTextGroup(''); setTimetable({ even_week: [], odd_week: [] }); setLoaded(false); setGroup(null)
                             AsyncStorage.removeItem('@key')
                             AsyncStorage.removeItem('@group')
                             props.navigation.navigate('SearchScreen')
                         }}>
-                            <AntDesign name="logout" size={20} color={theme.headerTitle} style={{transform:[{rotate: '180deg'}] }}/>
-                        </TouchableOpacity>
-                    </View>
+                        <DefaultIcon
+                            image={require('../../assets/icons/logout.png')}
+                            size={25}
+                        />
+                        {/* <AntDesign name="logout" size={20} color={theme.headerTitle} style={{transform:[{rotate: '180deg'}] }}/> */}
+                    </TouchableOpacity>
                     <Text style={[{
-                        height: 40,
-                        textAlignVertical: 'center',
                         fontSize: 25,
-                        
-                        color: theme.headerTitle}]}>{textGroup}</Text>
+
+                        color: theme.headerTitle
+                    }]}>{textGroup}</Text>
                 </View>
                 <TouchableOpacity onPress={() => {
                     index === 1 ?
-                    swiper.current.scrollBy(1, true) : swiper.current.scrollBy(-1, true)}} style={[{
-                                padding: 10,
-                                width: 100,
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                paddingLeft: 5,
-                                paddingRight: 5,
-                                borderRadius: 15,
-                                backgroundColor: 'white',
-                                shadowColor: "#000",
-                                shadowOffset: {
-                                    width: 6,
-                                    height: 6,
-                                },
-                                shadowOpacity: 0.30,
-                                shadowRadius: 4.65,
+                        swiper.current.scrollBy(1, true) : swiper.current.scrollBy(-1, true)
+                }} style={[{
+                    padding: 10,
+                    width: 100,
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    paddingLeft: 5,
+                    paddingRight: 5,
+                    borderRadius: 15,
+                    backgroundColor: 'white',
+                    shadowColor: "#000",
+                    shadowOffset: {
+                        width: 6,
+                        height: 6,
+                    },
+                    shadowOpacity: 0.30,
+                    shadowRadius: 4.65,
 
-                                elevation: 4,
-                                position: 'absolute',
-                                right: 10,
-                                bottom: (w/8 - w/12)/2}, {backgroundColor: theme.headerColor}]}>
-                    <Text style={[{textAlignVertical: 'center', 
-                                fontSize: 17,
-                                color: 'gray'}, {color: theme.headerTitle}]}>{index} {locale['week']}</Text>
+                    elevation: 4,
+                    position: 'absolute',
+                    right: 10,
+                    bottom: (w / 8 - w / 12) / 2
+                }, { backgroundColor: theme.headerColor }]}>
+                    <Text style={[{
+                        textAlignVertical: 'center',
+                        fontSize: 17,
+                        color: 'gray'
+                    }, { color: theme.headerTitle }]}>{index} {locale['week']}</Text>
                 </TouchableOpacity>
             </View>
         )
     }
-    
-    return(
-        <View style={[styles.container, {backgroundColor: theme.primaryBackground}]}>
-                <StatusBar backgroundColor={theme.blockColor} barStyle={mode === 'light' ? 'dark-content' : 'light-content'}/>
-                <TimetableHeader />
-                <Swiper ref={swiper} style={styles.wrapper} loop={false} index={currentWeek - 1} onIndexChanged={() => changeIndex()} showsPagination={false} >
+
+    return (
+        <View style={[styles.container, { backgroundColor: theme.primaryBackground }]}>
+            <StatusBar backgroundColor={theme.blockColor} barStyle={mode === 'light' ? 'dark-content' : 'light-content'} />
+            <TimetableHeader />
+            <Swiper ref={swiper} style={styles.wrapper} loop={false} index={currentWeek - 1} onIndexChanged={() => changeIndex()} showsPagination={false} >
                 <ScrollView showsVerticalScrollIndicator={false} ref={f_scrollViewRef}>
-                {!loaded ? 
-                        <View style={{ height: h - 140, alignItems: 'center', justifyContent: 'center'}}>
-                            <ActivityIndicator size='large' color={theme.blueColor}/>
+                    {!loaded ?
+                        <View style={{ height: h - 140, alignItems: 'center', justifyContent: 'center' }}>
+                            <ActivityIndicator size='large' color={theme.blueColor} />
                         </View> :
-                    timetable.odd_week.map(item => {
-                        const index = timetable.odd_week.indexOf(item)
-                        return(
-                            <View key={item.day} onLayout={(event) => {
-                                var date = new Date()
-                                if(date.getDay() - 1 === item.day && currentWeek === 1){
-                                    const layout = event.nativeEvent.layout
-                                    setY(layout.y)
-                                    f_scrollViewRef.current.scrollTo({x: 0, y: layout.y - 20, animated: true})
-                                }
-                        }}>
-                        <Day day={item} timetableMode={Number(timetableMode)} date={first_dates[index]} week={1} currentWeek={currentWeek} weekDay={weekDay} />
-                    </View>
-                )})}
+                        timetable.odd_week.map(item => {
+                            const index = timetable.odd_week.indexOf(item)
+                            return (
+                                <View key={item.day} onLayout={(event) => {
+                                    var date = new Date()
+                                    if (date.getDay() - 1 === item.day && currentWeek === 1) {
+                                        const layout = event.nativeEvent.layout
+                                        setY(layout.y)
+                                        f_scrollViewRef.current.scrollTo({ x: 0, y: layout.y - 20, animated: true })
+                                    }
+                                }}>
+                                    <Day day={item} timetableMode={Number(timetableMode)} date={first_dates[index]} week={1} currentWeek={currentWeek} weekDay={weekDay} />
+                                </View>
+                            )
+                        })}
                 </ScrollView>
                 <ScrollView showsVerticalScrollIndicator={false} ref={s_scrollViewRef}>
-                    {!loaded ?  
-                        <View style={{ height: h - 140, alignItems: 'center', justifyContent: 'center'}}>
-                            <ActivityIndicator size='large' color={theme.blueColor}/>
+                    {!loaded ?
+                        <View style={{ height: h - 140, alignItems: 'center', justifyContent: 'center' }}>
+                            <ActivityIndicator size='large' color={theme.blueColor} />
                         </View> :
                         timetable.even_week.map(item => {
-                        const index = timetable.even_week.indexOf(item)
-                        return(<View key={item.day} onLayout={(event) => {
-                            var date = new Date()
-                            if(date.getDay() - 1 === item.day && currentWeek === 2){
-                                const layout = event.nativeEvent.layout
-                                setY(layout.y)
-                                s_scrollViewRef.current.scrollTo({x: 0, y: layout.y - 20, animated: true})
-                            }
-                        }}>
-                        <Day day={item} timetableMode={Number(timetableMode)} date={second_dates[index]} week={2} currentWeek={currentWeek} weekDay={weekDay}/>
-                    </View>) })}
+                            const index = timetable.even_week.indexOf(item)
+                            return (<View key={item.day} onLayout={(event) => {
+                                var date = new Date()
+                                if (date.getDay() - 1 === item.day && currentWeek === 2) {
+                                    const layout = event.nativeEvent.layout
+                                    setY(layout.y)
+                                    s_scrollViewRef.current.scrollTo({ x: 0, y: layout.y - 20, animated: true })
+                                }
+                            }}>
+                                <Day day={item} timetableMode={Number(timetableMode)} date={second_dates[index]} week={2} currentWeek={currentWeek} weekDay={weekDay} />
+                            </View>)
+                        })}
                 </ScrollView>
             </Swiper>
-        </View>            
+        </View>
     )
 }
 
 function elevationShadowStyle(elevation) {
     return {
-      elevation,
-      shadowColor: 'black',
-      shadowOffset: { width: 0, height: 0.5 * elevation },
-      shadowOpacity: 0.3,
-      shadowRadius: 0.8 * elevation
+        elevation,
+        shadowColor: 'black',
+        shadowOffset: { width: 0, height: 0.5 * elevation },
+        shadowOpacity: 0.3,
+        shadowRadius: 0.8 * elevation
     };
-  }
+}
 
 const styles = StyleSheet.create({
     container: {
@@ -242,7 +256,7 @@ const styles = StyleSheet.create({
     },
     shadow: elevationShadowStyle(5),
 
-    
+
 
 })
 
