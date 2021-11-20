@@ -319,9 +319,9 @@ export default function Navigation({ firstLaunch }) {
         <HelloStack.Screen name='Hello' component={HelloScreen} />
         <HelloStack.Screen name='Auth' component={AuthScreen} />
         <HelloStack.Screen name='Bottom' component={BottomTab} />
-        {/* <HelloStack.Screen name="NotificationAttestation" component={AttestationScreen} />
+        <HelloStack.Screen name="NotificationAttestation" component={AttestationScreen} />
         <HelloStack.Screen name="NotificationMarks" component={MarksScreen} />
-        <HelloStack.Screen name="NotificationQuestions" component={QuestionsScreen} /> */}
+        <HelloStack.Screen name="NotificationQuestions" component={QuestionsScreen} />
       </HelloStack.Navigator>
     </NavigationContainer>
   )
@@ -416,8 +416,6 @@ function PersonStackScreen() {
 
   return (
     <PersonStack.Navigator headerMode={'none'}>
-      {/* <PersonStack.Screen name='Person' component={PersonScreen} />
-      <PersonStack.Screen name='AnotherSettings' component={AnotherSettingsScreen} /> */}
       {isAuthorizated ?
         <>
           <PersonStack.Screen name='Profile' component={ProfileScreen} />
