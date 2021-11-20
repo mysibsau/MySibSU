@@ -17,6 +17,8 @@
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* mysibsuTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* mysibsuTests.m */; };
 		491E856CAA8109158633FF91 /* libPods-mysibsu-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BCE7C20A175192B656B8DE25 /* libPods-mysibsu-tvOSTests.a */; };
+		7C6DA09B274953D500353FDB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7C6DA09A274953D500353FDB /* GoogleService-Info.plist */; };
+		7C6DA09C274953D500353FDB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7C6DA09A274953D500353FDB /* GoogleService-Info.plist */; };
 		7CC23ADF273FC06900E625F6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CC23ADE273FC06900E625F6 /* LaunchScreen.storyboard */; };
 		7CC23AE0273FC06900E625F6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CC23ADE273FC06900E625F6 /* LaunchScreen.storyboard */; };
 		A9EFA34DF71EA05363B88CF5 /* libPods-mysibsu-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FD41A0AF5797B89AE8FA90F2 /* libPods-mysibsu-tvOS.a */; };
@@ -59,6 +61,8 @@
 		2D02E4901E0B4A5D006451C7 /* mysibsu-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "mysibsu-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A35F9BE7C4624950C958655 /* Pods-mysibsu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mysibsu.debug.xcconfig"; path = "Target Support Files/Pods-mysibsu/Pods-mysibsu.debug.xcconfig"; sourceTree = "<group>"; };
 		6BFA8D69EBA3CAD0E7BB5023 /* Pods-mysibsu-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mysibsu-tvOS.release.xcconfig"; path = "Target Support Files/Pods-mysibsu-tvOS/Pods-mysibsu-tvOS.release.xcconfig"; sourceTree = "<group>"; };
+		7C4DDD7227495E2500386F7A /* mysibsu.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = mysibsu.entitlements; path = mysibsu/mysibsu.entitlements; sourceTree = "<group>"; };
+		7C6DA09A274953D500353FDB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7CC23ADE273FC06900E625F6 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = MySibSU/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		86BF12AA76782F722A81216A /* Pods-mysibsu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mysibsu.release.xcconfig"; path = "Target Support Files/Pods-mysibsu/Pods-mysibsu.release.xcconfig"; sourceTree = "<group>"; };
 		BCE7C20A175192B656B8DE25 /* libPods-mysibsu-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-mysibsu-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -126,6 +130,7 @@
 		13B07FAE1A68108700A75B9A /* mysibsu */ = {
 			isa = PBXGroup;
 			children = (
+				7C4DDD7227495E2500386F7A /* mysibsu.entitlements */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -133,6 +138,7 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB71A68108700A75B9A /* main.m */,
 				7CC23ADE273FC06900E625F6 /* LaunchScreen.storyboard */,
+				7C6DA09A274953D500353FDB /* GoogleService-Info.plist */,
 			);
 			name = mysibsu;
 			sourceTree = "<group>";
@@ -295,6 +301,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
+						DevelopmentTeam = HM9WL9QKWM;
 						LastSwiftMigration = 1120;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
@@ -343,6 +350,7 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				7CC23ADF273FC06900E625F6 /* LaunchScreen.storyboard in Resources */,
+				7C6DA09B274953D500353FDB /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -352,6 +360,7 @@
 			files = (
 				2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */,
 				7CC23AE0273FC06900E625F6 /* LaunchScreen.storyboard in Resources */,
+				7C6DA09C274953D500353FDB /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -667,7 +676,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = mysibsu/mysibsu.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = HM9WL9QKWM;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = mysibsu/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -677,7 +688,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.SibSU.MySibSU;
 				PRODUCT_NAME = mysibsu;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -691,7 +702,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = mysibsu/mysibsu.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = HM9WL9QKWM;
 				INFOPLIST_FILE = mysibsu/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -700,7 +713,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.SibSU.MySibSU;
 				PRODUCT_NAME = mysibsu;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
