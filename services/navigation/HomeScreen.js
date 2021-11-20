@@ -259,19 +259,19 @@ function BottomTab(props) {
   };
 
   React.useEffect(() => {
-    // messaging().onNotificationOpenedApp(remoteMessage => {
-    //   if (remoteMessage.data.click_action) {
-    //     navigateToScreen(remoteMessage.data.click_action)
-    //   }
-    // });
+    messaging().onNotificationOpenedApp(remoteMessage => {
+      if (remoteMessage.data.click_action) {
+        navigateToScreen(remoteMessage.data.click_action)
+      }
+    });
 
-    // messaging()
-    //   .getInitialNotification()
-    //   .then(remoteMessage => {
-    //     if (remoteMessage && remoteMessage.data.click_action) {
-    //       navigateToScreen(remoteMessage.data.click_action)
-    //     }
-    //   });
+    messaging()
+      .getInitialNotification()
+      .then(remoteMessage => {
+        if (remoteMessage && remoteMessage.data.click_action) {
+          navigateToScreen(remoteMessage.data.click_action)
+        }
+      });
 
   }, []);
 
