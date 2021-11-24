@@ -15,7 +15,7 @@ export class ToastsManager extends React.Component {
     this.animatedValue = new Animated.Value(0);
     this.state = {
       modalShown: false,
-      message: 'Какое-то сообщение',
+      message: '',
       backgroundColor: 'white',
       textColor: 'black',
     };

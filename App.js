@@ -53,7 +53,8 @@ function App() {
 
   // Если шрифты еще не были установлены, продолжаем загружать приложение
   if (firstLaunch === null) {
-    return <Text>sldkfjsldkjfsld</Text>;
+    // return <Text>sldkfjsldkjfsld</Text>;
+    return null;
   }
 
 
