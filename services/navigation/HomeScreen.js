@@ -80,6 +80,8 @@ import AnotherSettingsScreen from '../../screens/Profile/AnotherSettingsScreen'
 import TechScreen from '../../screens/services/StudentLife/TechScreen'
 import TechUnionScreen from '../../screens/services/StudentLife/TechUnionScreen'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import { BackButtonIcon } from '../icons/icons'
+import { DefaultIcon } from '../icons/default-icon'
 
 function LibraryTabBar({ state, descriptors, navigation, position }) {
   const { mode, theme, toggle } = useTheme()
@@ -94,7 +96,7 @@ function LibraryTabBar({ state, descriptors, navigation, position }) {
     <View style={{ flexDirection: 'row', backgroundColor: theme.blockColor, elevation: 6, paddingTop: insets.top }}>
       <TouchableOpacity onPress={() => navigation.navigate('LibrarySearch')}>
         <View style={{ height: Dimensions.get('window').width / 8, width: Dimensions.get('window').width / 4, justifyContent: 'center' }}>
-          <Ionicons name="ios-arrow-back" size={30} color="black" style={{ color: '#006AB3', paddingRight: 10, paddingLeft: 15 }} />
+          <BackButtonIcon />
         </View>
       </TouchableOpacity>
       <Animated.View
@@ -461,12 +463,19 @@ const BottomMenuItem = ({ iconName, label, isCurrent }) => {
   const { theme } = useTheme()
 
   const color = isCurrent ? theme.blueColor : 'gray'
+  const iconColor = isCurrent ? theme.blueColor : 'rgb(159, 165, 163)'
+
+  const getIcon = (image) => <DefaultIcon
+    image={image}
+    size={26}
+    color={iconColor} />
+
   const icons = {
-    'Feed': <MaterialCommunityIcons name="timetable" size={26} color={isCurrent ? theme.blueColor : 'rgb(159, 165, 163)'} />,
-    'Menu': <MaterialIcons name="restaurant-menu" size={26} color={isCurrent ? theme.blueColor : 'rgb(159, 165, 163)'} />,
-    'Timetable': <MaterialCommunityIcons name="calendar-text" size={26} color={isCurrent ? theme.blueColor : 'rgb(159, 165, 163)'} />,
-    'Services': <AntDesign name="appstore-o" size={26} color={isCurrent ? theme.blueColor : 'rgb(159, 165, 163)'} />,
-    'Profile': <Ionicons name='md-person' size={26} color={isCurrent ? theme.blueColor : 'rgb(159, 165, 163)'} />
+    'Feed': getIcon(require('../../assets/icons/tabs/news.png')),
+    'Menu': getIcon(require('../../assets/icons/tabs/restaurant.png')),
+    'Timetable': getIcon(require('../../assets/icons/tabs/timetable.png')),
+    'Services': getIcon(require('../../assets/icons/tabs/grid.png')),
+    'Profile': getIcon(require('../../assets/icons/tabs/profile.png'))
   }
 
   return (
@@ -489,7 +498,7 @@ const MainTabBar = ({ state, descriptors, navigation }) => {
   const { mode, theme, toggle } = useTheme()
   const totalWidth = Dimensions.get("window").width;
   return (
-    <View style={[style.tabContainer, { width: totalWidth, backgroundColor: theme.blockColor, paddingBottom: insets.bottom }]}>
+    <View style={[style.tabContainer, { width: totalWidth, backgroundColor: theme.blockColor, paddingTop: 3, paddingBottom: insets.bottom }]}>
       <View style={{ flexDirection: "row" }}>
         {state.routes.map((route, index) => {
           const { options } = descriptors[route.key];
@@ -539,7 +548,6 @@ const MainTabBar = ({ state, descriptors, navigation }) => {
 
 const style = StyleSheet.create({
   tabContainer: {
-    height: 50,
     shadowOffset: {
       width: 0,
       height: -3,
