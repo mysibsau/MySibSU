@@ -1,24 +1,49 @@
-import React from 'react'
-import { Text, TouchableOpacity, View } from 'react-native'
-import { h, w} from '../constants'
-import { useTheme } from '../../services/themes/ThemeManager'
+import React from 'react';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {h, w} from '../constants';
+import {useTheme} from '../../services/themes/ThemeManager';
 
 const Help = ({group, onPress, onPlus}) => {
-    const {theme} = useTheme()
-    return(
-        <>
-        <TouchableOpacity onPress={onPress} style={{ height: 40, width: w * 0.9, justifyContent: 'space-between', flexDirection: 'row'}}>
-            {/* <TouchableOpacity > */}
-                <Text allowFontScaling={false} style={{ height: 40, textAlignVertical: 'center',  fontSize: 18, backgroundColor: 'transparent', color: theme.labelColor, zIndex: 2, paddingLeft: 10, paddingTop: 4, paddingBottom: 4}}>{group.name}</Text>
-            {/* </TouchableOpacity> */}
-            <TouchableOpacity onPress={onPlus}>
-                <Text style={{height: 40, textAlignVertical: 'center', color: '#006AB3', fontWeight: 'bold', width: 40, fontSize: 20}}>+</Text>
-            </TouchableOpacity>   
-        </TouchableOpacity>
-        <View style={{ width: w * 0.9, height: 1, backgroundColor: 'gray', opacity: 0.5}} />
-        </>
-    )
-}
+  const {theme} = useTheme();
+  return (
+    <TouchableOpacity onPress={onPress} style={styles.container}>
+      <Text
+        allowFontScaling={false}
+        style={[styles.name, {color: theme.labelColor}]}>
+        {group.name}
+      </Text>
+      <TouchableOpacity onPress={onPlus}>
+        <Text style={styles.plusLabel}>+</Text>
+      </TouchableOpacity>
+    </TouchableOpacity>
+  );
+};
 
+const styles = StyleSheet.create({
+  container: {
+    width: w * 0.9,
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 5,
+  },
 
-export default Help
+  name: {
+    fontSize: 18,
+    backgroundColor: 'transparent',
+    zIndex: 2,
+    paddingLeft: 10,
+    paddingTop: 4,
+    paddingBottom: 4,
+  },
+
+  plusLabel: {
+    color: '#006AB3',
+    fontWeight: 'bold',
+    width: 40,
+    fontSize: 20,
+    textAlign: 'center',
+  },
+});
+
+export default Help;
