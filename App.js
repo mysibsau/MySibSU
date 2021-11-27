@@ -27,7 +27,7 @@ function App() {
   // const { isAuthorizated } = useUser();
 
   Text.defaultProps = Text.defaultProps || {};
-  Text.defaultProps.style = {fontFamily: 'System'}
+  Text.defaultProps.style = { fontFamily: 'System' }
   Text.defaultProps.allowFontScaling = false;
 
   const [firstLaunch, setFirstLaunch] = useState(null)
@@ -42,13 +42,34 @@ function App() {
         await AsyncStorage.removeItem('AuthData');
       }
     }
+    const getFcmToken = async () => {
+      const fcmToken = await messaging().getToken();
+      if (fcmToken) {
+        console.log(fcmToken);
+        console.log("Your Firebase Token is:", fcmToken);
+      } else {
+        console.log("Failed", "No token received");
+      }
+    }
+    const requestUserPermission = async () => {
+      const authStatus = await messaging().requestPermission();
+      const enabled =
+        authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
+        authStatus === messaging.AuthorizationStatus.PROVISIONAL;
+
+      if (enabled) {
+        getFcmToken()
+        console.log('Authorization status:', authStatus);
+      }
+    }
 
     checkFirstLaunch()
+    requestUserPermission()
   }, [])
 
   // Устанавливаем кастомный шрифт, который лежит в ./assets/fonts/
   // let [fontsLoaded] = useFonts({
-    // 'System': require('./assets/fonts/18811.ttf'),
+  // 'System': require('./assets/fonts/18811.ttf'),
   // });
 
   // Если шрифты еще не были установлены, продолжаем загружать приложение
@@ -74,8 +95,6 @@ function App() {
   //     if (res === null)
   //       AsyncStorage.setItem('@mode', '0')
   //   })
-
-  Text.defa
 
   return (
     <AuthManager>

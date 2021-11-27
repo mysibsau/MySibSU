@@ -7,20 +7,24 @@ import { BASE_URL } from './modules/constants';
 
 axios.defaults.baseURL = BASE_URL
 
-// // Register background push notifications
-// messaging().setBackgroundMessageHandler(async remoteMessage => {
-//   console.log('Message handled in the background!', remoteMessage);
-// });
+// Register background push notifications
+messaging().setBackgroundMessageHandler(async remoteMessage => {
+    console.log('Message handled in the background!', remoteMessage);
+});
 
 
-// // Subscribe to topic for notifications
-// messaging()
-//   .subscribeToTopic('allUsers_android')
-//   .then(() => console.log('Subscribed to topic!'));
+// Subscribe to topic for notifications
+messaging()
+    .subscribeToTopic('allUsers_android')
+    .then(() => console.log('Subscribed to topic1!'));
 
-// messaging()
-//   .subscribeToTopic('debug_android')
-//   .then(() => console.log('Subscribed to topic!'));
+messaging()
+    .subscribeToTopic('debug_android')
+    .then(() => console.log('Subscribed to topic2!'));
+
+messaging()
+    .subscribeToTopic('react_ios_test_topic')
+    .then(() => console.log('Subscribed to topic3!'));
 
 
 
